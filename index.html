@@ -157,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/16/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%B8%80)preprocessing/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/17/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%BA%8C)QC%20and%20Normalization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -171,7 +171,89 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/10/16/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%B8%80)preprocessing/" class="post-title-link" itemprop="url">R单细胞数据分析流程(一)Download and load</a>
+            <a href="/2021/10/17/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%BA%8C)QC%20and%20Normalization/" class="post-title-link" itemprop="url">R单细胞数据分析流程(二)QC amd Normalization</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-17 20:32:09" itemprop="dateCreated datePublished" datetime="2021-10-17T20:32:09+08:00">2021-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-18 02:13:33" itemprop="dateModified" datetime="2021-10-18T02:13:33+08:00">2021-10-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">单细胞转录组</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在这一步我们对加载入Seurat的数据进行进一步的<strong>质量控制</strong>，剔掉一些质量较差的细胞。其实在读入数据时，我们已经剔除了一部分的基因，例如我们筛掉了表达基因少于200个的细胞和在少于三个细胞中表达的基因。而在这一步，我们会从其它的一些指标来对我们的数据进行质控。</p>
+<p>接下来我们对数据进行Normalization，这样做对好处多多，可以使数据之间具有可比性，并且可以使数据的分布近似于下游分析的假设(正态分布)。但值得注意的是，<strong>理论上没有一种Normalization的方法适用于所有数据</strong>，我们应该根据数据集的情况选择合适的Normalization方法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/17/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%BA%8C)QC%20and%20Normalization/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/16/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%B8%80)Download%20and%20load/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Max">
+      <meta itemprop="description" content="在学了在学了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TypeError">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/16/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%B8%80)Download%20and%20load/" class="post-title-link" itemprop="url">R单细胞数据分析流程(一)Download and load</a>
         </h2>
 
         <div class="post-meta">
@@ -188,7 +270,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-17 18:47:22" itemprop="dateModified" datetime="2021-10-17T18:47:22+08:00">2021-10-17</time>
+                <time title="修改时间：2021-10-18 00:49:32" itemprop="dateModified" datetime="2021-10-18T00:49:32+08:00">2021-10-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -214,7 +296,7 @@
           <p>进行数据分析首先要获得数据，在这里先介绍一下如何从<strong>GEO数据库上下载</strong>别人发表的单细胞转录组数据库的表达矩阵，以及<strong>如何把数据加载到Seurat中</strong>。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/10/16/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%B8%80)preprocessing/#more" rel="contents">
+              <a class="btn" href="/2021/10/16/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%B8%80)Download%20and%20load/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -300,7 +382,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

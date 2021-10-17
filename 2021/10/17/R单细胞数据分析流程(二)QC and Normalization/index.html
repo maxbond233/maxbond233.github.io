@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在这一步我们对加载入Seurat的数据进行进一步的质量控制，剔掉一些质量较差的细胞。其实在读入数据时，我们已经剔除了一部分的基因，例如我们筛掉了表达基因少于200个的细胞和在少于三个细胞中表达的基因。而在这一步，我们会从其它的一些指标来对我们的数据进行质控。 接下来我们对数据进行Normalization，这样做对好处多多，可以使数据之间具有可比性，并且可以使数据的分布近似于下游分析的假设(正态分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R单细胞数据分析流程(二)QC amd Normalization">
+<meta property="og:url" content="http://example.com/2021/10/17/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%BA%8C)QC%20and%20Normalization/index.html">
+<meta property="og:site_name" content="TypeError">
+<meta property="og:description" content="在这一步我们对加载入Seurat的数据进行进一步的质量控制，剔掉一些质量较差的细胞。其实在读入数据时，我们已经剔除了一部分的基因，例如我们筛掉了表达基因少于200个的细胞和在少于三个细胞中表达的基因。而在这一步，我们会从其它的一些指标来对我们的数据进行质控。 接下来我们对数据进行Normalization，这样做对好处多多，可以使数据之间具有可比性，并且可以使数据的分布近似于下游分析的假设(正态分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018005322730.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018010156971.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018012339742.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/IMG_0793.PNG">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018015917490.png">
+<meta property="article:published_time" content="2021-10-17T12:32:09.000Z">
+<meta property="article:modified_time" content="2021-10-17T18:13:33.048Z">
+<meta property="article:author" content="Max">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="single-cell RNA-seq">
+<meta property="article:tag" content="pipeline">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018005322730.png">
+
+<link rel="canonical" href="http://example.com/2021/10/17/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%BA%8C)QC%20and%20Normalization/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>R单细胞数据分析流程(二)QC amd Normalization | TypeError</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TypeError</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/17/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%BA%8C)QC%20and%20Normalization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Max">
+      <meta itemprop="description" content="在学了在学了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TypeError">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          R单细胞数据分析流程(二)QC amd Normalization
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-17 20:32:09" itemprop="dateCreated datePublished" datetime="2021-10-17T20:32:09+08:00">2021-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-18 02:13:33" itemprop="dateModified" datetime="2021-10-18T02:13:33+08:00">2021-10-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">单细胞转录组</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在这一步我们对加载入Seurat的数据进行进一步的<strong>质量控制</strong>，剔掉一些质量较差的细胞。其实在读入数据时，我们已经剔除了一部分的基因，例如我们筛掉了表达基因少于200个的细胞和在少于三个细胞中表达的基因。而在这一步，我们会从其它的一些指标来对我们的数据进行质控。</p>
+<p>接下来我们对数据进行Normalization，这样做对好处多多，可以使数据之间具有可比性，并且可以使数据的分布近似于下游分析的假设(正态分布)。但值得注意的是，<strong>理论上没有一种Normalization的方法适用于所有数据</strong>，我们应该根据数据集的情况选择合适的Normalization方法。</p>
+<span id="more"></span>
+
+<h1 id="Quality-Control-QC"><a href="#Quality-Control-QC" class="headerlink" title="Quality Control(QC)"></a>Quality Control(QC)</h1><p>在QC这一步，我们主要根据三个标准来看细胞测序的质量：<strong>nFeature_RNA(细胞表达的基因数)， nCount_RNA(细胞表达的总的mRNA分子(UMI)数)， percent.mt(细胞中线粒体基因所占的比例)</strong></p>
+<p>计算线粒体基因的占比：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllCell[[<span class="string">&quot;percent.mt&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;mt-&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>PercentFeatureSet()</code>用于计算细胞中特定的基因(Feature)的占比，线粒体基因都有一个前缀”mt-“，可以使用”mt-“去匹配所有的线粒体基因。</p>
+<blockquote>
+<p>某些数据集中的线粒体基因可能会标为”MT-“，可以先查看一下基因命名确认一下。</p>
+</blockquote>
+<p>绘制小提琴图来查看这三个标准的在数据集中的分布情况：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VlnPlot(AllCell, features = <span class="built_in">c</span>(<span class="string">&quot;nFeature_RNA&quot;</span>, <span class="string">&quot;nCount_RNA&quot;</span>, <span class="string">&quot;percent.mt&quot;</span>), ncol = <span class="number">3</span>, pt.size = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018005322730.png" alt="image-20211018005322730"></p>
+<blockquote>
+<p>小提琴图横坐标的Identy为每个样本的编号，从这张图我们可以看出每个样本的数据质量。</p>
+</blockquote>
+<p>利用散点图查看不同的标准之间的相关性：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plot1 &lt;- FeatureScatter(AllCell, feature1 = <span class="string">&quot;nCount_RNA&quot;</span>, feature2 = <span class="string">&quot;percent.mt&quot;</span>)</span><br><span class="line">plot2 &lt;- FeatureScatter(AllCell, feature1 = <span class="string">&quot;nCount_RNA&quot;</span>, feature2 = <span class="string">&quot;nFeature_RNA&quot;</span>)</span><br><span class="line">plot1 + plot2</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018010156971.png" alt="image-20211018010156971"></p>
+<blockquote>
+<p><code> FeatureScatter()</code>函数还有很多其它的作用，参数Feature1, Feature2也可以是我们感兴趣的基因，这样我们就可以看到<strong>感兴趣的两种基因的共表达情况</strong>，当然最好在Normalization等标准流程走完以后再进行共表达的分析。</p>
+</blockquote>
+<p>我们也可以通过颜色添加第三维，将这三个标准展示在同一张图上，但Seurat并没有直接提供函数画出这种图，我们可以ggplot2自己画一下：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">testdata &lt;- FetchData(AllCell, vars = <span class="built_in">c</span>(<span class="string">&#x27;nCount_RNA&#x27;</span>, <span class="string">&#x27;nFeature_RNA&#x27;</span>, <span class="string">&#x27;percent.mt&#x27;</span>))</span><br><span class="line"></span><br><span class="line">ggplot(data = testdata) +</span><br><span class="line">  geom_point(mapping = aes(x = nCount_RNA, y = percent.mt, color = nFeature_RNA)) +</span><br><span class="line">  scale_color_gradientn(colors = <span class="built_in">c</span>(<span class="string">&#x27;#95a5a6&#x27;</span>, <span class="string">&#x27;#c0392b&#x27;</span>)) +</span><br><span class="line">  cowplot::theme_cowplot()</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018012339742.png" alt="image-20211018012339742"></p>
+<p>根据绘图的结果，确定筛选的阈值，并进行过滤，<strong>第一次对数据集进行分析的时候筛选的标准应当尽量宽松或者不进行筛选</strong>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#其实只是一个取子集的过程</span></span><br><span class="line">AllCell &lt;- subset(AllCell, subset = nCount_RNA &gt; <span class="number">2000</span> &amp; percent.mt &lt; <span class="number">15</span> &amp; nCount_RNA &lt; <span class="number">12000</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Normalization"><a href="#Normalization" class="headerlink" title="Normalization"></a>Normalization</h1><p>接下来我们对数据进行Normalization：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllCell &lt;- NormalizeData(AllCell, normalization.method = <span class="string">&quot;LogNormalize&quot;</span>, scale.factor = <span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>NormalizationData()</code>函数中的normalization.method中提供的默认参数为*”LogNormalize”*，该方法是对原始的Counts进行<strong>CPM转化</strong>后在进行<strong>log转化</strong>，因此在此步使用”LogNormalize”后<strong>不需要对数据进行进一步的对数转换</strong>。</p>
+<blockquote>
+<p>在此步一般<strong>使用默认参数</strong>即可，除了使用Seurat中的<code>NormalizationData()</code>, Normalization还有许多种方法，例如使用Scran包对数据进行scran(使用卷积的CPM改进版)，使用Scone包来评估各个Normalization方法对数据集的效果等等，每种方法的原理和使用范围也不同，在以后会提到。</p>
+<p>CPM，TPM等Normalization方法是从bulk RNA-seq借鉴过来的，但是用在单细胞转录组这种十分稀疏的数据集可能会出现各种各样的问题。因此会出现各种各样的对Normalization方法，但总的来说，<strong>不存在一种方法对所有的数据集都适用</strong>，理论上我们应当根据数据集的不同选择不同的Normalization的方法。</p>
+<p>放一张<a target="_blank" rel="noopener" href="https://xkcd.com/">xkcd</a>上的图：</p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/IMG_0793.PNG" alt="IMG_0793"></p>
+</blockquote>
+<p>寻找<strong>高异质性的基因</strong>：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllCell &lt;- FindVariableFeatures(AllCell)</span><br></pre></td></tr></table></figure>
+
+<p>在这一步我们要选择在细胞之间表达量差异最大的一部分基因，这样接下来的聚类等操作并不会计算所有的基因。而是会根据这些高异质性基因进行聚类。</p>
+<blockquote>
+<p>这一步一般来说也只<strong>用默认参数</strong>即可</p>
+</blockquote>
+<p>绘制高异质性基因:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 异质性最高的十个基因</span></span><br><span class="line">top10 &lt;- head(VariableFeatures(AllCell), <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制高异质性基因</span></span><br><span class="line">VariPlot1 &lt;- VariableFeaturePlot(AllCell)</span><br><span class="line">VariPlot2 &lt;- LabelPoints(plot = VariPlot1, points = top10, repel = <span class="literal">TRUE</span>)</span><br><span class="line">VariPlot1 + VariPlot2</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018015917490.png" alt="image-20211018015917490"></p>
+<p>对每个细胞的基因表达量进行<strong>scale</strong>:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Scaling the data</span></span><br><span class="line">all.genes &lt;- rownames(AllCell)</span><br><span class="line">AllCell &lt;- ScaleData(AllCell, features = all.genes)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对于是否要进行Scale仍有争议，在Seurat中如果不进行scale会报错，无法执行下一步。但在其它的一些包或者教程中，其作者认为不应该对基因进行scale，认为这种做法丢失了一些生物学信息。</p>
+<p>由于我们的分析依赖于Seurat，我们对数据进行Scale。</p>
+</blockquote>
+<p>至此，原始表达矩阵的转化已经基本完成，接下来可以着手对细胞进行聚类了。</p>
+<blockquote>
+<p>Ref:</p>
+<p><a target="_blank" rel="noopener" href="https://www.rdocumentation.org/packages/Seurat/versions/4.0.4/topics/PercentageFeatureSet">PercentageFeatureSet function - RDocumentation</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/satijalab/seurat/issues/3544">Plotting a 3rd dimension (color by expression) for FeatureScatter #3544</a></p>
+<p><a target="_blank" rel="noopener" href="https://satijalab.org/seurat/reference/read10x">Load in data from 10X</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.embopress.org/doi/full/10.15252/msb.20188746">Current best practices in single-cell RNA-seq analysis: a tutorial</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/single-cell-RNA-seq/" rel="tag"># single-cell RNA-seq</a>
+              <a href="/tags/pipeline/" rel="tag"># pipeline</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/16/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%B8%80)Download%20and%20load/" rel="prev" title="R单细胞数据分析流程(一)Download and load">
+      <i class="fa fa-chevron-left"></i> R单细胞数据分析流程(一)Download and load
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Quality-Control-QC"><span class="nav-number">1.</span> <span class="nav-text">Quality Control(QC)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Normalization"><span class="nav-number">2.</span> <span class="nav-text">Normalization</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Max</p>
+  <div class="site-description" itemprop="description">在学了在学了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
