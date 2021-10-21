@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在做好了前期的一些预处理后，我们便可以对数据进行聚类分析去得到一些我们想要的初步分析结果了，对细胞进行聚类主要有两种方法：聚类算法(clustering algorithms)和社区检测算法(community detection methods)。目前单细胞聚类的主流方法是在单细胞数据的knn图上通过社区检测算法(包括louvain和leiden)进行聚类分析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R单细胞数据分析流程(三)Clustering">
+<meta property="og:url" content="http://example.com/2021/10/18/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B-%E4%B8%89-Clustering/index.html">
+<meta property="og:site_name" content="TypeError">
+<meta property="og:description" content="在做好了前期的一些预处理后，我们便可以对数据进行聚类分析去得到一些我们想要的初步分析结果了，对细胞进行聚类主要有两种方法：聚类算法(clustering algorithms)和社区检测算法(community detection methods)。目前单细胞聚类的主流方法是在单细胞数据的knn图上通过社区检测算法(包括louvain和leiden)进行聚类分析。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021081811827.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021083042379.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021083546497.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021102543179.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021102505404.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021102940802.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021104702857.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021104955067.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021112438567.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021114706028.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021115432858.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021115623237.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021115857737.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021120123036.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021131202884.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021131325064.png">
+<meta property="article:published_time" content="2021-10-18T15:23:43.000Z">
+<meta property="article:modified_time" content="2021-10-21T05:20:44.791Z">
+<meta property="article:author" content="Max">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="single-cell RNA-seq">
+<meta property="article:tag" content="pipeline">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021081811827.png">
+
+<link rel="canonical" href="http://example.com/2021/10/18/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B-%E4%B8%89-Clustering/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>R单细胞数据分析流程(三)Clustering | TypeError</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TypeError</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B-%E4%B8%89-Clustering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Max">
+      <meta itemprop="description" content="在学了在学了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TypeError">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          R单细胞数据分析流程(三)Clustering
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-18 23:23:43" itemprop="dateCreated datePublished" datetime="2021-10-18T23:23:43+08:00">2021-10-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-21 13:20:44" itemprop="dateModified" datetime="2021-10-21T13:20:44+08:00">2021-10-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">单细胞转录组</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在做好了前期的一些预处理后，我们便可以对数据进行<strong>聚类分析</strong>去得到一些我们想要的初步分析结果了，对细胞进行聚类主要有两种方法：聚类算法(clustering algorithms)和社区检测算法(community detection methods)。目前单细胞聚类的主流方法是在单细胞数据的knn图上通过社区检测算法(包括louvain和leiden)进行聚类分析。</p>
+<span id="more"></span>
+
+<h1 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h1><p>首先利用挑出的高异质性基因进行PCA，进一步降低数据的维数。 </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PCA线性降维</span></span><br><span class="line">AllCell &lt;- RunPCA(AllCell, features = VariableFeatures(object = AllCell))</span><br><span class="line"><span class="comment"># 展示PCA结果</span></span><br><span class="line">pcaPlot &lt;- DimPlot(AllCell, reduction = <span class="string">&quot;pca&quot;</span>)</span><br><span class="line">elbowPlot &lt;- ElbowPlot(AllCell)</span><br></pre></td></tr></table></figure>
+<p>pcaPlot为根据PCA的前两维绘制的散点图，可以大致看出不同的样本的聚集情况。</p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021081811827.png" alt="image-20211021081811827"></p>
+<p>elbowPlot为碎石图，可以看出每个pc中所包含的信息量，通常用于确定接下来计算邻居结点或者计算Umap时选用多少个主成分。</p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021083042379.png" alt="image-20211021083042379"></p>
+<blockquote>
+<p>从碎石图中我们可以看到，主成分所含的信息量在大概pc8-pc10时有一个显著的下降，这个显著下降的点被称为”elbow”， 我们通常选择elbow前的pcs做后续的分析。</p>
+<p>对于pcs的选择，Seurat教程给出了一些建议：</p>
+<ul>
+<li>We encourage users to repeat downstream analyses with a different number of PCs (10, 15, or even 50!). As you will observe, the results often do not differ dramatically.</li>
+<li>We advise users to err on the higher side when choosing this parameter. For example, performing downstream analyses with only 5 PCs does significantly and adversely affect results.</li>
+</ul>
+</blockquote>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021083546497.png" alt="image-20211021083546497"></p>
+<p>确定了用于后续分析的维数后，就可以开始进行聚类了。目前比较通用的方法是先计算出单细胞簇的knn图<code>FindNeighbors()</code>，再在knn图上使用louvain算法检测出细胞的分簇<code>FindClusters()</code>， 最后通过UMAP图可视化分簇<code>RunUmap()</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算邻居</span></span><br><span class="line">AllCell &lt;- FindNeighbors(AllCell, dims = <span class="number">1</span>:<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 计算分簇</span></span><br><span class="line">AllCell &lt;- FindClusters(AllCell, resolution = <span class="number">0.5</span>)</span><br><span class="line"><span class="comment"># UMAP</span></span><br><span class="line">AllCell &lt;- RunUMAP(AllCell, dims = <span class="number">1</span>:<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 可视化</span></span><br><span class="line">AllCellumap &lt;- DimPlot(AllCell, reduction = <span class="string">&quot;umap&quot;</span>, label = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021102543179.png" alt="image-20211021102543179"></p>
+<p>也可以使用t-sne图进行可视化</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AllCell &lt;- RunTSNE(AllCell, dims = <span class="number">1</span>:<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">AllCellTsne &lt;- DimPlot(AllCell, reduction = <span class="string">&quot;tsne&quot;</span>, label = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021102505404.png" alt="image-20211021102505404"></p>
+<p>Seurat包中的图都是基于ggplot2绘制的，因此可以通过ggplot2对绘制的图进行设置：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DimPlot(AllCell, reduction = <span class="string">&quot;umap&quot;</span>, label = <span class="built_in">T</span>) +theme(</span><br><span class="line">  axis.line = element_blank(),</span><br><span class="line">  axis.ticks = element_blank(),</span><br><span class="line">  axis.text = element_blank(), </span><br><span class="line">  axis.title = element_blank()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021102940802.png" alt="image-20211021102940802"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DimPlot(AllCell, reduction = <span class="string">&quot;tsne&quot;</span>, label = <span class="built_in">T</span>) +theme(</span><br><span class="line">  axis.line = element_blank(),</span><br><span class="line">  axis.ticks = element_blank(),</span><br><span class="line">  axis.text = element_blank(), </span><br><span class="line">  axis.title = element_blank()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021104702857.png" alt="image-20211021104702857"></p>
+<h1 id="SeuratObject的构成"><a href="#SeuratObject的构成" class="headerlink" title="SeuratObject的构成"></a>SeuratObject的构成</h1><p>现在我们可以回过头来，看看<code>AllCell</code>里到底有什么</p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021104955067.png" alt="image-20211021104955067"></p>
+<table>
+<thead>
+<tr>
+<th>slot</th>
+<th align="center">function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>assays</td>
+<td align="center">A list of assays within this object</td>
+</tr>
+<tr>
+<td>meta.data</td>
+<td align="center">Cell-level meta data</td>
+</tr>
+<tr>
+<td>active.assay</td>
+<td align="center">Name of active, or default, assay</td>
+</tr>
+<tr>
+<td>active.ident</td>
+<td align="center">Identity classes for the current object</td>
+</tr>
+<tr>
+<td>graphs</td>
+<td align="center">A list of nearest neighbor graphs</td>
+</tr>
+<tr>
+<td>reductions</td>
+<td align="center">A list of DimReduc objects</td>
+</tr>
+<tr>
+<td>project.name</td>
+<td align="center">User-defined project name (optional)</td>
+</tr>
+<tr>
+<td>tools</td>
+<td align="center">Empty list. Tool developers can store any internal data from their methods here</td>
+</tr>
+<tr>
+<td>misc</td>
+<td align="center">Empty slot. User can store additional information here</td>
+</tr>
+<tr>
+<td>version</td>
+<td align="center">Seurat version used when creating the objec</td>
+</tr>
+<tr>
+<td>……</td>
+<td align="center">……</td>
+</tr>
+</tbody></table>
+<p>挑出几个重要的介绍一下：</p>
+<h2 id="Assays"><a href="#Assays" class="headerlink" title="Assays"></a>Assays</h2><p>assays中存放着原始的表达矩阵，基因名，barcode等信息，</p>
+<blockquote>
+<p>如果想获得数据中的基因名，可以直接使用<code>rownames()</code>如</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(rownames(AllCell))</span><br></pre></td></tr></table></figure>
+
+<p>Output:  [1] “Xkr4”    “Gm1992”  “Rp1”     “Sox17”   “Gm37323” “Mrpl15” </p>
+<p>也可以使用稍微复杂的表达方式:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(AllCell@assays[[<span class="string">&quot;RNA&quot;</span>]]@data@Dimnames[[<span class="number">1</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>Output: [1] “Xkr4”    “Gm1992”  “Rp1”     “Sox17”   “Gm37323” “Mrpl15” </p>
+<p>barcode同理，可以使用<code>colnames()</code>或<code>AllCell@assays[[&quot;RNA&quot;]]@data@Dimnames[[2]]</code>获取</p>
+</blockquote>
+<p>AllCell@assays[[“RNA”]]中，在聚类的标准流程走完后通常含有三种数据：counts, data, scale.data.<br>counts中包含的是原始表达矩阵中的counts值；<br>data中包含的是Normalization之后的值；<br>scale.data中包含的是Scale之后的值；<br>在一些Seurat函数如<code>FindMarks()</code>中，会有一个参数slot可以选择用于计算的是何种数据形式，默认值为”data”，即使用Normalization之后的数据进行计算。</p>
+<h2 id="Meta-data"><a href="#Meta-data" class="headerlink" title="Meta.data"></a>Meta.data</h2><p>meta.data 元数据，里面存放着对每个细胞的描述， meta.data中的列可以直接通过<code>AllCell$</code>获取：</p>
+<p>在此例中</p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021112438567.png" alt="image-20211021112438567"></p>
+<p>orig.ident为读入样本时对样本的编号，nCount_RNA是每个细胞的总Count数，nFeature_RNA是每个细胞表达的基因数。</p>
+<p>percent.mt, percent.rb, percent.IEG是我们计算出的线粒体基因，核糖体基因以及即早基因在每个细胞中所占比例：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AllCell[[<span class="string">&quot;percent.mt&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;^mt-&quot;</span>)  <span class="comment"># 计算每个细胞中线粒体基因的百分比</span></span><br><span class="line">AllCell[[<span class="string">&quot;percent.rb&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;^Rp[ls]&quot;</span>) <span class="comment"># 计算每个细胞中核糖体基因的百分比</span></span><br><span class="line">AllCell[[<span class="string">&quot;percent.IEG&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;^Fos$|^Egr1$|^Npas4$&quot;</span>) <span class="comment"># 计算每个细胞中即早基因IEG的百分比</span></span><br></pre></td></tr></table></figure>
+
+<p>RNA_snn_res.0.5和Seurat_clusters是每个细胞所属的分簇；</p>
+<p>meta.data中可以任意添加新列以描述各个细胞的信息，例如我们从Moffitt的原文得知，前三个样本(1,2,3)是雌鼠。后三个样本(4,5,6)是雄鼠。我们可以在meta.data中添加这一信息:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sex &lt;- fct_collapse(AllCell$orig.ident, <span class="string">&quot;female&quot;</span> = <span class="built_in">c</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>), <span class="string">&quot;male&quot;</span> = <span class="built_in">c</span>(<span class="string">&quot;4&quot;</span>, <span class="string">&quot;5&quot;</span>, <span class="string">&quot;6&quot;</span>))</span><br><span class="line">AllCell$sex &lt;- sex</span><br></pre></td></tr></table></figure>
+
+<p>在Umap图中，我们可以通过<code>group_by</code>参数查看我们关注的信息的分布情况：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DimPlot(AllCell, group.by = <span class="string">&quot;sex&quot;</span>, shuffle = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021114706028.png" alt="image-20211021114706028"></p>
+<blockquote>
+<p><code>Shffule = T</code>可以按随机顺序绘制点，防止色彩被盖住看不到分布情况。</p>
+</blockquote>
+<h3 id="Active"><a href="#Active" class="headerlink" title="Active.*"></a>Active.*</h3><p>Active.assay和active.ident表示当前默认的数据和当前默认的meta.data，一些函数如<code>FindAllMarker()</code>会根据active.ident计算当前默认分类中的差异表达基因。可以通过<code>Ident()</code>切换，如：</p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021115432858.png" alt="image-20211021115432858"></p>
+<blockquote>
+<p>当前默认的active.ident为聚类出的结果。</p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Idents(AllCell) &lt;- <span class="string">&quot;sex&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021115623237.png" alt="image-20211021115623237"></p>
+<p>切换成性别为当前默认ident，这样在调用<code>FindAllMarker()</code>函数时就会计算不同性别之间的差异基因。</p>
+<h2 id="reduction"><a href="#reduction" class="headerlink" title="reduction"></a>reduction</h2><p>reduction中保存了降维计算(pca, umap, tsne)的信息。</p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021115857737.png" alt="image-20211021115857737"></p>
+<p>主要是图中各个点的坐标：</p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021120123036.png" alt="image-20211021120123036"></p>
+<h2 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021131202884.png" alt="image-20211021131202884"></p>
+<p>Commands保存了之前对数据进行的操作的信息，其中包括该命令运行的时间以及使用的参数等等。</p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021131325064.png" alt="image-20211021131325064"></p>
+<blockquote>
+<p>Ref:</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1422461cb84c">seurat对象结构</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.embopress.org/doi/full/10.15252/msb.20188746">Current best practices in single-cell RNA-seq analysis: a tutorial</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/single-cell-RNA-seq/" rel="tag"># single-cell RNA-seq</a>
+              <a href="/tags/pipeline/" rel="tag"># pipeline</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/17/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B(%E4%BA%8C)QC%20and%20Normalization/" rel="prev" title="R单细胞数据分析流程(二)QC amd Normalization">
+      <i class="fa fa-chevron-left"></i> R单细胞数据分析流程(二)QC amd Normalization
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Clustering"><span class="nav-number">1.</span> <span class="nav-text">Clustering</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SeuratObject%E7%9A%84%E6%9E%84%E6%88%90"><span class="nav-number">2.</span> <span class="nav-text">SeuratObject的构成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Assays"><span class="nav-number">2.1.</span> <span class="nav-text">Assays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Meta-data"><span class="nav-number">2.2.</span> <span class="nav-text">Meta.data</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Active"><span class="nav-number">2.2.1.</span> <span class="nav-text">Active.*</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reduction"><span class="nav-number">2.3.</span> <span class="nav-text">reduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commands"><span class="nav-number">2.4.</span> <span class="nav-text">Commands</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Max</p>
+  <div class="site-description" itemprop="description">在学了在学了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
