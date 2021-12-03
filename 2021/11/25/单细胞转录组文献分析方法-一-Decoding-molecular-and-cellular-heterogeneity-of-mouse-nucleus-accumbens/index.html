@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="单细胞转录组文献分析方法[一]: Decoding molecular and cellular heterogeneity of mouse nucleus accumbens">
+<meta property="og:url" content="http://example.com/2021/11/25/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%B8%80-Decoding-molecular-and-cellular-heterogeneity-of-mouse-nucleus-accumbens/index.html">
+<meta property="og:site_name" content="TypeError">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211024172700636.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211203161811933.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig1_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig2_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig3_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig9_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig10_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig11_ESM.jpg">
+<meta property="article:published_time" content="2021-11-25T15:34:26.000Z">
+<meta property="article:modified_time" content="2021-12-03T08:29:02.833Z">
+<meta property="article:author" content="Max">
+<meta property="article:tag" content="single-cell RNA-seq">
+<meta property="article:tag" content="basal ganglia">
+<meta property="article:tag" content="brain">
+<meta property="article:tag" content="atlas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211024172700636.png">
+
+<link rel="canonical" href="http://example.com/2021/11/25/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%B8%80-Decoding-molecular-and-cellular-heterogeneity-of-mouse-nucleus-accumbens/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>单细胞转录组文献分析方法[一]: Decoding molecular and cellular heterogeneity of mouse nucleus accumbens | TypeError</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TypeError</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/25/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%B8%80-Decoding-molecular-and-cellular-heterogeneity-of-mouse-nucleus-accumbens/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Max">
+      <meta itemprop="description" content="在学了在学了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TypeError">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单细胞转录组文献分析方法[一]: Decoding molecular and cellular heterogeneity of mouse nucleus accumbens
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-25 23:34:26" itemprop="dateCreated datePublished" datetime="2021-11-25T23:34:26+08:00">2021-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-03 16:29:02" itemprop="dateModified" datetime="2021-12-03T16:29:02+08:00">2021-12-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">单细胞转录组</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211024172700636.png" alt="image-20211024172700636"></p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211203161811933.png" alt="image-20211203161811933"></p>
+<span id="more"></span>
+
+<blockquote>
+<p><strong>伏隔核 (NAc) 是基底神经节回路的关键组成部分，它将来自皮质和边缘区域的信息整合到直接行为中。</strong>先前的研究表明，NAc 参与调节多种行为，包括食欲和厌恶反应、进食、社交互动、强化和工具学习。此外，临床和临床前研究已将 NAc 功能障碍与多种神经精神疾病联系起来，包括抑郁症、焦虑症、精神分裂症和药物滥用 。与其功能多样性一致，NAc 与不同的大脑区域建立了复杂的神经连接。越来越多的证据表明，<strong>NAc 的特定输入/输出回路可能是其不同功能的基础。</strong></p>
+<p><strong>考虑到 NAc 的功能和解剖复杂性，对细胞组成和结构的理解仍然有限。</strong>一般来说，超过 90% 的 NAc 神经元是 GABA 能中等多刺神经元 (MSNs)，中间神经元 (INs) 的比例很小。<strong>传统的直接/间接通路模型根据其基因表达、连接性和功能将 MSN 分为 D1 多巴胺受体表达亚型和 D2 多巴胺受体表达亚型（D1 和 D2 MSN）。</strong></p>
+<p><strong>虽然该模型为理解纹状体的细胞和回路组织提供了一个框架，但它在很大程度上忽略了纹状体内的异质性，因此不能很好地解释 NAc 的解剖和功能多样性。</strong>例如，背侧纹状体 (DS) 中的纹状体/基质隔室和 NAc 中的核/壳组织表现出离散的分子和解剖学特征。此外，位于 NAc 不同甚至相同子区域的 MSN 与不同的上游和下游目标连接。此外，<strong>不同的神经功能被归因于不同的 NAc 亚区，甚至是近距离内的相同神经元亚型（例如，D1 MSN）。</strong></p>
+</blockquote>
+<h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><h2 id="data-filtering-and-quality-control"><a href="#data-filtering-and-quality-control" class="headerlink" title="data filtering and quality control"></a>data filtering and quality control</h2><p>The R package <mark><strong>Seurat</strong></mark> (v2.1.0) and some customized R scripts were used for data analyses. </p>
+<p>First, the expression matrices of all the 11 samples were pooled together into a global Seurat object using the ‘<strong>MergeSeurat</strong>’ function. </p>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MergeSeurat(object1, object2, project = <span class="literal">NULL</span>, min.cells = <span class="number">0</span>,</span><br><span class="line">  min.genes = <span class="number">0</span>, is.expr = <span class="number">0</span>, do.normalize = <span class="literal">TRUE</span>, scale.factor = <span class="number">10000</span>,</span><br><span class="line">  do.scale = <span class="literal">FALSE</span>, do.center = <span class="literal">FALSE</span>, names.field = <span class="number">1</span>,</span><br><span class="line">  names.delim = <span class="string">&quot;_&quot;</span>, add.cell.id1 = <span class="literal">NULL</span>, add.cell.id2 = <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>Genes expressed in fewer than three cells</strong> were excluded. </p>
+</li>
+<li><p><strong>The cells with more than 10% of their total transcripts from mitochondrial transcriptome</strong></p>
+</li>
+<li><p><strong>cells with a large number of uniquely expressed genes (more than the 99th percentile, 4,766 genes) were removed.</strong> </p>
+</li>
+<li><p>For the initial analysis, <strong>all single cells expressing ≤1,500 genes were also excluded</strong>. </p>
+</li>
+</ul>
+<p>In total, an expression matrix including <strong>19,458 genes</strong> and <strong>37,011 cells</strong> was obtained. The gene expression profile of each single cell was then normalized to count per million (<strong>cpm</strong>) and <strong>natural log-transformed</strong>. To further exclude potential experimental variations, a linear model was generated by using the <code>ScaleData</code> function in Seurat to regress out the effect of (1) <strong>the number of detected UMIs in each cell</strong>, (2) <strong>the percent of mitochondrial genes</strong> and (3) <strong>sample-to-sample variation</strong>.</p>
+<h2 id="Separation-of-cells-into-neuronal-and-non-neuronal-populations-and-detection-of-major-cell-populations"><a href="#Separation-of-cells-into-neuronal-and-non-neuronal-populations-and-detection-of-major-cell-populations" class="headerlink" title="Separation of cells into neuronal and non-neuronal populations and detection of major cell populations"></a>Separation of cells into neuronal and non-neuronal populations and detection of major cell populations</h2><p>To detect the major neuronal and non-neuronal populations, 2,104 genes with cpm &gt;1.5 and dispersion (variance/mean expression) larger than one standard deviation away from the expected dispersion were selected as variable genes using the Seurat function ‘<strong>FindVariableGenes</strong>’. The variable genes were used to <strong>calculate the top 30 principal components (PCs)</strong>, and the significant PCs were selected using the ‘<strong>JackStraw</strong>’ method in the Seurat package (<em>P</em> &lt; 1 × 10−3). The cells were then classified into 25 clusters with the Seurat ‘<strong>FindClusters</strong>’ function. </p>
+<p>Then, the 25 initial clusters were merged using a <strong>random forest classifier</strong> with ten-fold cross-validation and 500 trees built with the <strong>caret</strong> R package, until the markers of each cluster had a strong predictive power (&gt;80%), which led to 13 cell clusters. </p>
+<p>Based on the <strong>expression of neuron-specific gene <em>Snap25</em></strong>, the 13 cell clusters were identified as neuronal or non-neuronal clusters. In total, five neuronal clusters with 26,429 cells and eight non-neuronal clusters with 10,582 cells were detected. These 13 major cell clusters were further aggregated into five non-neuronal populations (<strong>astrocytes, endothelial cells, microglia, oligodendrocytes and OPCs</strong>) and four neuronal populations (<strong>D1 MSNs, D2 MSNs, INs and new-born neurons</strong>) based on the expression of established marker genes, which is presented in Fig. 1. </p>
+<h2 id="Inclusion-of-non-neuronal-cells-with-more-than-800-genes-detected"><a href="#Inclusion-of-non-neuronal-cells-with-more-than-800-genes-detected" class="headerlink" title="Inclusion of non-neuronal cells with more than 800 genes detected"></a>Inclusion of non-neuronal cells with more than 800 genes detected</h2><p>Previous studies showed that <strong>neuronal cells tend to have a higher number of mRNAs (UMI) and genes than non-neuronal cells</strong><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-021-00938-x?proof=t#ref-CR34">34</a>,<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-021-00938-x?proof=t#ref-CR35">35</a>, which is also confirmed in our dataset (Extended Data Fig. <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-021-00938-x?proof=t#Fig9">1d</a>). Thus, the criteria used above (&gt;1,500 genes detected) excluded many non-neuronal cells. </p>
+<p>Hence, we decided to <strong>include non-neuronal cells with more than 800 detected genes</strong>, which was regarded as high-quality cells in previous high-throughput scRNA-seq studies<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-021-00938-x?proof=t#ref-CR61">61</a>,<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-021-00938-x?proof=t#ref-CR62">62</a>. To this end, <strong>the cells expressing ≥1,500 genes were used to train a random forest classifier</strong> (500 trees and ten-fold cross-validation; Extended Data Fig. <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-021-00938-x?proof=t#Fig9">1e</a>) to predict the identity of the cells expressing 800–1,500 genes (Extended Data Fig. <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-021-00938-x?proof=t#Fig9">1f</a>). <strong>Only cells predicted as non-neuronal populations were included.</strong> This led to a dataset containing 26,429 neuronal cells and 26,913 non-neuronal cells.</p>
+<h2 id="Clustering-analysis-of-each-major-clusters"><a href="#Clustering-analysis-of-each-major-clusters" class="headerlink" title="Clustering analysis of each major clusters"></a>Clustering analysis of each major clusters</h2><p>To further cluster the major clusters, the variable genes for each major cluster were identified with the ‘<strong>FindVariableGenes</strong>’ function in Seurat. </p>
+<blockquote>
+<p>In this function, genes were placed into 20 non-overlapping bins according to their average expression, and then a <em>z</em>-score between their dispersion (variance/mean expression) and the mean dispersion of the bin was calculated. The genes with the expression cpm &gt;1.5 and dispersion ≥1 standard deviations away from the expected dispersion in the corresponding bin were selected as variable genes. In some cases, the threshold of dispersion was set to a higher value (up to 3 standard deviations) if the number of variable genes was greater than 2,500. </p>
+</blockquote>
+<p>Then, the variable genes of each major cluster were used to <strong>calculate the top 30 PCs</strong>. Significant PCs with a <em>P</em> value of 1 × 10−3 were selected with the <strong>JackStraw</strong> method in the Seurat package. If too many PCs were significant, the top 10 PCs were selected. After principal component analysis (PCA), the coordinates of the cells in the significant PCs were used as input for cell clustering. For each major cluster, we first forced the ‘<strong>FindClusters</strong>’ function to generate a large number of clusters by setting <strong>the resolution parameter to 3 or 4</strong>. Then, the marker genes of these clusters were calculated, and any pair of clusters with fewer than five DEGs (fold change &gt;2 and <em>P</em> &lt; 0.01) were merged. </p>
+<p>Finally, we <strong>manually filtered out</strong> the cell clusters with substantial expression of </p>
+<p>(1) neuronal and non-neuronal marker;</p>
+<p>(2) established non-neuronal markers of different subtypes, because they potentially represent double droplets. </p>
+<blockquote>
+<p> We also excluded the cell clusters <strong>expressing a high level of glutamatergic neuron markers (<em>Slc17a6</em> and <em>Slc17a7</em>)</strong>, because <strong>NAc</strong> does not contain glutamatergic neuron. </p>
+</blockquote>
+<p>In addition, <strong>cell clusters contributed by cells from fewer than three samples</strong> were also excluded. After these processes, our pruned dataset included 25,734 non-neuronal cells and 21,842 neuronal cells.</p>
+<h2 id="Identification-of-cluster-markers"><a href="#Identification-of-cluster-markers" class="headerlink" title="Identification of cluster markers"></a>Identification of cluster markers</h2><p>The cluster-specific markers were identified by <strong>detecting the DEGs in the saline-treated samples by comparing their expression in the given cluster versus the other clusters.</strong> Specifically, the cluster markers were calculated by using a <strong>likelihood ratio test</strong> with an underlying negative binomial distribution (<strong>FindAllMarkers</strong> function of the Seurat package) while controlling for </p>
+<p>(1) <strong>the number of UMIs in each cell</strong>; </p>
+<p>(2) <strong>the percent of mitochondrial transcripts</strong>; </p>
+<p>(3) <strong>sample-to-sample variation</strong>. </p>
+<blockquote>
+<p>False discovery rates were corrected using the Benjamini–Hochberg method. The gene expression counts were assumed to follow a negative binomial distribution, but this was not formally tested. For MERFISH data, the two-sided, non-parametric Mann–Whitney test with Benjamini–Hochberg multiple testing correction was used (FindAllMarkers function of the Seurat package).</p>
+</blockquote>
+<h1 id="Figures"><a href="#Figures" class="headerlink" title="Figures"></a>Figures</h1><h2 id="Fig-1-scRNA-seq-reveals-major-cell-populations-in-the-NAc"><a href="#Fig-1-scRNA-seq-reveals-major-cell-populations-in-the-NAc" class="headerlink" title="Fig. 1: scRNA-seq reveals major cell populations in the NAc."></a>Fig. 1: scRNA-seq reveals major cell populations in the NAc.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig1_HTML.png" alt="Fig. 1"></p>
+<blockquote>
+<p><strong>a</strong>, Workflow of scRNA-seq of mouse NAc. NAc tissues were dissected from adult mouse brain and dissociated into single-cell suspension. Single cells were captured into droplets with the 10x platform, followed by cDNA synthesis, amplification and library construction. After sequencing, cells were classified by their transcriptomes. <strong>b</strong>, <em>t</em>-SNE plot showing the different major cell types in the NAc. Different cell clusters are color-coded. <strong>c</strong>, <em>t</em>-SNE plots showing expression of cell-type-specific markers across different cell subtypes. The gene expression level is color-coded. <strong>d</strong>, Heat map showing that the cell-type-specific markers are differentially expressed across the nine NAc cell populations. DEGs with power &gt;0.4 and fold change &gt;2 among the nine cell clusters were used to generate the heat map. Columns represent individual cells, and rows represent individual genes. The gene expression level is color-coded. Astro, astrocyte; Endo, endothelial cell; Micro, microglia; NB, neural stem cells and neuroblasts; Oligo, oligodendrocyte; <em>t</em>-SNE, <em>t</em>-distributed stochastic neighbor embedding.</p>
+</blockquote>
+<h2 id="Fig-2-Gene-expression-and-spatial-pattern-of-NAc-IN-subtypes"><a href="#Fig-2-Gene-expression-and-spatial-pattern-of-NAc-IN-subtypes" class="headerlink" title="Fig. 2: Gene expression and spatial pattern of NAc IN subtypes."></a>Fig. 2: Gene expression and spatial pattern of NAc IN subtypes.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig2_HTML.png" alt="Fig. 2"></p>
+<blockquote>
+<p><strong>a</strong>, <em>t</em>-SNE plot showing the 13 IN subtypes identified in the NAc. DEGs among all subtypes are used for dimension reduction. Different neuron subtypes are color-coded. <strong>b</strong>, Dot plot showing the expression of selective markers in different NAc IN subtypes. The diameters of the dots represent the percentage of cells within a cluster expressing that gene. The gene expression level is color-coded. <strong>c</strong>, FISH showing the distribution of <em>Sst</em>+/<em>Hhip</em>+ and <em>Sst</em>+/<em>Hhip</em>− IN subtypes in different subregions of the NAc. The box regions labeled with 1–3 in the left panel indicate different subregions of the NAc (from medial to lateral), which are analyzed in the right panels (from upper to lower). The right panels show the FISH of NAc slice with <em>Sst</em> and <em>Hhip</em> probes. Arrowheads indicate cells co-expressing <em>Sst</em> and <em>Hhip</em>. Three independent experiments were performed with similar results. Scale bar, 100 µm. <strong>d</strong>, FISH showing the enrichment of distinct <em>Pthlh</em>+ IN subpopulations in different subregions of the NAc. The upper and lower panels represent the medial and lateral regions of the NAc. Triple-color FISH was performed with probes targeting <em>Pthlh</em>, <em>Crhbp</em> and <em>Pvalb</em>. Arrowheads indicate cells co-expressing <em>Pthlh</em> and <em>Crbhp</em> (upper panels) or cells co-expressing <em>Pthlh</em> and <em>Pvalb</em> (lower panels). Three independent experiments were performed with similar results. Scale bar, 50 µm. <em>t</em>-SNE, <em>t</em>-distributed stochastic neighbor embedding.</p>
+</blockquote>
+<h2 id="Fig-3-Transcriptional-features-of-MSN-subtypes-correlate-with-their-spatial-distribution-in-the-NAc"><a href="#Fig-3-Transcriptional-features-of-MSN-subtypes-correlate-with-their-spatial-distribution-in-the-NAc" class="headerlink" title="Fig. 3: Transcriptional features of MSN subtypes correlate with their spatial distribution in the NAc."></a>Fig. 3: Transcriptional features of MSN subtypes correlate with their spatial distribution in the NAc.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig3_HTML.png" alt="Fig. 3"></p>
+<blockquote>
+<p><strong>a</strong>, <em>t</em>-SNE plots showing the expression pattern of <em>Ppp1r1b</em>, <em>Drd1</em>, <em>Pdyn</em>, <em>Drd2</em> and <em>Adora2a</em> in different MSN populations. The expression level is color-coded. <strong>b</strong>, <em>t</em>-SNE plots showing the eight D1 MSN subtypes (upper panel) and eight D2 MSN subtypes (lower panel); different subtypes are color-coded. <strong>c</strong>, Violin plots showing the expression pattern of MSN subtype-specific gene markers across the D1 MSNs (left) and D2 MSNs (right). Different MSN subtypes are color-coded. The mRNA level is presented on a log scale and adjusted for different genes. <strong>d</strong>, <em>Tshz1</em> is enriched in a subpopulation of D1 MSNs. Left, <em>t</em>-SNE plots showing the expression pattern of <em>Tshz1</em> across MSN populations. The expression level is color-coded. The MSN subtypes labeled by <em>Tshz1</em> are indicated. Right, ISH of <em>Tshz1</em> showing the distribution of <em>Tshz1</em>+ cells in the NAc. Coronal section of mouse brain including NAc is shown. Data were obtained from the Allen Mouse Brain Atlas. Scale bar, 500 µm. <strong>e</strong>, <em>Calb1</em> and <em>Stard5</em> showing anti-correlated expression pattern. Left two panels, <em>t</em>-SNE plots showing the expression of <em>Calb1</em> and <em>Stard5</em> as detected by scRNA-seq across D1 and D2 MSNs. The gene expression level is color-coded. The MSN subtypes labeled by <em>Calb1</em> and <em>Stard5</em> are indicated. Right two panels, ISH of <em>Calb1</em> and <em>Stard5</em> showing their anti-correlated expression pattern in the NAc. The ISH data are from the Allen Brain Atlas. Scale bars, 500 µm. <strong>f</strong>, <em>Upb1</em>+ D2 MSNs are distributed in the medial NAc. Left panel, <em>t</em>-SNE plot showing that <em>Upb1</em> expression is restricted in certain D2 MSN populations. Right panel, ISH image showing the distribution of <em>Upb1</em>+ cells in the NAc. Data were obtained from the Allen Mouse Brain Atlas. Scale bar, 500 µm. <strong>g</strong>, <em>t</em>-SNE plots showing the expression of selected MSN subtype markers across MSNs. Transcriptional levels are color-coded. <strong>h</strong>, ISH images showing the spatial distribution of <em>Serpinb2</em>, <em>Tac2</em> and <em>Calcr</em>, markers of certain D1/D2 MSN subtypes, in mouse NAc. Boxed regions in left panels are enlarged and shown in the right panels. The data are from the Allen Mouse Brain Atlas. Scale bars, 500 µm. <strong>i</strong>, Three-color FISH confirms the expression of MSN subtype-specific markers in the NAc. The arrowheads indicate cells that co-express selected MSN subtype markers with <em>Drd1</em> or <em>Drd2</em> in mouse NAc. Three independent experiments were performed with similar results. Scale bar, 50 µm. <em>t</em>-SNE, <em>t</em>-distributed stochastic neighbor embedding.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-1-Identification-of-the-transcriptionally-distinct-cell-types-in-mouse-NAc"><a href="#Extended-Data-Fig-1-Identification-of-the-transcriptionally-distinct-cell-types-in-mouse-NAc" class="headerlink" title="Extended Data Fig. 1: Identification of the transcriptionally distinct cell types in mouse NAc."></a>Extended Data Fig. 1: Identification of the transcriptionally distinct cell types in mouse NAc.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig9_ESM.jpg" alt="Extended Data Fig. 1"></p>
+<blockquote>
+<p><strong>a</strong>, Schematic diagram showing the nucleus accumbens region used for single-cell RNA sequencing. Adult mouse brain was first cut into 0.5mm-thick serial coronal sections and then NAc tissues (shown in purple contours) were dissected from successive slices along the rostral-caudal axis. The brain pictures were taken from Allen Mouse Brain Atlas. <strong>b</strong>, Bargraphs showing the distribution of UMI and gene number detected in each cell across the 11 samples. Different samples are color-coded. The black central line is the median, the box limits indicate the upper and lower quartiles, the whiskers indicate the 1.5 interquartile range and dots represent outliers. <strong>c</strong>, Histograms showing the percentage of cells from each sample that contribute to the major cell clusters. Different samples are color-coded. <strong>d</strong>, Bargraphs showing the distribution of UMI and gene number detected in each cell across the 9 major cell clusters. Different cell clusters are color-coded. The black central line is the median, the box limits indicate the upper and lower quartiles, the whiskers indicate the 1.5 interquartile range and dots represent outliers. Astro, astrocyte; D1, medial spiny neuron, D1-receoptor subtype; D2, medial spiny neuron, D2-receptor subtype; Endo, endothelial cell; IN, interneuron; Micro, microglia; NB, neural stem cells and neuroblast; Oligo, oligodendrocyte; OPC, oligodendrocyte progenitor cell. <strong>e</strong>, ROC curves showing the high accuracy of the cell identity predictor, especially for non-neuronal cells. The curves of different cell types are represented by different colors. <strong>f</strong>, Heatmap showing the results of predicted identity of cells with 800 to 1,500 genes detected. The prediction probability is color-coded. <strong>g</strong>, <em>In situ</em> hybridization of the cell-cycle gene, <em>Top2a</em>, showing the distribution of neural stem cells and neuroblasts in the ventral wall of the lateral ventricle. The purple contour indicates the NAc, and the boxed region in the left panel is enlarged and shown on the right. The ISH data was obtained from Allen Mouse Brain Atlas. Scale bar, 100 µm.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-2-Gene-expression-and-spatial-pattern-of-NAc-interneuron-subtypes"><a href="#Extended-Data-Fig-2-Gene-expression-and-spatial-pattern-of-NAc-interneuron-subtypes" class="headerlink" title="Extended Data Fig. 2: Gene expression and spatial pattern of NAc interneuron subtypes."></a>Extended Data Fig. 2: Gene expression and spatial pattern of NAc interneuron subtypes.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig10_ESM.jpg" alt="Extended Data Fig. 2"></p>
+<blockquote>
+<p><strong>a</strong>, Hierarchical relationship of the 13 NAc interneuron subtypes identified from scRNA-seq. The dendrogram indicate the relatedness among interneuron subtypes based on their gene expression. The markers and the number of cells of each subtypes are shown. <strong>b</strong>, Heatmap showing the expression pattern of interneuron markers across different subtypes. Each column represents a single cell. The gene expression level is color coded. The 13 interneuron subtypes are indicated by different colors on top. <strong>c</strong>, ISH showing the expression of selected interneuron subtype markers identified by scRNA-seq in NAc. The regions around the anterior commissure (AC) were shown except for <em>Pvalb</em>, which was more enriched in lateral part of NAc. The images were obtained from the Allen Mouse Brain Atlas. <strong>d</strong>, tSNE plots showing the expression of interneuron subtype markers across NAc interneuron subtypes. The gene expression level is color-coded. <strong>e</strong>, FISH showing the overlap of selected interneuron markers in NAc. Arrow heads indicate the cells co-express the two genes. Arrows indicate cells expressing one marker gene. Three independent experiments were performed with similar results. Scale bar, 50 µm.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-3-Molecularly-defined-MSN-subtypes-exhibit-distinct-spatial-distribution-in-NAc"><a href="#Extended-Data-Fig-3-Molecularly-defined-MSN-subtypes-exhibit-distinct-spatial-distribution-in-NAc" class="headerlink" title="Extended Data Fig. 3: Molecularly defined MSN subtypes exhibit distinct spatial distribution in NAc."></a>Extended Data Fig. 3: Molecularly defined MSN subtypes exhibit distinct spatial distribution in NAc.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig11_ESM.jpg" alt="Extended Data Fig. 3"></p>
+<blockquote>
+<p><strong>a</strong>, Histograms showing the percentage of cells from each of the 11 samples across D1 and D2 MSN subtypes. Different samples are represented in different colors. <strong>b</strong>, tSNE plots showing the expression pattern of <em>Lrpprc</em>, <em>Foxp2, Foxp1</em> and <em>Isl1</em> across MSN populations. The expression level is color-coded. <strong>c</strong>, ISH of <em>Tshz1</em> showing the distribution of <em>Tshz1</em>+ cells in NAc. Sagittal section of mouse brain including NAc is shown. The boxed region is enlarged and shown on the right. Data are obtained from Allen Mouse Brain Atlas. Scale bars, 500 µm. <strong>d, e</strong>, <em>Ddit4l</em> (<strong>d</strong>) and <em>Trhr</em> (<strong>e</strong>) are enriched in subpopulation of MSNs. Left panel, tSNE plots showing the expression pattern of <em>Ddit4l</em> (<strong>d</strong>) and <em>Trhr</em> (<strong>e</strong>) across MSN populations. The expression level is color-coded. The MSN subtypes labeled by <em>Ddit4l</em> or <em>Trhr</em> were indicated. Right panels, ISH image showing the distribution of <em>Ddit4l</em>+ (<strong>d</strong>) and <em>Trhr</em>+ (<strong>e</strong>) cells in NAc. The boxed regions are enlarged and shown on the right. Data is obtained from Allen Mouse Brain Atlas. Scale bar, 500 µm. <strong>f</strong>, Heatmaps showing the gene expression correlation of differentially expresses genes in D1 MSNs (upper panel) and D2 MSNs (lower panel). The correlation is color-coded, and genes were sorted into groups with higher intra-group correlation. <strong>g, h</strong>, Violin plots showing the expression of selected markers across high-resolution D1 (<strong>g</strong>) and D2 (<strong>h</strong>) MSN subtypes. Different MSN subtypes are color-coded. The mRNA level is presented on a log scale and adjusted for different genes.</p>
+</blockquote>
+<p>reference:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/satijalab/seurat/issues/2860">could not find function “MergeSeurat” #2860</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/single-cell-RNA-seq/" rel="tag"># single-cell RNA-seq</a>
+              <a href="/tags/basal-ganglia/" rel="tag"># basal ganglia</a>
+              <a href="/tags/brain/" rel="tag"># brain</a>
+              <a href="/tags/atlas/" rel="tag"># atlas</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/18/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B-%E4%B8%89-Clustering/" rel="prev" title="R单细胞数据分析流程(三)Clustering">
+      <i class="fa fa-chevron-left"></i> R单细胞数据分析流程(三)Clustering
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods"><span class="nav-number">1.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#data-filtering-and-quality-control"><span class="nav-number">1.1.</span> <span class="nav-text">data filtering and quality control</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Separation-of-cells-into-neuronal-and-non-neuronal-populations-and-detection-of-major-cell-populations"><span class="nav-number">1.2.</span> <span class="nav-text">Separation of cells into neuronal and non-neuronal populations and detection of major cell populations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inclusion-of-non-neuronal-cells-with-more-than-800-genes-detected"><span class="nav-number">1.3.</span> <span class="nav-text">Inclusion of non-neuronal cells with more than 800 genes detected</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clustering-analysis-of-each-major-clusters"><span class="nav-number">1.4.</span> <span class="nav-text">Clustering analysis of each major clusters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identification-of-cluster-markers"><span class="nav-number">1.5.</span> <span class="nav-text">Identification of cluster markers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figures"><span class="nav-number">2.</span> <span class="nav-text">Figures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-1-scRNA-seq-reveals-major-cell-populations-in-the-NAc"><span class="nav-number">2.1.</span> <span class="nav-text">Fig. 1: scRNA-seq reveals major cell populations in the NAc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-2-Gene-expression-and-spatial-pattern-of-NAc-IN-subtypes"><span class="nav-number">2.2.</span> <span class="nav-text">Fig. 2: Gene expression and spatial pattern of NAc IN subtypes.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-3-Transcriptional-features-of-MSN-subtypes-correlate-with-their-spatial-distribution-in-the-NAc"><span class="nav-number">2.3.</span> <span class="nav-text">Fig. 3: Transcriptional features of MSN subtypes correlate with their spatial distribution in the NAc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-1-Identification-of-the-transcriptionally-distinct-cell-types-in-mouse-NAc"><span class="nav-number">2.4.</span> <span class="nav-text">Extended Data Fig. 1: Identification of the transcriptionally distinct cell types in mouse NAc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-2-Gene-expression-and-spatial-pattern-of-NAc-interneuron-subtypes"><span class="nav-number">2.5.</span> <span class="nav-text">Extended Data Fig. 2: Gene expression and spatial pattern of NAc interneuron subtypes.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-3-Molecularly-defined-MSN-subtypes-exhibit-distinct-spatial-distribution-in-NAc"><span class="nav-number">2.6.</span> <span class="nav-text">Extended Data Fig. 3: Molecularly defined MSN subtypes exhibit distinct spatial distribution in NAc.</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Max</p>
+  <div class="site-description" itemprop="description">在学了在学了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
