@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig10_ESM.jpg">
 <meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_938_Fig11_ESM.jpg">
 <meta property="article:published_time" content="2021-11-25T15:34:26.000Z">
-<meta property="article:modified_time" content="2021-12-03T08:54:17.551Z">
+<meta property="article:modified_time" content="2021-12-04T01:42:20.917Z">
 <meta property="article:author" content="Max">
 <meta property="article:tag" content="single-cell RNA-seq">
 <meta property="article:tag" content="basal ganglia">
@@ -201,7 +201,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-03 16:54:17" itemprop="dateModified" datetime="2021-12-03T16:54:17+08:00">2021-12-03</time>
+                <time title="修改时间：2021-12-04 09:42:20" itemprop="dateModified" datetime="2021-12-04T09:42:20+08:00">2021-12-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,8 +237,9 @@
 <p><strong>考虑到 NAc 的功能和解剖复杂性，对细胞组成和结构的理解仍然有限。</strong>一般来说，超过 90% 的 NAc 神经元是 GABA 能中等多刺神经元 (MSNs)，中间神经元 (INs) 的比例很小。<strong>传统的直接/间接通路模型根据其基因表达、连接性和功能将 MSN 分为 D1 多巴胺受体表达亚型和 D2 多巴胺受体表达亚型（D1 和 D2 MSN）。</strong></p>
 <p><strong>虽然该模型为理解纹状体的细胞和回路组织提供了一个框架，但它在很大程度上忽略了纹状体内的异质性，因此不能很好地解释 NAc 的解剖和功能多样性。</strong>例如，背侧纹状体 (DS) 中的纹状体/基质隔室和 NAc 中的核/壳组织表现出离散的分子和解剖学特征。此外，位于 NAc 不同甚至相同子区域的 MSN 与不同的上游和下游目标连接。此外，<strong>不同的神经功能被归因于不同的 NAc 亚区，甚至是近距离内的相同神经元亚型（例如，D1 MSN）。</strong></p>
 </blockquote>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>The nucleus accumbens (NAc) plays an important role in regulating multiple behaviors, and its dysfunction has been linked to many neural disorders. However, the molecular, cellular and anatomic heterogeneity underlying its functional diversity remains incompletely understood. In this study, we generated a cell census of the mouse NAc using single-cell RNA sequencing and multiplexed error-robust fluorescence in situ hybridization, revealing a high level of cell heterogeneity in this brain region. Here we show that the transcriptional and spatial diversity of neuron subtypes underlie the NAc’s anatomic and functional heterogeneity. These findings explain how the seemingly simple neuronal composition of the NAc achieves its highly heterogenous structure and diverse functions. Collectively, our study generates a spatially resolved cell taxonomy for understanding the structure and function of the NAc, which demonstrates the importance of combining molecular and spatial information in revealing the fundamental features of the nervous system.</p>
 <h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><h2 id="data-filtering-and-quality-control"><a href="#data-filtering-and-quality-control" class="headerlink" title="data filtering and quality control"></a>data filtering and quality control</h2><p>The R package <mark><strong>Seurat</strong></mark> (v2.1.0) and some customized R scripts were used for data analyses. </p>
-<p>First, the expression matrices of all the 11 samples were pooled together into a global Seurat object using the**<code>MergeSeurat</code>** function. </p>
+<p>First, the expression matrices of all the 11 samples were pooled together into a global Seurat object using the <strong><code>MergeSeurat</code></strong> function. </p>
  <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MergeSeurat(object1, object2, project = <span class="literal">NULL</span>, min.cells = <span class="number">0</span>,</span><br><span class="line">  min.genes = <span class="number">0</span>, is.expr = <span class="number">0</span>, do.normalize = <span class="literal">TRUE</span>, scale.factor = <span class="number">10000</span>,</span><br><span class="line">  do.scale = <span class="literal">FALSE</span>, do.center = <span class="literal">FALSE</span>, names.field = <span class="number">1</span>,</span><br><span class="line">  names.delim = <span class="string">&quot;_&quot;</span>, add.cell.id1 = <span class="literal">NULL</span>, add.cell.id2 = <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -333,7 +334,10 @@
     <a href="/2021/10/18/R%E5%8D%95%E7%BB%86%E8%83%9E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B-%E4%B8%89-Clustering/" rel="prev" title="R单细胞数据分析流程(三)Clustering">
       <i class="fa fa-chevron-left"></i> R单细胞数据分析流程(三)Clustering
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/04/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%BA%8C-Single-cell-transcriptomic-analysis-of-the-lateral-hypothalamic-area-reveals-molecularly-distinct-populations-of-inhibitory-and-excitatory-neurons/" rel="next" title="单细胞转录组文献分析方法[二]: Single-cell transcriptomic analysis of the lateral hypothalamic area reveals molecularly distinct populations of inhibitory and excitatory neurons">
+      单细胞转录组文献分析方法[二]: Single-cell transcriptomic analysis of the lateral hypothalamic area reveals molecularly distinct populations of inhibitory and excitatory neurons <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -392,7 +396,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods"><span class="nav-number">1.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#data-filtering-and-quality-control"><span class="nav-number">1.1.</span> <span class="nav-text">data filtering and quality control</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Separation-of-cells-into-neuronal-and-non-neuronal-populations-and-detection-of-major-cell-populations"><span class="nav-number">1.2.</span> <span class="nav-text">Separation of cells into neuronal and non-neuronal populations and detection of major cell populations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inclusion-of-non-neuronal-cells-with-more-than-800-genes-detected"><span class="nav-number">1.3.</span> <span class="nav-text">Inclusion of non-neuronal cells with more than 800 genes detected</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clustering-analysis-of-each-major-clusters"><span class="nav-number">1.4.</span> <span class="nav-text">Clustering analysis of each major clusters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identification-of-cluster-markers"><span class="nav-number">1.5.</span> <span class="nav-text">Identification of cluster markers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figures"><span class="nav-number">2.</span> <span class="nav-text">Figures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-1-scRNA-seq-reveals-major-cell-populations-in-the-NAc"><span class="nav-number">2.1.</span> <span class="nav-text">Fig. 1: scRNA-seq reveals major cell populations in the NAc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-2-Gene-expression-and-spatial-pattern-of-NAc-IN-subtypes"><span class="nav-number">2.2.</span> <span class="nav-text">Fig. 2: Gene expression and spatial pattern of NAc IN subtypes.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-3-Transcriptional-features-of-MSN-subtypes-correlate-with-their-spatial-distribution-in-the-NAc"><span class="nav-number">2.3.</span> <span class="nav-text">Fig. 3: Transcriptional features of MSN subtypes correlate with their spatial distribution in the NAc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-1-Identification-of-the-transcriptionally-distinct-cell-types-in-mouse-NAc"><span class="nav-number">2.4.</span> <span class="nav-text">Extended Data Fig. 1: Identification of the transcriptionally distinct cell types in mouse NAc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-2-Gene-expression-and-spatial-pattern-of-NAc-interneuron-subtypes"><span class="nav-number">2.5.</span> <span class="nav-text">Extended Data Fig. 2: Gene expression and spatial pattern of NAc interneuron subtypes.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-3-Molecularly-defined-MSN-subtypes-exhibit-distinct-spatial-distribution-in-NAc"><span class="nav-number">2.6.</span> <span class="nav-text">Extended Data Fig. 3: Molecularly defined MSN subtypes exhibit distinct spatial distribution in NAc.</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods"><span class="nav-number">2.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#data-filtering-and-quality-control"><span class="nav-number">2.1.</span> <span class="nav-text">data filtering and quality control</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Separation-of-cells-into-neuronal-and-non-neuronal-populations-and-detection-of-major-cell-populations"><span class="nav-number">2.2.</span> <span class="nav-text">Separation of cells into neuronal and non-neuronal populations and detection of major cell populations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inclusion-of-non-neuronal-cells-with-more-than-800-genes-detected"><span class="nav-number">2.3.</span> <span class="nav-text">Inclusion of non-neuronal cells with more than 800 genes detected</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clustering-analysis-of-each-major-clusters"><span class="nav-number">2.4.</span> <span class="nav-text">Clustering analysis of each major clusters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identification-of-cluster-markers"><span class="nav-number">2.5.</span> <span class="nav-text">Identification of cluster markers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figures"><span class="nav-number">3.</span> <span class="nav-text">Figures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-1-scRNA-seq-reveals-major-cell-populations-in-the-NAc"><span class="nav-number">3.1.</span> <span class="nav-text">Fig. 1: scRNA-seq reveals major cell populations in the NAc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-2-Gene-expression-and-spatial-pattern-of-NAc-IN-subtypes"><span class="nav-number">3.2.</span> <span class="nav-text">Fig. 2: Gene expression and spatial pattern of NAc IN subtypes.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-3-Transcriptional-features-of-MSN-subtypes-correlate-with-their-spatial-distribution-in-the-NAc"><span class="nav-number">3.3.</span> <span class="nav-text">Fig. 3: Transcriptional features of MSN subtypes correlate with their spatial distribution in the NAc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-1-Identification-of-the-transcriptionally-distinct-cell-types-in-mouse-NAc"><span class="nav-number">3.4.</span> <span class="nav-text">Extended Data Fig. 1: Identification of the transcriptionally distinct cell types in mouse NAc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-2-Gene-expression-and-spatial-pattern-of-NAc-interneuron-subtypes"><span class="nav-number">3.5.</span> <span class="nav-text">Extended Data Fig. 2: Gene expression and spatial pattern of NAc interneuron subtypes.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-3-Molecularly-defined-MSN-subtypes-exhibit-distinct-spatial-distribution-in-NAc"><span class="nav-number">3.6.</span> <span class="nav-text">Extended Data Fig. 3: Molecularly defined MSN subtypes exhibit distinct spatial distribution in NAc.</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -406,7 +410,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -419,7 +423,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

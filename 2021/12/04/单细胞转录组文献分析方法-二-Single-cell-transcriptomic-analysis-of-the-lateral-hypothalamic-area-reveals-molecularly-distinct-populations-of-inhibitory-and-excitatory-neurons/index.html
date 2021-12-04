@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="单细胞转录组文献分析方法[二]: Single-cell transcriptomic analysis of the lateral hypothalamic area reveals molecularly distinct populations of inhibitory and excitatory neurons">
+<meta property="og:url" content="http://example.com/2021/12/04/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%BA%8C-Single-cell-transcriptomic-analysis-of-the-lateral-hypothalamic-area-reveals-molecularly-distinct-populations-of-inhibitory-and-excitatory-neurons/index.html">
+<meta property="og:site_name" content="TypeError">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211204015205854.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig1_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig1_HTML-20211204015346239.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig2_HTML-20211204092356032.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig3_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig4_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig5_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig6_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig7_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig9_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig10_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig11_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig12_ESM.jpg">
+<meta property="article:published_time" content="2021-12-03T17:50:25.000Z">
+<meta property="article:modified_time" content="2021-12-04T01:42:54.412Z">
+<meta property="article:author" content="Max">
+<meta property="article:tag" content="single-cell RNA-seq">
+<meta property="article:tag" content="brain">
+<meta property="article:tag" content="atlas">
+<meta property="article:tag" content="hypothalamus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211204015205854.png">
+
+<link rel="canonical" href="http://example.com/2021/12/04/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%BA%8C-Single-cell-transcriptomic-analysis-of-the-lateral-hypothalamic-area-reveals-molecularly-distinct-populations-of-inhibitory-and-excitatory-neurons/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>单细胞转录组文献分析方法[二]: Single-cell transcriptomic analysis of the lateral hypothalamic area reveals molecularly distinct populations of inhibitory and excitatory neurons | TypeError</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TypeError</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/04/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%BA%8C-Single-cell-transcriptomic-analysis-of-the-lateral-hypothalamic-area-reveals-molecularly-distinct-populations-of-inhibitory-and-excitatory-neurons/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Max">
+      <meta itemprop="description" content="在学了在学了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TypeError">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单细胞转录组文献分析方法[二]: Single-cell transcriptomic analysis of the lateral hypothalamic area reveals molecularly distinct populations of inhibitory and excitatory neurons
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-04 01:50:25 / 修改时间：09:42:54" itemprop="dateCreated datePublished" datetime="2021-12-04T01:50:25+08:00">2021-12-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">单细胞转录组</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211204015205854.png" alt="image-20211204015205854"></p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig1_HTML.png" alt="Fig. 1"></p>
+<span id="more"></span>
+
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>The lateral hypothalamic area (LHA) coordinates an array of fundamental behaviors, including sleeping, waking, feeding, stress and motivated behavior. The wide spectrum of functions ascribed to the LHA may be explained by a heterogeneous population of neurons, the full diversity of which is poorly understood. We employed a droplet-based single-cell RNA-sequencing approach to develop a comprehensive census of molecularly distinct cell types in the mouse LHA. Neuronal populations were classified based on fast neurotransmitter phenotype and expression of neuropeptides, transcription factors and synaptic proteins, among other gene categories. We define 15 distinct populations of glutamatergic neurons and 15 of GABAergic neurons, including known and novel cell types. We further characterize a novel population of somatostatin-expressing neurons through anatomical and behavioral approaches, identifying a role for these neurons in specific forms of innate locomotor behavior. This study lays the groundwork for better understanding the circuit-level underpinnings of LHA function.</p>
+<h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><p>For filtering and unsupervised clustering, the gene expression matrix from Cell Ranger was used for downstream analysis <mark>(using <strong>Python 2.7.8</strong> and <strong>R 3.3.1</strong>).</mark> </p>
+<p>Of the initial <mark><strong>7,218</strong> cells (3,784 male and 3,434 female)</mark>, 89 cells with <strong>less than 500UMIs</strong> or <strong>&gt;40% of mitochondrial reads</strong> were discarded. <strong>Genes with at least 2 counts in 5 cells</strong> were used for downstream analysis. </p>
+<p>Gene expression of the remaining 7,129 cells was <strong>normalized</strong> by the total number of transcripts detected in each cell and multiplied by the median transcript count. The normalized expression was <strong>log2-transformed</strong> after an addition of a pseudocount. </p>
+<blockquote>
+<p>The top 1,000 genes with the most variance were identified based on their mean expression in the population and dispersion (variance/mean expression). Genes were binned into 50 different bins based on their mean expression and dispersion scaled with respect to the median dispersion in each bin.  </p>
+</blockquote>
+<p>These genes were used to reduce the dimensions of the dataset using Barnes Hut t-SNE with default <strong>parameters</strong>. </p>
+<blockquote>
+<p>Cells were clustered in t-SNE space using DBSCAN. In each case, this was through an iterative process, <strong>testing different parameters</strong> and visualizing ellipse thresholds to ensure that clusters were optimally resolved into distinct units in t-SNE space. In the case of male and female samples, both sexes were combined for the analysis. The calculation for the top 1,000 genes, dimensionality reduction and clustering were performed on a combined gene expression matrix, which led to a single representation of cells in t-SNE space.</p>
+</blockquote>
+<p>To differentiate neuronal and non-neuronal clusters, the entire gene vs cell matrix was filtered and clustered as described above. <strong>This identified 20 initial clusters.</strong> </p>
+<p>To classify a cluster as a neuron or a non-neuron cluster, we aggregated the median expression of the known neuron markers <mark><strong>Snap25, Syp, Tubb3 and Elavl2</strong></mark> for each cluster. We aggregated the median expression of these genes in each cluster and classified a cluster as high (neuronal) or low (non-neuronal) expression using a simple Gaussian mixture model. Every cell was then classified as a neuron or non-neuron based on their cluster membership. A total of 185 cells were discarded as they were present in clusters classified as both neuronal and non-neuronal. </p>
+<p>Subsequent clustering of non-neuronal and neuronal populations was based on this classification. For <strong>classification of GABAergic and glutamatergic clusters</strong>, clusters classified as neurons were combined and re-clustered as described above, which yielded 30 clusters. Clusters were classified as GABAergic if the <strong>median expression of Slc32a1 is greater than Slc17a6</strong> in each cluster and glutamatergic if the <strong>median expression of Slc17a6 is greater than Slc32a1</strong>. A total of 803 cells were discarded in this step, as they were unassigned to any of the 30 clusters or there was no difference in the median expression of Slc17a6 and Slc32a1. Furthermore, 17 cells were unassigned to non-neuronal clusters, 80 cells were unassigned to glutamatergic clusters and 71 cells were unassigned to GABAergic clusters. </p>
+<p>Marker genes were identified using area under a receiver operating characteristic curve (<strong>AUROC</strong>) analysis. All genes that are greater than <strong>twofold expressed</strong> in the cluster compared with the rest of the population were analyzed using AUROC. Genes that had greater than 85% classification score were defined as markers specific to the cell type. Genes differentially expressed in a given cluster were computed using <strong>edgeR</strong>. </p>
+<p>Expression of marker genes in each cluster were represented as violin plots. Violin plots were rendered using the <strong>ggplot2</strong> package in R. They represent the distribution of log-transformed normalized gene expression (gene UMIs/total cell UMIs) in each cluster.</p>
+<p>The maximum expression for each of violin plot was set to 5. <strong>Marker genes were used for provisional cluster names that included one to three markers</strong>. A cluster name denoted by a single marker indicates a gene that is selectively and robustly expressed by a single cluster and is sufficient to define that cluster. The addition of a second marker indicates a secondary identifier that is also strongly, although not necessarily uniquely, expressed in the cluster. <strong>Gad1 was added to the four LHAGlut clusters that robustly expressed it, despite being classified as glutamatergic</strong>. Finally, we found that although <strong>Pmch and Hcrt</strong> expression was sufficient to identify LHAGlut clusters 1 and 6, respectively, they were unique in also being expressed at low, but consistent, levels in every other LHAGlut and LHAGABA cluster. This is likely explained by ambient mRNA released from damaged neurons during dissociation.</p>
+<h1 id="Figure"><a href="#Figure" class="headerlink" title="Figure"></a>Figure</h1><h2 id="Fig-1-scRNA-seq-of-LHA-cell-populations"><a href="#Fig-1-scRNA-seq-of-LHA-cell-populations" class="headerlink" title="Fig. 1: scRNA-seq of LHA cell populations."></a>Fig. 1: scRNA-seq of LHA cell populations.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig1_HTML-20211204015346239.png" alt="Fig. 1"></p>
+<blockquote>
+<p><strong>a</strong>, Schematic representation of the workflow for LHA microdissection, single-cell isolation, cDNA library preparation, sequencing and clustering. <strong>b</strong>, Location of LHA microdissections from male and female C57BL/6 mice, mapped onto coronal mouse brain atlas images corresponding to distances from bregma of −1.34, −1.58 and −1.82 mm. mt, mammillothalamic tract; f, fornix. Scale bar, 500 μm. <strong>c</strong>, Histograms of genes and transcripts (UMIs) detected in 7,129 single cells. <strong>d</strong>, Sum of normalized expression of pan-neuronal markers in each cell shown on a t-SNE plot after the first iteration of unsupervised clustering (<em>n</em> = 6,944 cells). <strong>e</strong>, Cells were classified using a Gaussian mixture model as neurons or non-neurons based on the combined expression of pan-neuronal markers (<em>n</em> = 6,944 cells). <strong>f</strong>, Normalized expression of <em>Slc17a6</em>, <em>Slc32a1</em>, <em>Gad1</em> and <em>Gad2</em> in each cell shown on a t-SNE plot after the second iteration of unsupervised clustering of neuronal cells (<em>n</em> = 3,589 cells in each panel). <strong>g</strong>, Neurons were classified as either GABAergic or glutamatergic based on the expression of <em>Slc32a1</em> and <em>Slc17a6</em>, respectively (<em>n</em> = 3,589 cells).</p>
+</blockquote>
+<h2 id="Fig-2-Classification-of-LHAGlut-and-LHAGABA-neuronal-cell-types-in-the-LHA"><a href="#Fig-2-Classification-of-LHAGlut-and-LHAGABA-neuronal-cell-types-in-the-LHA" class="headerlink" title="Fig. 2: Classification of LHAGlut and LHAGABA neuronal cell types in the LHA."></a>Fig. 2: Classification of LHAGlut and LHAGABA neuronal cell types in the LHA.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig2_HTML-20211204092356032.png"></p>
+<blockquote>
+<p><strong>a</strong>, Unsupervised clustering of LHAGlut neuronal cell types represented in a t-SNE plot (<em>n</em> = 1,537 cells). Cell-type clusters are color coded, with classifications below the plot. <strong>b</strong>, Violin plot, representing the distribution of log-transformed normalized gene expression (gene UMIs/total cell UMIs) in each cluster, of the pan-neuronal marker <em>Snap25</em>, neurotransmitter components (<em>Slc32a1</em>, <em>Gad1</em>, <em>Gad2</em> and <em>Slc17a6</em>) (upper) and discriminatory markers (lower) for LHAGlut neuronal cell types (<em>n</em> = 1,537 cells). <strong>c</strong>, Unsupervised clustering of LHAGABA neuronal cell types represented in a t-SNE plot (<em>n</em> = 1,900 cells). Different cell-type clusters are color coded, with classifications below the plot. <strong>d</strong>, Violin plot showing normalized expression of neuronal, neurotransmitter (upper) and discriminatory markers (lower) for LHAGABA neuronal cell types (<em>n</em> = 1,900 cells). Total number of cells per cluster, mean genes per cell and mean UMIs per cell are provided in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-019-0349-8#MOESM1">1</a>.</p>
+</blockquote>
+<h2 id="Fig-3-Validation-of-discriminatory-marker-expression-in-LHAGlut-Hcrt-expressing-neurons"><a href="#Fig-3-Validation-of-discriminatory-marker-expression-in-LHAGlut-Hcrt-expressing-neurons" class="headerlink" title="Fig. 3: Validation of discriminatory marker expression in LHAGlut Hcrt-expressing neurons."></a>Fig. 3: Validation of discriminatory marker expression in LHAGlut <em>Hcrt</em>-expressing neurons.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig3_HTML.png" alt="Fig. 3"></p>
+<blockquote>
+<p><strong>a</strong>, Violin plot, representing the distribution of log-transformed normalized gene expression (gene UMIs/total cell UMIs), of <em>Slc32a1</em>, <em>Slc17a6</em> and discriminatory markers of LHAGlut cluster 6 (<em>Hcrt</em>) neurons (<em>n</em> = 162 cells). Total number of cells, mean genes per cell and mean UMIs per cell are provided in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-019-0349-8#MOESM1">1</a>. <strong>b</strong>, Left: heatmap of 100 single <em>Hcrt</em>+ neurons and their expression of 30 genes by qPCR (<em>n</em> = 11 mice). Heatmap colors depict expression levels on a log2 scale from low (blue) to high (red). Right: bar graph measuring percentage expression for seven genes in single <em>Hcrt</em>+ neurons. <strong>c</strong>, Confocal micrographs (×40) of coronal sections of wild-type mice and corresponding pie charts representing co-expression of mRNA for <em>Hcrt</em> and <em>Rfx4</em> (<em>n</em> = 675 cells, 4 mice; upper), <em>Hcrt</em> and <em>Nptx2</em> (<em>n</em> = 203 cells, 4 mice; middle), and <em>Hcrt</em> and <em>Pcsk1</em> (<em>n</em> = 675 cells, 3 mice; lower). All sections were counterstained with DAPI (blue). White arrowheads indicate co-localization. Scale bar (applicable to all micrographs), 50 μm.</p>
+</blockquote>
+<h2 id="Fig-4-Validation-of-discriminatory-marker-expression-in-LHAGlut-Pmch-expressing-neurons-and-subpopulations"><a href="#Fig-4-Validation-of-discriminatory-marker-expression-in-LHAGlut-Pmch-expressing-neurons-and-subpopulations" class="headerlink" title="Fig. 4: Validation of discriminatory marker expression in LHAGlut Pmch-expressing neurons and subpopulations."></a>Fig. 4: Validation of discriminatory marker expression in LHAGlut <em>Pmch</em>-expressing neurons and subpopulations.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig4_HTML.png" alt="Fig. 4"></p>
+<blockquote>
+<p><strong>a</strong>, Violin plot, representing the distribution of log-transformed normalized gene expression (gene UMIs/total cell UMIs), of <em>Slc32a1</em>, <em>Slc17a6</em> and discriminatory markers of LHAGlut cluster 1 (<em>Pmch</em> with <em>Gad1</em>) neurons (<em>n</em> = 119 cells). Total number of cells, mean genes per cell and mean UMIs per cell are provided in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-019-0349-8#MOESM1">1</a>. <strong>b</strong>, Left: heatmap of 19 single <em>Pmch</em>+ neurons and their expression of 30 genes by qPCR (<em>n</em> = 3 mice). Heatmap colors depict expression levels on a log2 scale from low (blue) to high (red). Right: bar graph measuring percentage expression for seven genes in single <em>Pmch</em>+ neurons. <strong>c</strong>, Confocal micrographs (×40) of coronal sections of wild-type mice and corresponding pie charts representing co-expression of mRNA for <em>Pmch</em> and <em>Zic1</em> (<em>n</em> = 251 cells, 4 mice; upper), <em>Pmch</em> and <em>Chodl</em> (<em>n</em> = 206 cells, 3 mice; middle), and <em>Pmch</em> and <em>Otx1</em> (<em>n</em> = 748 cells, 3 mice; lower). <strong>d</strong>, Heatmap showing scaled expression (log counts per million (CPM)) of discriminative genes across the two <em>Pmch</em>+ subclusters. <strong>e</strong>, Unsupervised clustering of <em>Pmch</em>+ neurons of the LHA represented as a t-SNE plot (<em>n</em> = 119 cells), showing subclusters 1 (blue) and 2 (green). <strong>f</strong>, Normalized expression of discriminatory markers shown as t-SNE plots (<em>Pmch</em>, <em>Cartpt</em>, <em>Tacr3</em>, <em>Nptx1</em>, <em>Scg2</em> and <em>Nrxn3</em>) (<em>n</em> = 119 cells). <strong>g</strong>, Confocal micrographs (×40) of coronal sections of wild-type mice and corresponding pie charts representing co-expression of mRNA for <em>Pmch</em>, <em>Cartpt</em> and <em>Tacr3</em> (<em>n</em> = 283 cells, 3 mice; upper), <em>Pmch</em>, <em>Nptx1</em> and <em>Cartpt</em> (<em>n</em> = 261 cells, 3 mice; middle), and <em>Pmch</em>, <em>Nrxn3</em> and <em>Cartpt</em> (<em>n</em> = 309 cells, 3 mice; upper). For <strong>c</strong> and <strong>g</strong>, all sections were counterstained with DAPI (blue), and white arrowheads indicate co-localization. Scale bar (applicable to all micrographs), 50 μm.</p>
+</blockquote>
+<h2 id="Fig-5-Validation-of-discriminatory-marker-expression-in-LHAGlut-Trh-expressing-neurons-and-subpopulations"><a href="#Fig-5-Validation-of-discriminatory-marker-expression-in-LHAGlut-Trh-expressing-neurons-and-subpopulations" class="headerlink" title="Fig. 5: Validation of discriminatory marker expression in LHAGlut Trh-expressing neurons and subpopulations."></a>Fig. 5: Validation of discriminatory marker expression in LHAGlut <em>Trh</em>-expressing neurons and subpopulations.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig5_HTML.png" alt="Fig. 5"></p>
+<blockquote>
+<p><strong>a</strong>, Violin plot, representing the distribution of log-transformed normalized gene expression (gene UMIs/total cell UMIs), of <em>Slc32a1</em>, <em>Slc17a6</em> and discriminatory markers of LHAGlut clusters 8 and 12 (<em>Trh</em> with <em>X</em>) neurons (<em>n</em> = 131 cells). Total number of cells, mean genes per cell and mean UMIs per cell are shown in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-019-0349-8#MOESM1">1</a>. <strong>b</strong>, Confocal micrographs (×40) of coronal sections of wild-type mice and corresponding pie charts representing co-expression of mRNA for <em>Trh</em> and <em>Slc17a6</em> (<em>n</em> = 299 cells, 3 mice; upper), <em>Trh</em> and <em>Otp</em> (<em>n</em> = 732 cells, 4 mice; middle), and <em>Trh</em> and <em>Onecut2</em> (<em>n</em> = 274 cells, 3 mice; lower). White arrowheads indicate co-localization. <strong>c</strong>, Heatmap showing scaled expression (log CPM) of discriminative genes across the two <em>Trh</em>+ clusters. <strong>d</strong>, Unsupervised clustering of LHA <em>Trh</em>+ neurons represented as a t-SNE plot (<em>n</em> = 131 cells), showing clusters 8 (blue) and cluster 12 (green). <strong>e</strong>, Normalized expression of discriminatory markers shown as t-SNE plots (<em>Trh</em>, <em>Cbln2</em>, <em>Gpr101</em>, <em>Syt2</em> and <em>Cplx1</em>) (<em>n</em> = 131 cells). <strong>f</strong>, Confocal micrographs (×40) of coronal sections of wild-type mice and corresponding pie chart representing the co-expression of mRNA for <em>Trh</em>, <em>Syt2</em> and <em>Cbln2</em> (<em>n</em> = 1177 cells, 4 mice). All sections were counterstained with DAPI (blue), and white arrowheads indicate co-localization of <em>Trh</em> and <em>Syt2</em> and white asterisks indicate co-localization of <em>Trh</em> and <em>Cbln2</em>. Scale bar (applicable to all micrographs), 50 μm.</p>
+</blockquote>
+<h2 id="Fig-6-Validation-of-discriminatory-marker-expression-in-LHAGABA-Nts-expressing-neurons-and-subpopulations"><a href="#Fig-6-Validation-of-discriminatory-marker-expression-in-LHAGABA-Nts-expressing-neurons-and-subpopulations" class="headerlink" title="Fig. 6: Validation of discriminatory marker expression in LHAGABA Nts-expressing neurons and subpopulations."></a>Fig. 6: Validation of discriminatory marker expression in LHAGABA <em>Nts</em>-expressing neurons and subpopulations.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig6_HTML.png" alt="Fig. 6"></p>
+<blockquote>
+<p><strong>a</strong>, Violin plot, representing the distribution of log-transformed normalized gene expression (gene UMIs/total cell UMIs), of <em>Slc32a1</em>, <em>Slc17a6</em> and discriminatory markers of LHAGABA cluster 3 (<em>Nts</em> with <em>Cartpt</em>) neurons (<em>n</em> = 75 cells). Total number of cells, mean genes per cell and mean UMIs per cell are shown in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-019-0349-8#MOESM1">1</a>. <strong>b</strong>, Left: heatmap of 73 single <em>Nts</em>+ neurons and their expression of 30 genes by qPCR (<em>n</em> = 3 mice). Heatmap colors depict expression levels on a log2 scale from low (blue) to high (red). Right: bar graph measuring percentage expression for seven genes in <em>Nts</em>+ single neurons. <strong>c</strong>, Confocal micrographs (×40) of coronal sections of wild-type mice and corresponding pie charts representing co-expression of mRNA for <em>Nts</em> and <em>Gpr101</em> (<em>n</em> = 553 cells, 3 mice; upper), <em>Nts</em> and <em>Jak1</em> (<em>n</em> = 361 cells, 3 mice; middle), <em>Nts</em> and <em>Cartpt</em> (<em>n</em> = 408 cells, 3 mice; lower). All sections were counterstained with DAPI (blue). White arrowheads indicate co-localization. Scale bar (applicable to all micrographs), 50 μm. <strong>d</strong>, Heatmap showing scaled expression (log CPM) of discriminative genes across the two <em>Nts</em> and <em>Cartpt</em> subclusters (<em>n</em> = 74 cells). <strong>e</strong>, Unsupervised clustering of LHA <em>Nts</em> and <em>Cartpt</em> neurons represented as a t-SNE plot (<em>n</em> = 74 cells), showing subclusters 1 (blue) and 2 (green). <strong>f</strong>, Normalized expression of discriminatory markers shown as t-SNE plots (<em>Nts</em>, <em>Gal</em>, <em>Tac1</em> and <em>Crh</em>) (<em>n</em> = 74 cells). <strong>g</strong>, Confocal micrographs (×40) of coronal sections of wild-type mice and corresponding pie charts representing co-expression of mRNA for <em>Nts</em>, <em>Slc32a1</em> and <em>Gal</em> (<em>n</em> = 308 cells, 3 mice; upper). White arrowheads indicate co-localization of <em>Nts</em>, <em>Slc32a1</em> and <em>Gal</em>. Co-expression of <em>Nts</em>, <em>Crh</em> and <em>Tac1</em> (<em>n</em> = 1,016 cells, 3 mice; lower). White arrowheads indicate co-localization of <em>Nts</em> and <em>Crh</em>, and white asterisks indicate co-localization of <em>Nts</em> and <em>Tac1</em>. All sections were counterstained with DAPI (blue). Scale bar (applicable to all micrographs), 50 μm.</p>
+</blockquote>
+<h2 id="Fig-7-Defining-four-molecularly-distinct-populations-of-Sst-expressing-neurons-in-the-LHA"><a href="#Fig-7-Defining-four-molecularly-distinct-populations-of-Sst-expressing-neurons-in-the-LHA" class="headerlink" title="Fig. 7: Defining four molecularly distinct populations of Sst-expressing neurons in the LHA"></a>Fig. 7: Defining four molecularly distinct populations of <em>Sst</em>-expressing neurons in the LHA</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig7_HTML.png" alt="Fig. 7"></p>
+<blockquote>
+<p><strong>a</strong>, Violin plot, representing the distribution of log-transformed normalized gene expression (gene UMIs/total cell UMIs), of <em>Slc32a1</em>, <em>Slc17a6</em> and discriminatory markers of LHAGlut cluster 15 (<em>Sst</em>) neurons (<em>n</em> = 40 cells). <strong>b</strong>, Violin plot showing normalized expression of <em>Slc32a1</em>, <em>Slc17a6</em> and discriminatory markers of LHAGABA clusters 6 (<em>Sst</em> with <em>Col25a</em>1) (<em>n</em> = 27 cells), 10 (<em>Sst</em> with <em>Meis2</em>) (<em>n</em> = 60 cells) and 13 (<em>Sst</em> with <em>Otp</em>) (<em>n</em> = 70 cells) neurons. Total number of cells, mean genes per cell and mean UMIs per cell are provided in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-019-0349-8#MOESM1">1</a>. <strong>c</strong>, Heatmap showing scaled expression (log CPM) of differentially expressed genes between <em>Sst</em>+ and <em>Slc32a1</em>+ neurons (blue) and <em>Sst</em>+ and <em>Slc17a6</em>+ neurons (pink) (<em>n</em> = 197 cells). <strong>d</strong>, Heatmap showing scaled expression (log CPM) of differentially expressed genes between the three <em>Sst</em>+ and <em>Slc32a1</em>+ clusters (shades of blue) (<em>n</em> = 157 cells). <strong>e</strong>, Unsupervised clustering of all <em>Sst</em>+ LHA neurons represented in a t-SNE plot (<em>n</em> = 197 cells). Each cell type cluster is color coded as in <strong>c</strong> and <strong>d</strong>. <strong>f</strong>, Left: heatmap of 87 single <em>Sst</em>+ neurons and their expression of 30 genes by qPCR (<em>n</em> = 3 mice). Heatmap colors depict expression levels on a log2 scale from low (blue) to high (red). Right: bar graph measuring percentage expression for four genes in <em>Sst</em>+ single neurons. <strong>g</strong>, Anatomical schematic of the perifornical region of the LHA (gray) (upper left). Confocal micrographs (×40) of coronal sections of wild-type mice and corresponding pie charts representing co-expression of mRNA within the perifornical LHA for <em>Sst</em>, <em>Slc32a1</em> and <em>Slc17a6</em> (<em>n</em> = 952 cells, 5 mice; upper right). Tuberal region (gray) (lower left). Confocal micrographs (×40) of coronal sections of wild-type mice and corresponding pie charts representing co-expression within the tuberal region for <em>Sst</em>, <em>Slc32a1</em> and <em>Slc17a6</em> (<em>n</em> = 1,116 cells, 5 mice; lower right). All sections were counterstained with DAPI (blue). White arrowheads indicate co-localization of <em>Sst</em> and <em>Slc32a1</em>, while white asterisks denote co-localization of <em>Sst</em> and <em>Slc17a6</em>. Scale bar (applicable to all micrographs), 50 μm.</p>
+</blockquote>
+<h2 id="Supplementary-Figure-1-Comparison-of-female-and-male-single-cell-LHA-samples"><a href="#Supplementary-Figure-1-Comparison-of-female-and-male-single-cell-LHA-samples" class="headerlink" title="Supplementary Figure 1: Comparison of female and male single-cell LHA samples."></a>Supplementary Figure 1: Comparison of female and male single-cell LHA samples.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig9_ESM.jpg" alt="Supplementary Figure 1"></p>
+<blockquote>
+<p>(<strong>a</strong>) Comparison of male (green) and female (blue) LHA cells (total <em>n</em> = 6944 cells; from 3 male and 2 female mice). LHA single cells shown on t-SNE plots after the first iteration of unsupervised clustering show near-identical cell type assignments. (<strong>b</strong>) Proportion of male vs. female cells that comprise the 13 clusters of non-neuronal cells; (<strong>c</strong>) 15 clusters of LHAGlut neurons; and (<strong>d</strong>) 15 clusters of LHAGABA neurons.</p>
+</blockquote>
+<h2 id="Supplementary-Figure-2-Classification-of-major-non-neuronal-cell-types-in-the-LHA"><a href="#Supplementary-Figure-2-Classification-of-major-non-neuronal-cell-types-in-the-LHA" class="headerlink" title="Supplementary Figure 2: Classification of major non-neuronal cell types in the LHA."></a>Supplementary Figure 2: Classification of major non-neuronal cell types in the LHA.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig10_ESM.jpg" alt="Supplementary Figure 2"></p>
+<blockquote>
+<p>(<strong>a</strong>) Unsupervised clustering of non-neuronal cell types in the LHA represented as a t-SNE plot (<em>n</em> = 2536 cells). Different cell type clusters are color coded below. (<strong>b</strong>) Heatmap showing scaled expression of discriminative marker gene sets across all 13 non-neuronal clusters, with cells as columns and genes as rows (<em>n</em> = 2536 cells). Color scheme represents Z-score distribution with −3 (blue) to 3 (dark orange). (<strong>c</strong>) Violin plot, representing the distribution of log transformed normalized gene expression (gene UMIs/total cell UMIs) in each cluster, of selected markers for non-neuronal populations (<em>n</em> = 2536 cells). These include three populations of oligodendrocyte lineage cells: a large population of mature oligodendrocytes (cluster 1: <em>Olig1</em>+, <em>Mag</em>+, <em>Opalin</em>+); proliferating oligodendrocyte progenitors (cluster 3: <em>Olig1</em>+, <em>Cspg4</em>+, <em>Pdgfra</em>+); and immature oligodendrocytes (cluster 13: <em>Olig1</em>+, <em>Mag</em>+, <em>Pdgfra</em>-, <em>Fyn</em>+). Two clusters of astrocytes (clusters 6 and 8) exhibited robust expression of <em>Gja1</em>+, <em>Aqp4</em>+ and <em>Agt</em>+, but could be distinguished on the basis of <em>Slc7a10</em> (high in 6, low in 8) and <em>Gfap</em> (low in 6, high in 8) expression. Other clusters were identified as endothelial cells (cluster 2: <em>Flt1</em>+); red blood cells (cluster 4: <em>Hba-a1</em>+); fibroblasts (cluster 5: <em>Pdgfra</em>+, <em>Col1a2</em>+, <em>Gja1</em>+); macrophages (cluster 7: <em>C1qa</em>+, <em>Cx3cr1</em>+, <em>Mrc1</em>+); pericytes (cluster 9: <em>Cspg4</em>+, <em>Acta2</em>+); and microglia (cluster 10: <em>C1qa</em>+, <em>Cx3cr1</em>+, <em>Tmem119</em>+). All neurons are represented as N. Number of cells, mean genes/cell and mean UMIs/cell is provided in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-019-0349-8#MOESM1">1</a>. (<strong>d</strong>) Distribution of genes and transcripts (UMIs) detected in each non-neuronal cell type in the data and all neurons (N).</p>
+</blockquote>
+<h2 id="Supplementary-Figure-3-Genes-and-transcripts-detected-in-LHAGlut-and-LHAGABA-neuronal-cell-types-in-the-LHA"><a href="#Supplementary-Figure-3-Genes-and-transcripts-detected-in-LHAGlut-and-LHAGABA-neuronal-cell-types-in-the-LHA" class="headerlink" title="Supplementary Figure 3: Genes and transcripts detected in LHAGlut and LHAGABA neuronal cell types in the LHA."></a>Supplementary Figure 3: Genes and transcripts detected in LHAGlut and LHAGABA neuronal cell types in the LHA.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig11_ESM.jpg" alt="Supplementary Figure 3"></p>
+<blockquote>
+<p>(<strong>a</strong>) Violin plots representing the distribution of log transformed normalized gene expression (gene UMIs/total cell UMIs) in each LHAGlut neuronal cluster in the data (<em>n</em> = 1537 cells). (<strong>b</strong>) Heatmap showing scaled expression (log CPM) of discriminative marker gene sets across all 15 LHAGlut clusters (<em>n</em> = 1537 cells), with cells as columns and genes as rows. Color scheme represents Z-score distribution with −3 (blue) to 3 (dark orange). (<strong>c</strong>) Violin plot showing distribution of genes and transcripts detected in each LHAGABA neuronal cluster in the data (<em>n</em> = 1900 cells). (<strong>d</strong>) Heatmap showing scaled expression (log CPM) of discriminative marker gene sets across all 15 LHAGABA clusters (<em>n</em> = 1900 cells), with cells as columns and genes as rows. Color scheme represents Z-score distribution with −3 (blue) to 3 (dark orange). Total number of cells, mean genes/cell and mean UMIs/cell is provided in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-019-0349-8#MOESM1">1</a>.</p>
+</blockquote>
+<h2 id="Supplementary-Figure-4-Comparison-of-Allen-Brain-Atlas-ISH-expression-for-single-discriminatory-markers-for-each-LHAGABA-and-LHAGlut-cluster"><a href="#Supplementary-Figure-4-Comparison-of-Allen-Brain-Atlas-ISH-expression-for-single-discriminatory-markers-for-each-LHAGABA-and-LHAGlut-cluster" class="headerlink" title="Supplementary Figure 4: Comparison of Allen Brain Atlas ISH expression for single discriminatory markers for each LHAGABA and LHAGlut cluster."></a>Supplementary Figure 4: Comparison of Allen Brain Atlas ISH expression for single discriminatory markers for each LHAGABA and LHAGlut cluster.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2019_349_Fig12_ESM.jpg" alt="Supplementary Figure 4"></p>
+<blockquote>
+<p>Representative Allen Mouse Brian Atlas (Lein et al, 2007) micrographs of ISH expression of single discriminatory markers for (<strong>a</strong>) LHAGlut clusters, and (<strong>b</strong>) LHAGABA clusters, in coronal sections containing the LHA (corresponding to middle/posterior LHA). Image credit for all ISH images: Allen Institute. Note that some identical ISH figures, for discriminatory markers that define more than one cluster, appear multiple times (ex. <em>Sst</em>, <em>Trh</em>), and one ISH is unavailable (<em>Atp1a2</em>).</p>
+</blockquote>
+<p>reference:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-019-0349-8">Single-cell transcriptomic analysis of the lateral hypothalamic area reveals molecularly distinct populations of inhibitory and excitatory neurons</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/single-cell-RNA-seq/" rel="tag"># single-cell RNA-seq</a>
+              <a href="/tags/brain/" rel="tag"># brain</a>
+              <a href="/tags/atlas/" rel="tag"># atlas</a>
+              <a href="/tags/hypothalamus/" rel="tag"># hypothalamus</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/25/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%B8%80-Decoding-molecular-and-cellular-heterogeneity-of-mouse-nucleus-accumbens/" rel="prev" title="单细胞转录组文献分析方法[一]: Decoding molecular and cellular heterogeneity of mouse nucleus accumbens">
+      <i class="fa fa-chevron-left"></i> 单细胞转录组文献分析方法[一]: Decoding molecular and cellular heterogeneity of mouse nucleus accumbens
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods"><span class="nav-number">2.</span> <span class="nav-text">Methods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figure"><span class="nav-number">3.</span> <span class="nav-text">Figure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-1-scRNA-seq-of-LHA-cell-populations"><span class="nav-number">3.1.</span> <span class="nav-text">Fig. 1: scRNA-seq of LHA cell populations.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-2-Classification-of-LHAGlut-and-LHAGABA-neuronal-cell-types-in-the-LHA"><span class="nav-number">3.2.</span> <span class="nav-text">Fig. 2: Classification of LHAGlut and LHAGABA neuronal cell types in the LHA.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-3-Validation-of-discriminatory-marker-expression-in-LHAGlut-Hcrt-expressing-neurons"><span class="nav-number">3.3.</span> <span class="nav-text">Fig. 3: Validation of discriminatory marker expression in LHAGlut Hcrt-expressing neurons.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-4-Validation-of-discriminatory-marker-expression-in-LHAGlut-Pmch-expressing-neurons-and-subpopulations"><span class="nav-number">3.4.</span> <span class="nav-text">Fig. 4: Validation of discriminatory marker expression in LHAGlut Pmch-expressing neurons and subpopulations.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-5-Validation-of-discriminatory-marker-expression-in-LHAGlut-Trh-expressing-neurons-and-subpopulations"><span class="nav-number">3.5.</span> <span class="nav-text">Fig. 5: Validation of discriminatory marker expression in LHAGlut Trh-expressing neurons and subpopulations.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-6-Validation-of-discriminatory-marker-expression-in-LHAGABA-Nts-expressing-neurons-and-subpopulations"><span class="nav-number">3.6.</span> <span class="nav-text">Fig. 6: Validation of discriminatory marker expression in LHAGABA Nts-expressing neurons and subpopulations.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-7-Defining-four-molecularly-distinct-populations-of-Sst-expressing-neurons-in-the-LHA"><span class="nav-number">3.7.</span> <span class="nav-text">Fig. 7: Defining four molecularly distinct populations of Sst-expressing neurons in the LHA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supplementary-Figure-1-Comparison-of-female-and-male-single-cell-LHA-samples"><span class="nav-number">3.8.</span> <span class="nav-text">Supplementary Figure 1: Comparison of female and male single-cell LHA samples.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supplementary-Figure-2-Classification-of-major-non-neuronal-cell-types-in-the-LHA"><span class="nav-number">3.9.</span> <span class="nav-text">Supplementary Figure 2: Classification of major non-neuronal cell types in the LHA.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supplementary-Figure-3-Genes-and-transcripts-detected-in-LHAGlut-and-LHAGABA-neuronal-cell-types-in-the-LHA"><span class="nav-number">3.10.</span> <span class="nav-text">Supplementary Figure 3: Genes and transcripts detected in LHAGlut and LHAGABA neuronal cell types in the LHA.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supplementary-Figure-4-Comparison-of-Allen-Brain-Atlas-ISH-expression-for-single-discriminatory-markers-for-each-LHAGABA-and-LHAGlut-cluster"><span class="nav-number">3.11.</span> <span class="nav-text">Supplementary Figure 4: Comparison of Allen Brain Atlas ISH expression for single discriminatory markers for each LHAGABA and LHAGlut cluster.</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Max</p>
+  <div class="site-description" itemprop="description">在学了在学了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
