@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="单细胞转录组文献分析方法[四]:Human and mouse single-nucleus transcriptomics reveal TREM2-dependent and TREM2-independent cellular responses in Alzheimer’s disease">
+<meta property="og:url" content="http://example.com/2021/12/13/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E5%9B%9B-Human-and-mouse-single-nucleus-transcriptomics-reveal-TREM2-dependent-and-TREM2-independent-cellular-responses-in-Alzheimer%E2%80%99s-disease/index.html">
+<meta property="og:site_name" content="TypeError">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211213134145576.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig1_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig1_HTML-20211213205742052.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig2_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig3_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig4_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig5_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig6_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig7_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig8_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig9_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig10_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig11_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig12_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig13_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig14_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig15_ESM.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig16_ESM.jpg">
+<meta property="article:published_time" content="2021-12-13T01:51:23.000Z">
+<meta property="article:modified_time" content="2021-12-13T13:46:50.937Z">
+<meta property="article:author" content="Max">
+<meta property="article:tag" content="single-cell RNA-seq">
+<meta property="article:tag" content="brain">
+<meta property="article:tag" content="prefrontal cortex">
+<meta property="article:tag" content="disease">
+<meta property="article:tag" content="AD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211213134145576.png">
+
+<link rel="canonical" href="http://example.com/2021/12/13/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E5%9B%9B-Human-and-mouse-single-nucleus-transcriptomics-reveal-TREM2-dependent-and-TREM2-independent-cellular-responses-in-Alzheimer%E2%80%99s-disease/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>单细胞转录组文献分析方法[四]:Human and mouse single-nucleus transcriptomics reveal TREM2-dependent and TREM2-independent cellular responses in Alzheimer’s disease | TypeError</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TypeError</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E5%9B%9B-Human-and-mouse-single-nucleus-transcriptomics-reveal-TREM2-dependent-and-TREM2-independent-cellular-responses-in-Alzheimer%E2%80%99s-disease/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Max">
+      <meta itemprop="description" content="在学了在学了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TypeError">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单细胞转录组文献分析方法[四]:Human and mouse single-nucleus transcriptomics reveal TREM2-dependent and TREM2-independent cellular responses in Alzheimer’s disease
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-13 09:51:23 / 修改时间：21:46:50" itemprop="dateCreated datePublished" datetime="2021-12-13T09:51:23+08:00">2021-12-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">单细胞转录组</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211213134145576.png" alt="image-20211213134145576"></p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig1_HTML.png" alt="Fig. 1"></p>
+<span id="more"></span>
+
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Glia have been implicated in Alzheimer’s disease (AD) pathogenesis. Variants of the microglia receptor triggering receptor expressed on myeloid cells 2 (TREM2) increase AD risk, and activation of disease-associated microglia (DAM) is dependent on TREM2 in mouse models of AD. We surveyed gene-expression changes associated with AD pathology and TREM2 in 5XFAD mice and in human AD by single-nucleus RNA sequencing. We confirmed the presence of <em>Trem2</em>-dependent DAM and identified a previously undiscovered <strong>Serpina3n+C4b+ reactive oligodendrocyte population</strong> in mice. Interestingly, remarkably different glial phenotypes were <strong>evident</strong> in human AD. Microglia signature was reminiscent of <strong>IRF8-driven reactive microglia</strong> in peripheral-nerve injury. Oligodendrocyte signatures suggested impaired axonal myelination and metabolic adaptation to neuronal degeneration. Astrocyte profiles indicated weakened metabolic coordination with neurons. Notably, the reactive phenotype of microglia was less evident in *TREM2-*R47H and <em>TREM2</em>-R62H carriers than in non-carriers, demonstrating a TREM2 requirement in both mouse and human AD, despite the marked species-specific differences.</p>
+<h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><h4 id="Processing-data-with-Seurat-package-and-quality-control"><a href="#Processing-data-with-Seurat-package-and-quality-control" class="headerlink" title="Processing data with Seurat package and quality control"></a>Processing data with Seurat package and quality control</h4><p>The <mark><strong>Seurat</strong></mark> package in R was used for subsequent analysis. </p>
+<p>For quality control, nuclei with <strong>mitochondrial content &gt;5% were removed</strong>. Nuclei that are duplets or multiplets were filtered out by two steps. </p>
+<ul>
+<li>First, nuclei with <strong>more than one marker gene expressed were removed</strong>. </li>
+<li>Then cells with <strong>high UMI and gene number per cell were filtered out</strong>. </li>
+<li>Cutoffs for UMI and gene number were determined on the basis of histograms showing cell density as a function of UMI per gene counts. <ul>
+<li>For 7-month-old mouse brain snRNA-seq analysis, a cutoff of <strong>300–9,000 UMI</strong> and <strong>300–5,600 genes</strong> was applied. After filtering, a total of <strong>73,419 individual nuclei</strong> across all genotypes remained, with <strong>a median of 3,941 UMIs</strong> and <strong>2,378 genes per nucleus</strong> for downstream analysis. </li>
+<li>For human brain snRNA-seq, a cutoff of <strong>400–20,000 UMI</strong> and <strong>400–7,000 genes</strong> was applied. After filtering, <strong>66,311 nuclei</strong> were remained across 11 AD (CV), 10 AD (R62H) and 11 control samples, with a <strong>median of 1,951 UMIs</strong> and <strong>1,312 genes per nucleus</strong> for downstream analysis. </li>
+<li>For 15-month-old mouse brain snRNA-seq analysis, <strong>genes expressed in fewer than 3 nuclei and nuclei that expressed &lt;400 or &gt;3,500 genes</strong> were removed for downstream analysis. After filtering, <strong>38,230 nuclei</strong> were remained. </li>
+</ul>
+</li>
+</ul>
+<p>Data were normalized using a scaling factor of <strong>10,000</strong>, and <strong>nUMI was regressed</strong> with a negative binomial model. Principal component analysis was performed using the top 3,000 most variable genes and t-SNE analysis was performed <strong>with the top 20 PCAs</strong>. Clustering was performed using <strong>a resolution of 0.6.</strong></p>
+<h2 id="Clustering-and-finding-markers"><a href="#Clustering-and-finding-markers" class="headerlink" title="Clustering and finding markers"></a>Clustering and finding markers</h2><p>Principal component analysis was performed prior to clustering and <strong>the first ten principal components</strong> were used based on the ElbowPlot. Clustering was performed using the <code>FindClusters</code> function, which works on <strong>K-nearest neighbor (KNN) graph model</strong> with the <strong>granularity ranging from 0.1–0.9 and selected 0.2 for the downstream clustering</strong>. For identifying the markers for each cluster, we performed differential expression of each cluster against all other clusters, identifying negative and positive markers for that cluster. Nuclei from broad cell types (<strong>astrocytes, microglia and oligodendrocytes clusters</strong>) were taken and re-clustered to further analyze the sub-clusters in each cell type.</p>
+<h2 id="Analysis-of-gene-differential-expression"><a href="#Analysis-of-gene-differential-expression" class="headerlink" title="Analysis of gene differential expression"></a>Analysis of gene differential expression</h2><p>Differential expression of genes between conditions was done using the <strong><mark>MAST</mark></strong> algorithm of the Seurat package in R, which implements a two-part hurdle model. <strong>log2(fold change)</strong> of average expression and the percentage of cells (pct) expressing the genes in each condition were generated. </p>
+<p>For the mouse snRNA-seq analyses, to facilitate data interpretation, changes in the frequency of cells were taken into account. The bulk fold change was calculated by adding log2(pct1 + 0.005) / (pct2 + 0.005) to the log2(fold change) generated from the <strong>Seurat</strong> Package. The adjusted <em>P</em> value was calculated using Bonferroni correction.</p>
+<p>Lists of mouse DEGs were generated by filtering all genes for <strong>fold change &gt; 1.5, adjusted <em>P</em> &lt; 0.05**. The lists were ordered by adjusted *P* value. For the human snRNA-seq analysis, lists of DEGs in non-neuronal clusters were generated by filtering genes for **log2(fold change) &gt; 0.5, <em>P</em> &lt; 0.05</strong>. These gene lists were used as inputs for downstream sub-clustering analyses. Lists of human DEGs in neuronal clusters were generated by filtering all genes for <strong><em>P</em> &lt; 0.05</strong>. The lists were ordered by fold change. </p>
+<h2 id="Comparing-marker-genes-with-public-datasets"><a href="#Comparing-marker-genes-with-public-datasets" class="headerlink" title="Comparing marker genes with public datasets"></a>Comparing marker genes with public datasets</h2><p>Public datasets <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE53890">GSE53890</a> and <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE39420">GSE39420</a> were processed and analyzed in the Phantasus tool (<a target="_blank" rel="noopener" href="https://artyomovlab.wustl.edu/phantasus/">https://artyomovlab.wustl.edu/phantasus/</a>). The top 12,000 genes ranked by average gene expression were selected for <strong>differential-expression analysis</strong> using the <strong>LIMMA</strong> package. Differential expression was calculated between samples with age less than 40 and greater than 80, and between controls and people with early-onset AD, respectively. </p>
+<p>Gene-set enrichment analysis was then performed using the marker genes from oligodendrocyte and microglia sub-clusters as inputs.</p>
+<h1 id="Figure"><a href="#Figure" class="headerlink" title="Figure"></a>Figure</h1><h2 id="Fig-1-snRNA-seq-distinguishes-major-brain-cell-types-and-shows-microgliosis-in-the-5XFAD-brains"><a href="#Fig-1-snRNA-seq-distinguishes-major-brain-cell-types-and-shows-microgliosis-in-the-5XFAD-brains" class="headerlink" title="Fig. 1: snRNA-seq distinguishes major brain-cell types and shows microgliosis in the 5XFAD brains."></a>Fig. 1: snRNA-seq distinguishes major brain-cell types and shows microgliosis in the 5XFAD brains.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig1_HTML-20211213205742052.png" alt="Fig. 1"></p>
+<blockquote>
+<p><strong>a</strong>, Diagram of snRNA-seq pipeline. <strong>b</strong>, t-SNE plot showing 11 distinguished clusters, 0–10, with cell-type identities as determined by expression of specific markers (Extended Data Fig. <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#Fig7">1b</a>). Cluster 10 had very low frequency and did not have a clear marker profile and was thus omitted from analysis. <em>n</em> = 3 biologically independent mouse brain samples per genotype; 73,419 total nuclei. <strong>c</strong>, Heat map showing expression of specific markers in every sample, identifying each cluster in <strong>b</strong>. Each column represents one individual mouse. Within each cluster (0–9, below plot), mice from left to right: WT1–3, <em>Trem2**–/–</em>1–3, WT 5XFAD1–3, <em>Trem2**–/–</em> 5XFAD1–3. Clusters are identified with the same markers in every mouse. <strong>d</strong>, Pie chart showing the frequency of each cluster across all genotypes. <strong>e</strong>, Bar graph showing the frequency of each cluster in every sample. All clusters are similarly represented among the 3 mice analyzed for each genotype. <strong>f</strong>, Relative frequency of clusters in each genotype, normalized to overall frequency in <strong>d</strong>. Cluster 7 (microglia) was highly enriched in 5XFAD. <em>n</em> = 3 biologically independent mouse brain samples per genotype. Data are presented as mean ± s.e.m.</p>
+</blockquote>
+<h2 id="Fig-2-Characterization-of-the-microglia-cluster"><a href="#Fig-2-Characterization-of-the-microglia-cluster" class="headerlink" title="Fig. 2: Characterization of the microglia cluster."></a>Fig. 2: Characterization of the microglia cluster.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig2_HTML.png" alt="Fig. 2"></p>
+<blockquote>
+<p><strong>a</strong>, t-SNE plot showing the microglia cluster (cluster 7) from Fig. <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#Fig1">1</a> expressing microglia genes, such as <em>C1qa</em>, <em>Fcrls</em> and <em>Tyrobp</em>. <em>n</em> = 3 biologically independent mouse brain samples per genotype; 73,419 total nuclei. <strong>b</strong>, Volcano plots showing significant DEGs (fold change &gt; 1.5, two-part hurdle model, adjusted <em>P</em> &lt; 0.05, Bonferroni correction) in microglia of 5XFAD versus WT (effect of Aβ) and 5XFAD versus <em>Trem2**–/–</em> 5XFAD (dependence of <em>Trem2</em>). Microglia nuclei show an Aβ- and <em>Trem2</em>-dependent DAM signature. <em>n</em> = 3 biologically independent mouse brain samples per genotype; 524 WT, 1,123 WT 5XFAD and 604 <em>Trem2**–/–</em> 5XFAD microglial nuclei. <strong>c</strong>, Heat map showing the average gene expression of top DEGs in the microglia cluster for each sample. DAM signature is present in all 5XFAD mice in a <em>Trem2</em>-dependent manner. Color scheme shows row max and row min, which represents relative expression of each gene among all samples. <strong>d</strong>, The log2(fold change) values of top DEGs in 7-month-old 5XFAD versus WT mice and 15-month-old 5XFAD versus WT mice are plotted against each other. DAM signature is consistently present in both 7- and 15-month-old mice. <strong>e</strong>, t-SNE plot of re-clustered microglia (from Cluster 7) identifying 4 sub-clusters. <em>n</em> = 3 biologically independent mouse brain samples per genotype; 2,840 total microglial nuclei. <strong>f</strong>, Bar graph showing the frequency of each microglia sub-cluster in all genotypes. Sub-cluster 1 is only present in 5XFAD samples, mostly in the WT 5XFAD mice and to a lesser extent in the <em>Trem2**–/–</em> 5XFAD. <strong>g</strong>, Violin plots showing the expression of DAM genes, <em>Cst7</em>, <em>Lpl</em> and <em>Csf1</em>, in microglia sub-clusters. DAM genes are enriched in sub-cluster 1. Violin plots are presented with floating boxes showing median (middle line) and quartiles (top and bottom). Minima and maxima are shown as the bottom and top of the violin plots. <em>n</em> = 3 biologically independent mouse brain samples per genotype; 524 WT, 582 <em>Trem2**–/–</em>, 1,123 WT 5XFAD and 604 <em>Trem2**–/–</em> 5XFAD microglial nuclei.</p>
+</blockquote>
+<h2 id="Fig-3-Identification-of-a-novel-oligodendrocyte-Aβ-reactive-state-defined-by-C4b-and-Serpina3n-expression"><a href="#Fig-3-Identification-of-a-novel-oligodendrocyte-Aβ-reactive-state-defined-by-C4b-and-Serpina3n-expression" class="headerlink" title="Fig. 3: Identification of a novel oligodendrocyte Aβ-reactive state defined by C4b and Serpina3n expression."></a>Fig. 3: Identification of a novel oligodendrocyte Aβ-reactive state defined by C4b and Serpina3n expression.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig3_HTML.png" alt="Fig. 3"></p>
+<blockquote>
+<p><strong>a</strong>,<strong>b</strong>, Volcano plots showing DEGs (fold change &gt; 1.5, two-part hurdle model, adjusted <em>P</em> &lt; 0.05, Bonferroni correction) of 5XFAD versus WT in 7-month-old (<strong>a</strong>) and 15-month-old (<strong>b</strong>) mice in the oligodendrocyte cluster. Each panel is accompanied by a t-SNE plot, showing the oligodendrocyte cluster in the two cohorts of mice. <em>C4b</em>, <em>Serpina3n</em> and <em>H2-D1</em> were significantly upregulated in 5XFAD mice at both 7 and 15 months of age. <em>n</em> = 3 biologically independent mouse brain samples per genotype; 2,672 WT and 2,180 WT 5XFAD oligodendrocytes (<strong>a</strong>). <em>n</em> = 617 WT and 160 WT 5XFAD oligodendrocytes pooled from 3 mouse brains per genotype (<strong>b</strong>). <strong>c</strong>, Quantification of total number of Olig2+ nuclei in the four genotypes. <em>n</em> = 3 biologically independent mice per genotype. <em>P</em> value by one-way analysis of variance (ANOVA) with Tukey’s multiple-comparisons test. <strong>d</strong>,<strong>f</strong>, Representative IF images of C4b (<strong>d</strong>) and Serpina3n (<strong>f</strong>) staining in 15-month-old cortices of all genotypes showing perinuclear localization of C4b and Serpina3n around Olig2+ nuclei in 5XFAD brains. X04, methoxy X04, indicative of plaques. <em>n</em> = 3 biologically independent mice per genotype. Scale bars, 40 μm. <strong>e</strong>,<strong>g</strong>, Automated quantification of staining intensity was performed by averaging the voxel intensities of C4b (<strong>e</strong>) and Serpina3n (<strong>g</strong>) staining within 2 μm of (oligodendrocyte) or more than 5 μm away (other) from Olig2+ objects in <strong>d</strong> and <strong>f</strong>. <em>n</em> = 3 biologically independent mice per genotype. <em>P</em> value by two-way ANOVA with Tukey’s multiple-comparisons test. <strong>h</strong>, Representative IF images of 5-month-old WT 5XFAD and <em>Trem2**–/–</em> 5XFAD cortices showing Serpina3n+ oligodendrocytes are present solely in plaque-bearing regions. IV, V and VI indicate corresponding cortical layers. cg, cingulum. X04, methoxy X04, indicative of plaques. n = 6 biologically independent mice per genotype. Scale bar, 60 μm. <strong>i</strong>, Quantification of the density of Serpina3n+ and Serpina3n– oligodendrocytes in shells away from plaques. Serpina3n+ but not Serpina3n– oligodendrocytes are mostly found in regions bearing plaques. <em>n</em> = 6 biologically independent mice per genotype. All data are presented as mean ± s.e.m. (<strong>c</strong>,<strong>e</strong>,<strong>g</strong>,<strong>i</strong>).</p>
+</blockquote>
+<h2 id="Fig-4-Human-AD-brain-exhibits-a-microglia-signature-distinct-from-that-in-mice"><a href="#Fig-4-Human-AD-brain-exhibits-a-microglia-signature-distinct-from-that-in-mice" class="headerlink" title="Fig. 4: Human AD brain exhibits a microglia signature distinct from that in mice."></a>Fig. 4: Human AD brain exhibits a microglia signature distinct from that in mice.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig4_HTML.png" alt="Fig. 4"></p>
+<blockquote>
+<p><strong>a</strong>, t-SNE plot showing 10 clusters from 11 people with AD carrying TREM2-CV, 10 carrying TREM2-R62H and 11 non-AD controls. <em>n</em> = 66,311 total nuclei. <strong>b</strong>, Bar graph presenting the frequency of each cluster in every group. <strong>c</strong>, Heat maps showing fold change of top DEGs (log2(fold change) &gt; 0.5, two-part hurdle model, adjusted <em>P</em> &lt; 0.05, Bonferroni correction) in microglia, comparing AD (CV) versus control. Left, genes upregulated in AD. Right, genes downregulated in AD. <em>n</em> = 11 AD (CV), 919 nuclei; 11 controls, 1,547 nuclei. <strong>d</strong>, Gene ontology terms associated with genes upregulated (left) and downregulated (right) genes in AD. <em>n</em> = 45 upregulated and 47 downregulated genes, hypergeometric test. <strong>e</strong>, Representative IF images of AD and control cortical samples showing nuclear IRF8 staining within Iba1+ microglia in AD. Scale bar, 5 μm. The experiment was performed twice. <strong>f</strong>, Representative IHC from AD cortical autoptic samples and age-matched controls showing that microglia upregulate Iba1, CD68 and HLA-DR in AD. Insets show higher magnification of the corresponding panels. Lower inset in Iba1 AD panel shows double staining of Iba1+ microglia in blue surrounding silver+ plaques. Scale bars, 100 μm (panels); 30 μm (insets). The experiment was performed six times. <strong>g</strong>,<strong>h</strong>, P2RY12 level in mouse microglia-like cultures is increased upon <em>Irf8</em> overexpression (OE) (<strong>g</strong>) and decreased in <em>Irf8**–/–</em> cultures (<strong>h</strong>), compared with WT cultures. Data are from two (<strong>g</strong>) or three (<strong>h</strong>) independent experiments. Numbers indicate cell frequency in each quadrant. <strong>i</strong>, t-SNE plots of re-clustered microglia showing 7 sub-clusters. Micro0 is increased in AD; Micro1 is reduced. <em>n</em> = 919 AD and 1,547 control microglial nuclei. <strong>j</strong>, t-SNE plots showing average <em>z</em>-scores of DEGs in microglia. Top, upregulated genes are enriched in Micro0. Bottom, downregulated genes are enriched in Micro1. <em>n</em> = 46 upregulated and 47 downregulated genes in microglia listed in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#MOESM1">4</a> were used as inputs.</p>
+</blockquote>
+<h2 id="Fig-5-snRNA-seq-identifies-human-AD-associated-astrocyte-and-oligodendrocyte-signatures-corroborated-by-NanoString-gene-expression-analysis"><a href="#Fig-5-snRNA-seq-identifies-human-AD-associated-astrocyte-and-oligodendrocyte-signatures-corroborated-by-NanoString-gene-expression-analysis" class="headerlink" title="Fig. 5: snRNA-seq identifies human AD-associated astrocyte and oligodendrocyte signatures corroborated by NanoString gene-expression analysis."></a>Fig. 5: snRNA-seq identifies human AD-associated astrocyte and oligodendrocyte signatures corroborated by NanoString gene-expression analysis.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig5_HTML.png" alt="Fig. 5"></p>
+<blockquote>
+<p><strong>a</strong>, t-SNE plots of re-clustered astrocytes showing six sub-clusters in AD and controls. Astro3 is depleted in AD. Astro4 is present in only one sample and is omitted for downstream analysis. <em>n</em> = 2,641 AD and 2,955 control astrocytes. <strong>b</strong>, t-SNE plots showing average <em>z</em>-scores of DEGs in astrocytes. Top, upregulated genes are enriched in Astro0 and Astro1. Bottom, downregulated genes are enriched in Astro3. <em>n</em> = 13 upregulated and 65 downregulated astrocyte genes listed in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#MOESM1">4</a> were used as inputs. <strong>c</strong>, Heatmap representing average gene expression of top DEGs in astrocyte sub-clusters in AD versus controls. Color scheme shows row max and row min. <strong>d</strong>, Heatmap showing average gene expression of top DEGs in oligodendrocyte clusters (Oli0 and Oli1) in each sample. Color scheme shows row max and row min. <strong>e</strong>, t-SNE plots of re-clustered oligodendrocytes showing five sub-clusters in AD and controls. Oligo3 is enriched, whereas Oligo1 and Oligo2 are significantly reduced in AD. <em>n</em> = 6,980 AD and 16,499 control oligodendrocytes. <strong>f</strong>, Heatmap representing the average gene expression of top oligodendrocyte DEGs in oligodendrocyte sub-clusters in AD versus control. Color scheme shows row max and row min. <strong>g</strong>, t-SNE plots showing expression of SERPINA3 and C4B in human astrocytes. <em>n</em> = 66,311 total nuclei. <strong>h</strong>, Volcano plot showing DEGs of AD versus control from Rush samples analyzed by NanoString. <em>n</em> = 13 subjects with AD and 12 controls. <em>P</em> value was determined by multivariate linear regression with Benjamini–Yekutieli adjustment. <strong>i</strong>, Heatmaps depicting fold changes in each cluster in snRNA-seq of selected DEGs from NanoString. Direction of change of these genes is consistent between snRNA-seq and NanoString. Numbers represent log2(fold change). Red, upregulation. Blue, downregulation.</p>
+</blockquote>
+<h2 id="Fig-6-TREM2-R62H-and-TREM2-R47H-carriers-exhibit-reduced-microglia-reactive-signature"><a href="#Fig-6-TREM2-R62H-and-TREM2-R47H-carriers-exhibit-reduced-microglia-reactive-signature" class="headerlink" title="Fig. 6: TREM2-R62H and TREM2-R47H carriers exhibit reduced microglia reactive signature."></a>Fig. 6: TREM2-R62H and TREM2-R47H carriers exhibit reduced microglia reactive signature.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig6_HTML.png" alt="Fig. 6"></p>
+<blockquote>
+<p><strong>a</strong>, t-SNE plot showing the distribution of nuclei from 11 AD (CV), 10 AD (R62H) and 11 control samples. AD (CV) and AD (R62H) cluster more closely, compared with control, especially in the non-neuronal clusters. <em>n</em> = 32,625 control, 16,279 AD (CV) and 16,594 AD (R62H) nuclei. <strong>b</strong>–<strong>d</strong>, Violin plots showing average gene expression across microglia (<strong>b</strong>), oligodendrocyte (<strong>c</strong>) and astrocyte (<strong>d</strong>) nuclei isolated from each individual. Expression of microglial genes is significantly reduced in AD (R62H) compared with AD (CV); oligodendrocyte genes show intermediate expression in AD (R62H) compared with AD (CV) and control; and astrocyte genes show similar expression in AD (CV) and AD (R62H). Violin plots are centered around the median (black line) with quartiles (dashed lines). Minima and maxima are shown as the bottom and top of the plots. Each dot represents one individual. <em>n</em> = 11 control, 11 AD (CV) and 10 AD (R62H) samples. <strong>e</strong>, Volcano plot showing DEGs derived from NanoString analysis of AD brains of TREM2-CV and TREM2-R62H carriers from Rush cohorts. <em>n</em> = 13 AD (CV) and 11 AD (R62H) samples. <em>P</em> value was calculated by multivariate linear regression with Benjamini–Yekutieli adjustment. <strong>f</strong>, Pathway analysis shows defective microglia activation in R62H carriers. <strong>g</strong>, Volcano plot showing DEGs derived from NanoString analysis of AD brains of TREM2-CV and TREM2-R47H carriers from ADRC cohorts. R47H carriers have reduced expression of microglial genes. <em>n</em> = 5 subjects with AD (CV) and 5 subjects with AD (R47H). <em>P</em> value was calculated by multivariate linear regression with Benjamini–Yekutieli adjustment. <strong>h</strong>, Pathway analysis shows defective neuronal functions in R47H carriers.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-1-Cluster-characterization-of-7-month-old-mouse-cohort"><a href="#Extended-Data-Fig-1-Cluster-characterization-of-7-month-old-mouse-cohort" class="headerlink" title="Extended Data Fig. 1: Cluster characterization of 7-month-old mouse cohort."></a>Extended Data Fig. 1: Cluster characterization of 7-month-old mouse cohort.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig7_ESM.jpg" alt="Extended Data Fig. 1"></p>
+<blockquote>
+<p><strong>a</strong>, Alignment of <em>Trem2</em> reads from all mice sequenced to the <em>Trem2</em> reference genome shows knockout of <em>Trem2</em> gene in <em>Trem2**–/–</em> and <em>Trem2**–/–</em> 5XFAD mice. No reads from <em>Trem2**–/–</em> and <em>Trem2**–/–</em> 5XFAD mice align to <em>Trem2</em> exon 2. Alignment of reads from <em>Trem2</em>-deficient mice to <em>Trem2</em> exon 1 reflects early transcriptional termination due to deletion of exons 3 and 4 in the design of <em>Trem2</em>-knockout construct. The presence of exon1 reads correspond to the use of 5′ sequencing in this cohort. Numbers on the left represent the total number of <em>Trem2</em> reads from each sample. <strong>b</strong>, tSNE plots of snRNA-seq of 7-month-old mouse brain showing cell-type-specific markers identifying each cluster. <em>n</em> = 73,419 total nuclei. <strong>c</strong>, Bar graphs showing median of the number of genes, median of the number of UMIs and the total number of nuclei of each sample sequenced.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-2-Cluster-characterization-of-15-month-old-mouse-cohort"><a href="#Extended-Data-Fig-2-Cluster-characterization-of-15-month-old-mouse-cohort" class="headerlink" title="Extended Data Fig. 2: Cluster characterization of 15-month-old mouse cohort."></a>Extended Data Fig. 2: Cluster characterization of 15-month-old mouse cohort.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig8_ESM.jpg" alt="Extended Data Fig. 2"></p>
+<blockquote>
+<p><strong>a</strong>, t-SNE plot showing 13 distinguished clusters, 0–12, with cell-type identities determined by expression of specific markers. Cluster 12 had very low frequency and did not have a clear marker profile and was thus omitted from analysis. <strong>b</strong>, Heat map showing specific markers identifying each cluster in <strong>a</strong>. Color scheme shows row max and row min. <strong>c</strong>, Pie chart showing the frequency of each cluster across all genotypes. Neuronal clusters are shown in blue hues and non-neuronal clusters are shown in red hues. <strong>d</strong>, Relative frequency of clusters in different samples, normalized to overall frequency in <strong>c</strong>, shown for cortex and hippocampus. Clusters 2 and 11 (neuronal) were exclusive to hippocampus, while clusters 0 and 6 (neuronal) were exclusive to cortex. Cluster 4 (neuronal) was enriched in <em>Trem2**–/–</em> 5XFAD cortex. <strong>e</strong>, Number of unique molecular identifiers (UMIs), indicative of captured reads, superimposed on the t-SNE plot from <strong>a</strong>. Cluster 4 has a lower average number of UMIs compared to other neurons. <strong>f</strong>, t-SNE plot showing expression of <em>Pam</em>, a representative gene enriched in cluster 4. <em>n</em> = 38,230 total nuclei pooled from 3 mouse brains per genotype (<strong>a</strong>,<strong>e</strong>,<strong>f</strong>).</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-3-Characterization-of-the-microglia-cluster-in-the-15-month-old-mouse-cohort"><a href="#Extended-Data-Fig-3-Characterization-of-the-microglia-cluster-in-the-15-month-old-mouse-cohort" class="headerlink" title="Extended Data Fig. 3: Characterization of the microglia cluster in the 15-month-old mouse cohort."></a>Extended Data Fig. 3: Characterization of the microglia cluster in the 15-month-old mouse cohort.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig9_ESM.jpg" alt="Extended Data Fig. 3"></p>
+<blockquote>
+<p><strong>a</strong>, t-SNE plot showing the microglia cluster (cluster 10 from Extended Data Fig. <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#Fig8">2</a>), expressing microglia genes, such as <em>C1qa</em>, <em>Fcrls</em> and <em>Tyrobp</em>. <strong>b</strong>, Volcano plots showing DEGs (fold change &gt; 1.5, two-part hurdle model, adjusted <em>P</em> &lt; 0.05, Bonferroni correction) of 5XFAD versus WT (effect of Aβ) and 5XFAD versus <em>Trem2**–/–</em> 5XFAD (dependence of <em>Trem2</em>) in microglia. <strong>c</strong>, t-SNE plot of re-clustered microglia (from cluster 10) identifying 4 sub-clusters. <strong>d</strong>, Bar graphs showing the relative frequency of sub-cluster 3 in each sample. Sub-cluster 3 is only present in the 5XFAD sample. <strong>e</strong>, Violin plots showing the expression of DAM genes, <em>Cst7</em>, <em>Gpnmb</em> and <em>Spp1</em>, enriched in sub-cluster 3. Violin plots are presented with floating box showing median (middle line) and quartiles (top and bottom). Minima and maxima are shown as the bottom and top of the violin plots. <em>n</em> = 266 WT, 92 <em>Trem2**–/–</em>, 171 WT 5XFAD and 88 <em>Trem2**–/–</em> 5XFAD microglial nuclei, pooled from 3 mouse brains per genotype (<strong>a</strong>,<strong>b</strong>,<strong>c</strong>,<strong>e</strong>).</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-4-Oligodendrocytes-acquire-an-Aβ-dependent-signature-and-do-not-cluster-around-plaques-in-the-5XFAD-model"><a href="#Extended-Data-Fig-4-Oligodendrocytes-acquire-an-Aβ-dependent-signature-and-do-not-cluster-around-plaques-in-the-5XFAD-model" class="headerlink" title="Extended Data Fig. 4: Oligodendrocytes acquire an Aβ-dependent signature and do not cluster around plaques in the 5XFAD model."></a>Extended Data Fig. 4: Oligodendrocytes acquire an Aβ-dependent signature and do not cluster around plaques in the 5XFAD model.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig10_ESM.jpg" alt="Extended Data Fig. 4"></p>
+<blockquote>
+<p><strong>a</strong>, Box plots showing average gene expression across oligodendrocyte nuclei isolated from each mouse in the 7-month-old cohort. Floating bars show the min and max and black line shows the mean. Each dot represents one mouse. <em>n</em> = 3 biologically independent mice per genotype. <strong>b</strong>, Violin plots showing expression of <em>C4b</em>, <em>Serpina3n</em> and <em>H2-D1</em> in all oligodendrocytes from the 15-month-old cohort. Violin plots are presented with floating boxes showing median (middle line) and quartiles (top and bottom). Minima and maxima are shown as the bottom and top of the violin plots. <em>n</em> = 617 WT, 298 <em>Trem2**–/–</em>, 160 WT 5XFAD and 308 <em>Trem2**–/–</em> 5XFAD oligodendrocytes, pooled from 3 mouse brains per genotype. <strong>c</strong>, RT–qPCR from human oligodendrocyte cell line (HOG) treated with Aβ oligomers or fibrils at the indicated concentrations for 18 h showing Aβ directly induces <em>C4</em>. <em>n</em> = 3 biologically independent cell cultures. <strong>d</strong>, RT–qPCR from HOG treated with soluble factors (GPNMB or alpha-2-macroglobulin) for 24 h or a cocktail of cytokines (IL-1β, IL-6, TNF-α, IFN-α, IFN-γ) for 8 h showing induced <em>C4</em>. <em>n</em> = 3 biologically independent cell cultures. <strong>e</strong>, Representative immunofluorescence images of Olig2 and plaque staining in 5-month-old WT 5XFAD and <em>Trem2**–/–</em> 5XFAD cortices. <em>n</em> = 6 mice per genotype. Scale bar, 50 μm. <strong>f</strong>, Quantification of density of Olig2+ nuclei within 15 μm or 30 μm shell around plaque surfaces in the cortex in <strong>e</strong>, <em>n</em> = 6 mice per genotype. <strong>g</strong>, Quantification of total number of CA2+ oligodendrocytes in all 4 genotypes at 7 months of age. <em>n</em> = 3 mice per genotype. <strong>h</strong>, Representative immunofluorescence images of Serpina3n staining in 7-month-old mice of all genotypes showing colocalization of Serpina3n with oligodendrocyte marker CA2. White arrow heads indicate colocalization. <em>n</em> = 3 mice per genotype. Scale bar, 15 μm. <strong>i</strong>, Automated quantification of Serpina3n intensity in CA2+ oligodendrocytes in <strong>h</strong>. <em>n</em> = 3 mice per genotype. <strong>j</strong>, Representative confocal images showing colocalization of Serpina3n with GFAP+ astrocytes in 15-month-old 5XFAD mice. <em>n</em> = 3 mice per genotype. CC, corpus callosum. Scale bar, 50 μm. Inset, enlarged image detail. <strong>k</strong>, Representative confocal images showing colocalization of Serpina3n with X04+ plaques in 15-month-old 5XFAD mice. IV, V and VI indicate corresponding cortical layers. <em>n</em> = 3 mice per genotype. Scale bar, 60 μm. <strong>l</strong>, Thioflavin T fluorescence of Aβ42 aggregation with the addition of combinations of proteins at indicated concentrations in microplate shaking assay. <em>n</em> = 5 independent wells for the aggregation reactions; data represent two independent experiments. <em>P</em> value by one-way ANOVA, Tukey’s multiple comparisons test (<strong>a</strong>,<strong>g</strong>,<strong>i</strong>) or unpaired <em>t</em>-test, two-tailed (<strong>c</strong>). All data are presented as mean ± s.e.m.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-5-Heat-maps-of-fold-changes-of-DEGs-in-OPC-astrocyte-and-neuron-clusters-in-the-7-month-old-mouse-cohort"><a href="#Extended-Data-Fig-5-Heat-maps-of-fold-changes-of-DEGs-in-OPC-astrocyte-and-neuron-clusters-in-the-7-month-old-mouse-cohort" class="headerlink" title="Extended Data Fig. 5: Heat maps of fold changes of DEGs in OPC, astrocyte and neuron clusters in the 7-month-old mouse cohort."></a>Extended Data Fig. 5: Heat maps of fold changes of DEGs in OPC, astrocyte and neuron clusters in the 7-month-old mouse cohort.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig11_ESM.jpg" alt="Extended Data Fig. 5"></p>
+<blockquote>
+<p>Cluster-by-cluster analysis of differential gene expression. Heat maps showing the top 30 (or less) DEGs (fold change &gt; 1.5, two-part hurdle model, adjusted <em>P</em> value &lt; 0.05, Bonferroni correction), ordered by adjusted <em>P</em> value, and results are presented for comparisons of 5XFAD versus WT. Numbers indicate log2(fold change). Analyses are presented for the following clusters: <strong>a</strong>, cluster 8 (OPC), <em>n</em> = 485 5XFAD and 705 WT nuclei; <strong>b</strong>, cluster 6 (astrocytes), <em>n</em> = 490 5XFAD and 1,088 WT nuclei; <strong>c</strong>, cluster 0 (excitatory neurons), <em>n</em> = 3,302 5XFAD and 4,396 WT nuclei; <strong>d</strong>, cluster 3 (excitatory neurons), <em>n</em> = 1,941 5XFAD and 3,038 WT nuclei; <strong>e</strong>, cluster 5 (excitatory neurons), <em>n</em> = 1,530 5XFAD and 1,912 WT nuclei; <strong>f</strong>, cluster 1 (inhibitory neurons), <em>n</em> = 2,606 5XFAD and 3,315 WT nuclei; and <strong>g</strong>, cluster 4 (inhibitory neurons), <em>n</em> = 1,672 5XFAD and 2,660 WT nuclei. <em>n</em> = 3 biologically independent mouse brain samples per genotype. The lists of genes are in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#MOESM1">1</a>.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-6-Proteomic-analysis-recapitulates-major-findings-from-snRNA-seq-analysis"><a href="#Extended-Data-Fig-6-Proteomic-analysis-recapitulates-major-findings-from-snRNA-seq-analysis" class="headerlink" title="Extended Data Fig. 6: Proteomic analysis recapitulates major findings from snRNA-seq analysis."></a>Extended Data Fig. 6: Proteomic analysis recapitulates major findings from snRNA-seq analysis.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig12_ESM.jpg" alt="Extended Data Fig. 6"></p>
+<blockquote>
+<p><strong>a</strong>, Left, Heat map of relative abundance of the most significantly upregulated proteins from proteomics in CV 5XFAD compared with CV mice, ranked by fold change. Total protein analysis was conducted on brain tissues from 10-month-old CV, R47H, <em>Trem2**–/–</em> (KO), CV 5XFAD, R47H 5XFAD and KO 5XFAD mice. Right, Heat map showing average expression of corresponding gene in each cluster in snRNA-seq of every mouse from 7-month-old cohort. Each column represents one individual mouse. Within a cluster, mice from left to right: WT1–3, <em>Trem2**–/–</em>1–3, WT 5XFAD1–3, <em>Trem2**–/–</em> 5XFAD1–3. <strong>b</strong>, Relative abundance of selected proteins upregulated in different cell types. <strong>c</strong>, IPA analysis showing pathways upregulated in CV-5XFAD compared with CV mice in proteomics. <em>n</em> = 312 genes, Fisher’s exact test. <strong>d</strong>, Left, Heat map of relative abundance of proteins with the most significantly upregulated phospho-peptides from phospho-proteomics in CV 5XFAD compared with CV mice, ranked by fold change. Right, Heat map showing average expression of corresponding gene in each cluster in snRNA-seq of every mouse from 7-month-old cohort. Each column represents one individual mouse. Within a cluster, mice from left to right: WT1–3, <em>Trem2**–/–</em>1–3, WT 5XFAD1–3, <em>Trem2**–/–</em> 5XFAD1–3. <strong>e</strong>, IPA analysis showing pathways upregulated in CV-5XFAD compared to CV mice in phospho-proteomics. <em>n</em> = 270 genes, Fisher’s exact test.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-7-Characterization-of-human-snRNA-seq"><a href="#Extended-Data-Fig-7-Characterization-of-human-snRNA-seq" class="headerlink" title="Extended Data Fig. 7: Characterization of human snRNA-seq."></a>Extended Data Fig. 7: Characterization of human snRNA-seq.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig13_ESM.jpg" alt="Extended Data Fig. 7"></p>
+<blockquote>
+<p><strong>a</strong>, Total number of nuclei, median of number of UMIs and median of number of genes of each human sample sequenced. C, control; AD, AD (CV); P, AD (R62H). <strong>b</strong>, t-SNE plots of human snRNA-seq showing cell-type-specific markers identifying each cluster. <em>n</em> = 66,311 total nuclei. <strong>c</strong>, Violin plots showing expression of known cell type markers that define each cluster. Total number of nuclei in each cluster: 16,156 in Oli0, 13,322 in Oli1, 12,806 in Ex0, 1,869 in Ex1, 4,256 in In, 9,019 in Astro, 3,986 in Micro, 3,243 in OPC, 841 in Endo. Violin plots are centered around the median and shape represents cell distribution. <strong>d</strong>, Bar graph presenting frequency of nuclei in each neuronal sub-cluster across all neuronal nuclei, comparing AD (CV), AD (R62H) versus control samples. <strong>e</strong>, t-SNE plot showing expression of NEFL in neuronal clusters, especially in cluster Ex1. <em>n</em> = 66,311 total nuclei.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-8-AD-associated-human-signatures-are-distinct-from-those-in-the-Aβ-mouse-model"><a href="#Extended-Data-Fig-8-AD-associated-human-signatures-are-distinct-from-those-in-the-Aβ-mouse-model" class="headerlink" title="Extended Data Fig. 8: AD-associated human signatures are distinct from those in the Aβ mouse model."></a>Extended Data Fig. 8: AD-associated human signatures are distinct from those in the Aβ mouse model.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig14_ESM.jpg" alt="Extended Data Fig. 8"></p>
+<blockquote>
+<p><strong>a</strong>, Heatmaps showing fold change of top DEGs (log2(fold change) &gt; 0.5, two-part hurdle model, adjusted <em>P</em> &lt; 0.05, Bonferroni correction) between AD (CV) and control in all clusters. Left, Genes upregulated in AD. Right, Genes downregulated in AD. Numbers indicate log2(fold change). <em>n</em> = 11 subjects with AD (CV) and 11 controls. <strong>b</strong>, Violin plots showing expression of mouse DAM genes in 7- and 15-month-old mouse snRNA-seq and their homologs in human snRNA-seq within the microglia cluster. Violin plots are presented with floating boxes showing median (middle line) and quartiles (top and bottom). Minima and maxima are shown as the bottom and top of the violin plots. 7-month-old mouse, <em>n</em> = 3 biologically independent mouse brains per genotype, 524 WT, 582 <em>Trem2**–/–</em>, 1,123 WT 5XFAD and 604 <em>Trem2**–/–</em> 5XFAD microglial nuclei; 15-month-old mouse, n = 266 WT, 92 <em>Trem2**–/–</em>, 171 WT 5XFAD and 88 <em>Trem2**–/–</em> 5XFAD microglial nuclei, pooled from 3 mouse brains per genotype; human, <em>n</em> = 11 controls, 1,547 nuclei; 11 subjects with AD, 919 nuclei. <strong>c</strong>, t-SNE plots showing the cell type of origin of selected DAM genes in the human brain. <em>CST7</em> was not detectable in any cluster. <em>GPNMB</em> and <em>LPL</em> were expressed in OPCs. Color scheme shows expression. <em>n</em> = 66,311 total nuclei. <strong>d</strong>, Gating strategy for viral transduced BMDMs. WT BMDMs were transduced with virus containing empty pESV-ires-eGFP vector or <em>Irf8</em>-overexpressing (OE) pESV-Irf8-ires-eGFP vector. Successfully transduced cells were identified by GFP+ gate. <strong>e</strong>, Gating strategy for WT and <em>Irf8**–/–</em> BMDMs. <strong>f</strong>, Heatmap representing the average gene expression of top microglia DEGs in microglia sub-clusters in AD versus control samples. Microglia subclusters are indicated in the top left t-SNE plot. Color scheme shows row max and row min. <strong>g</strong>, t-SNE projection of all nuclei in AD versus control samples showing the lack of a sub-population of astrocytes in AD. Red circle indicates the population. Colors correspond to individual clusters. n = 66,311 total nuclei. <strong>h</strong>, t-SNE plots showing the average <em>z</em>-scores of downregulated genes in astrocytes. Red circle indicates the disappearing population enriched for downregulated genes. <em>n</em> = 65 downregulated genes in astrocytes listed in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#MOESM1">4</a> were used as inputs. <strong>i</strong>, t-SNE plots of oligodendrocyte sub-clusters showing average <em>z</em>-scores of DEGs in oligodendrocytes. Top, Upregulated genes are enriched in Oligo0 and Oligo3 (indicated in Fig.<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#Fig5">5</a>). Bottom, Downregulated genes are enriched in Oligo1 and Oligo2. Oligodendrocyte subclusters are indicated in the top left t-SNE plot. <em>n</em> = 20 up- and 23 downregulated genes in oligodendrocytes listed in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#MOESM1">4</a> were used as inputs.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-9-Human-AD-associated-oligodendrocyte-and-microglia-signatures-identified-by-snRNA-seq-match-public-datasets-from-aging-and-early-onset-AD-populations"><a href="#Extended-Data-Fig-9-Human-AD-associated-oligodendrocyte-and-microglia-signatures-identified-by-snRNA-seq-match-public-datasets-from-aging-and-early-onset-AD-populations" class="headerlink" title="Extended Data Fig. 9: Human AD-associated oligodendrocyte and microglia signatures identified by snRNA-seq match public datasets from aging and early-onset AD populations."></a>Extended Data Fig. 9: Human AD-associated oligodendrocyte and microglia signatures identified by snRNA-seq match public datasets from aging and early-onset AD populations.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig15_ESM.jpg" alt="Extended Data Fig. 9"></p>
+<blockquote>
+<p>Cluster markers of Micro0, Micro1, Olig0 and Oligo1 (listed in Supplementary Table <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41591-019-0695-9#MOESM1">4</a>) were used as inputs for GSEA analysis against public datasets on aging (<strong>a</strong>, <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE53890">GSE53890</a>) and people with early-onset AD (<strong>b</strong>, <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE39420">GSE39420</a>). Genes enriched in Micro0 and Oligo0 correspond to genes previously identified as upregulated in human aging and people with early-onset AD. Genes enriched in Micro1 and Oligo1 correlate with downregulation in aging and early-onset AD. <em>n</em> = 146 genes for Micro0, 178 genes for Micro1, 59 genes for Oligo0 and 233 genes for Oligo1 were used as inputs. <em>P</em> value by permutation test.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-10-NanoString-nCounter-analysis-of-two-cohorts-of-subjects-with-AD-corroborates-findings-in-snRNA-seq"><a href="#Extended-Data-Fig-10-NanoString-nCounter-analysis-of-two-cohorts-of-subjects-with-AD-corroborates-findings-in-snRNA-seq" class="headerlink" title="Extended Data Fig. 10: NanoString nCounter analysis of two cohorts of subjects with AD corroborates findings in snRNA-seq."></a>Extended Data Fig. 10: NanoString nCounter analysis of two cohorts of subjects with AD corroborates findings in snRNA-seq.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41591_2019_695_Fig16_ESM.jpg" alt="Extended Data Fig. 10"></p>
+<blockquote>
+<p><strong>a</strong>, Diagram of NanoString pipeline. <strong>b</strong>, t-SNE plots of human brain showing the cell type of origin of top DEGs identified in NanoString analysis of Rush cohort. Color scheme shows expression. <em>n</em> = 66,311 total nuclei shown. <strong>c</strong>, Volcano plot showing DEGs of AD versus control from the BRI cohort. <em>n</em> = 10 controls and 10 subjects with AD. <em>P</em> value by multivariate linear regression with Benjamini–Yekutieli adjustment. <strong>d</strong>, Pathway analysis showing the same pathways are differentially regulated in AD brains from Rush (left) and BRI (right). <strong>e</strong>, t-SNE plots showing expression of IL10RA and HPGDS in human microglia. <em>n</em> = 66,311 total nuclei shown.</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/single-cell-RNA-seq/" rel="tag"># single-cell RNA-seq</a>
+              <a href="/tags/brain/" rel="tag"># brain</a>
+              <a href="/tags/prefrontal-cortex/" rel="tag"># prefrontal cortex</a>
+              <a href="/tags/disease/" rel="tag"># disease</a>
+              <a href="/tags/AD/" rel="tag"># AD</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/04/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%B8%89-Single-cell-transcriptomic-analysis-of-Alzheimer-disease/" rel="prev" title="单细胞转录组文献分析方法[三]: Single-cell transcriptomic analysis of Alzheimer's disease">
+      <i class="fa fa-chevron-left"></i> 单细胞转录组文献分析方法[三]: Single-cell transcriptomic analysis of Alzheimer's disease
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods"><span class="nav-number">2.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Processing-data-with-Seurat-package-and-quality-control"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">Processing data with Seurat package and quality control</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clustering-and-finding-markers"><span class="nav-number">2.1.</span> <span class="nav-text">Clustering and finding markers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-of-gene-differential-expression"><span class="nav-number">2.2.</span> <span class="nav-text">Analysis of gene differential expression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparing-marker-genes-with-public-datasets"><span class="nav-number">2.3.</span> <span class="nav-text">Comparing marker genes with public datasets</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figure"><span class="nav-number">3.</span> <span class="nav-text">Figure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-1-snRNA-seq-distinguishes-major-brain-cell-types-and-shows-microgliosis-in-the-5XFAD-brains"><span class="nav-number">3.1.</span> <span class="nav-text">Fig. 1: snRNA-seq distinguishes major brain-cell types and shows microgliosis in the 5XFAD brains.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-2-Characterization-of-the-microglia-cluster"><span class="nav-number">3.2.</span> <span class="nav-text">Fig. 2: Characterization of the microglia cluster.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-3-Identification-of-a-novel-oligodendrocyte-A%CE%B2-reactive-state-defined-by-C4b-and-Serpina3n-expression"><span class="nav-number">3.3.</span> <span class="nav-text">Fig. 3: Identification of a novel oligodendrocyte Aβ-reactive state defined by C4b and Serpina3n expression.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-4-Human-AD-brain-exhibits-a-microglia-signature-distinct-from-that-in-mice"><span class="nav-number">3.4.</span> <span class="nav-text">Fig. 4: Human AD brain exhibits a microglia signature distinct from that in mice.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-5-snRNA-seq-identifies-human-AD-associated-astrocyte-and-oligodendrocyte-signatures-corroborated-by-NanoString-gene-expression-analysis"><span class="nav-number">3.5.</span> <span class="nav-text">Fig. 5: snRNA-seq identifies human AD-associated astrocyte and oligodendrocyte signatures corroborated by NanoString gene-expression analysis.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-6-TREM2-R62H-and-TREM2-R47H-carriers-exhibit-reduced-microglia-reactive-signature"><span class="nav-number">3.6.</span> <span class="nav-text">Fig. 6: TREM2-R62H and TREM2-R47H carriers exhibit reduced microglia reactive signature.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-1-Cluster-characterization-of-7-month-old-mouse-cohort"><span class="nav-number">3.7.</span> <span class="nav-text">Extended Data Fig. 1: Cluster characterization of 7-month-old mouse cohort.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-2-Cluster-characterization-of-15-month-old-mouse-cohort"><span class="nav-number">3.8.</span> <span class="nav-text">Extended Data Fig. 2: Cluster characterization of 15-month-old mouse cohort.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-3-Characterization-of-the-microglia-cluster-in-the-15-month-old-mouse-cohort"><span class="nav-number">3.9.</span> <span class="nav-text">Extended Data Fig. 3: Characterization of the microglia cluster in the 15-month-old mouse cohort.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-4-Oligodendrocytes-acquire-an-A%CE%B2-dependent-signature-and-do-not-cluster-around-plaques-in-the-5XFAD-model"><span class="nav-number">3.10.</span> <span class="nav-text">Extended Data Fig. 4: Oligodendrocytes acquire an Aβ-dependent signature and do not cluster around plaques in the 5XFAD model.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-5-Heat-maps-of-fold-changes-of-DEGs-in-OPC-astrocyte-and-neuron-clusters-in-the-7-month-old-mouse-cohort"><span class="nav-number">3.11.</span> <span class="nav-text">Extended Data Fig. 5: Heat maps of fold changes of DEGs in OPC, astrocyte and neuron clusters in the 7-month-old mouse cohort.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-6-Proteomic-analysis-recapitulates-major-findings-from-snRNA-seq-analysis"><span class="nav-number">3.12.</span> <span class="nav-text">Extended Data Fig. 6: Proteomic analysis recapitulates major findings from snRNA-seq analysis.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-7-Characterization-of-human-snRNA-seq"><span class="nav-number">3.13.</span> <span class="nav-text">Extended Data Fig. 7: Characterization of human snRNA-seq.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-8-AD-associated-human-signatures-are-distinct-from-those-in-the-A%CE%B2-mouse-model"><span class="nav-number">3.14.</span> <span class="nav-text">Extended Data Fig. 8: AD-associated human signatures are distinct from those in the Aβ mouse model.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-9-Human-AD-associated-oligodendrocyte-and-microglia-signatures-identified-by-snRNA-seq-match-public-datasets-from-aging-and-early-onset-AD-populations"><span class="nav-number">3.15.</span> <span class="nav-text">Extended Data Fig. 9: Human AD-associated oligodendrocyte and microglia signatures identified by snRNA-seq match public datasets from aging and early-onset AD populations.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-10-NanoString-nCounter-analysis-of-two-cohorts-of-subjects-with-AD-corroborates-findings-in-snRNA-seq"><span class="nav-number">3.16.</span> <span class="nav-text">Extended Data Fig. 10: NanoString nCounter analysis of two cohorts of subjects with AD corroborates findings in snRNA-seq.</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Max</p>
+  <div class="site-description" itemprop="description">在学了在学了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-bug"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
