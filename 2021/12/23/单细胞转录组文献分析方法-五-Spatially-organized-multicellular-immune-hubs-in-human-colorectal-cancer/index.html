@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="单细胞转录组文献分析方法[五]:Spatially organized multicellular immune hubs in human colorectal cancer">
+<meta property="og:url" content="http://example.com/2021/12/23/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%BA%94-Spatially-organized-multicellular-immune-hubs-in-human-colorectal-cancer/index.html">
+<meta property="og:site_name" content="TypeError">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211223203308840.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr1_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr1_lrg-20211223221946473.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr2_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr3_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr4_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr5_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr6_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr7_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs1_lrg-20211223204326065.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs2_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs3_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs4_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs5_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs6_lrg.jpg">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs7_lrg.jpg">
+<meta property="article:published_time" content="2021-12-23T12:32:15.000Z">
+<meta property="article:modified_time" content="2021-12-24T02:57:26.103Z">
+<meta property="article:author" content="Max">
+<meta property="article:tag" content="single-cell RNA-seq">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211223203308840.png">
+
+<link rel="canonical" href="http://example.com/2021/12/23/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%BA%94-Spatially-organized-multicellular-immune-hubs-in-human-colorectal-cancer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>单细胞转录组文献分析方法[五]:Spatially organized multicellular immune hubs in human colorectal cancer | TypeError</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TypeError</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/23/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%BA%94-Spatially-organized-multicellular-immune-hubs-in-human-colorectal-cancer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Max">
+      <meta itemprop="description" content="在学了在学了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TypeError">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单细胞转录组文献分析方法[五]:Spatially organized multicellular immune hubs in human colorectal cancer
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-23 20:32:15" itemprop="dateCreated datePublished" datetime="2021-12-23T20:32:15+08:00">2021-12-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-24 10:57:26" itemprop="dateModified" datetime="2021-12-24T10:57:26+08:00">2021-12-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">单细胞转录组</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211223203308840.png" alt="image-20211223203308840"></p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr1_lrg.jpg" alt="img"></p>
+<span id="more"></span>
+
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Immune responses to cancer are highly variable, with <strong>mismatch repair-deficient (MMRd) tumors</strong> exhibiting more anti-tumor immunity than <strong>mismatch repair-proficient (MMRp) tumors</strong>. To understand the rules governing these varied responses, we transcriptionally profiled <strong>371,223</strong> cells from colorectal tumors and adjacent normal tissues of <strong>28 MMRp</strong> and <strong>34 MMRd</strong> individuals. Analysis of 88 cell subsets and their 204 associated gene expression programs revealed extensive transcriptional and spatial remodeling across tumors. To discover hubs of interacting malignant and immune cells, we identified expression programs in different cell types that co-varied across tumors from affected individuals and used spatial profiling to localize coordinated programs. We discovered a myeloid cell-attracting hub at the tumor-luminal interface associated with tissue damage and an MMRd-enriched immune hub within the tumor, with activated T cells together with malignant and myeloid cells expressing T cell-attracting chemokines. By identifying interacting cellular programs, we reveal the logic underlying spatially organized immune-malignant cell networks. </p>
+<h1 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h1><h2 id="scRNA-seq-pre-processing-and-quality-control-filtering"><a href="#scRNA-seq-pre-processing-and-quality-control-filtering" class="headerlink" title="scRNA-seq pre-processing and quality control filtering"></a>scRNA-seq pre-processing and quality control filtering</h2><p>For droplet-based scRNA-seq, <strong>CellRanger v3.1</strong> was used to align reads to the GRCh38 liftover (37 liftover, v28; <a target="_blank" rel="noopener" href="https://www.gencodegenes.org/human/release_28lift37.html">https://www.gencodegenes.org/human/release_28lift37.html</a>) human genome reference. The output was processed using the <strong>dropletUtils</strong> R package (version 1.7.1), to exclude any chimeric reads that had less than 80% assignment to a cell barcode, and identify and exclude empty cell droplets (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib25">Griffiths et al., 2018</a>; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib55">Lun et al., 2019</a>), by testing against a background generated from barcodes with 1,000 to 10 UMIs, with cutoffs determined dynamically based on channel-specific characteristics. </p>
+<p>UMI and gene saturation was estimated in individual cells by sub-sampling reads without replacement in each cell barcode, in incremental fractions of 2%, with 20 repeats. A saturation function of the form $ y = \frac{ax}{x+b}+c$ was fit based on the number of UMIs observed while sampling reads at different depths. </p>
+<p>Cell barcodes were excluded if they satisfied any one of the following criteria: </p>
+<p>(<strong>1</strong>) Fewer than 200 genes; </p>
+<p>(<strong>2</strong>) Fewer than 1,000 reads; </p>
+<p>(<strong>3</strong>) Fewer than 500 UMIs; </p>
+<p>(<strong>4</strong>) More than 50% of UMIs mapping to the mitochondrial genome; </p>
+<p>(<strong>5</strong>) Non-empty droplet with false discovery rate (FDR) less than 0.1; </p>
+<p>(<strong>6</strong>) Over 5% of reads estimated as coming from swapped barcodes/chimeric reads (available at the supplemental website, see <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#sectitle0030">Data and code availability</a>). </p>
+<p>The filtered data was clustered and cells were manually assigned to immune/stromal/epithelial groups based on expressed markers. Using outlier exclusion separately for each channel and each channel cell type combination, cells that deviated by &gt; 2 interquartile ranges (IQR) from the median were then flagged based on the following criteria: </p>
+<p>(<strong>1</strong>) log10(total transcript UMI), </p>
+<p>(<strong>2</strong>) Fraction of barcode swaps, </p>
+<p>(<strong>3</strong>) Gene saturation estimate, </p>
+<p>(<strong>4</strong>) UMI saturation estimate, </p>
+<p>(<strong>5</strong>) Fraction of UMI supported by &gt; 1 read (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib29">Habib et al., 2017</a>). </p>
+<p>Cells were further flagged if they substantially deviated from the fit based on the following relationships: </p>
+<p>(<strong>1</strong>) Total reads versus total UMI, </p>
+<p>(<strong>2</strong>) Total UMI versus log likelihood of being empty (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib55">Lun et al., 2019</a>); </p>
+<p>(<strong>3</strong>) Total UMI versus total number of genes. </p>
+<p>A cell was excluded if it was flagged by at least two of these criteria for epithelial and immune cells, or at least three criteria for stromal cells.</p>
+<h2 id="Selection-of-variable-genes-dimensionality-reduction-and-clustering"><a href="#Selection-of-variable-genes-dimensionality-reduction-and-clustering" class="headerlink" title="Selection of variable genes, dimensionality reduction and clustering"></a>Selection of variable genes, dimensionality reduction and clustering</h2><p>After filtering and exclusion, scRNA-seq profiles were clustered across all patients using a <strong>non-negative matrix factorization (NMF)</strong> (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib47">Li and Ngom, 2013</a>) and a graph clustering-based approach. Transcriptionally over-dispersed genes were identified within each experimental batch (i.e., 10x channel) by the difference of the coefficient of variation (CV) from the median CV for other genes with a similar mean expression (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib72">Satija et al., 2015</a>). </p>
+<p>A robust set of <strong>1,000 to 8,000 genes</strong> was retained based on an elbow-based criterion, applied to the median of over-dispersed difference statistics based on 200 samples of 75% of cells. </p>
+<p>In all subsequent analysis of single cell data we used <strong>log2(TP10K+1)</strong> values, calculated for the ith gene in the jth cell as $ g_{ij} = log_{2}(\frac{cij}{\sum_{j}c_{ij}}10^{4}+1)$, unless indicated otherwise. </p>
+<p>Next, <strong>80% of genes and samples were sub-sampled between 50 to 200 times</strong>, and NMF was used to reduce the dimensionality of the full dataset to between 15 and 40 dimensions as the product of two non-negative matrices (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib44">Lee and Seung, 1999</a>). The loading matrices (i.e., activations) of these NMF components were used to calculate the <em>k</em>-nearest neighbors (<em>k</em>-NN) graph (<em>k</em> = 21) based on a cosine similarity distance. </p>
+<p>This graph was clustered using stability optimizing graph clustering (<a target="_blank" rel="noopener" href="http://michaelschaub.github.io/PartitionStability/">http://michaelschaub.github.io/PartitionStability/</a>; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib19">Delvenne et al., 2010</a>; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib77">Shekhar et al., 2016</a>), to identify 7 top level cell type clusters (epithelial, stromal, mast, B, plasma, myeloid, and T cells). </p>
+<p>To minimize differences across samples due to technical reasons (e.g., 10x v2 versus 10x v3), gene expression measurements of individual genes were quantile normalized, separately among cells of each top-level cellular compartment, such that the expression CDFs for each gene matched across all batches. </p>
+<p>Next, the same dimensionality reduction by NMF and graph-clustering procedure was applied iteratively to the transcriptomes of each top-level cell type separately, resulting in a total of 88 cell clusters spanning distinct types or states (<a target="_blank" rel="noopener" href="https://www.cell.com/cms/10.1016/j.cell.2021.08.003/attachment/adbd2c80-1a11-4123-8d04-f1756f8f42a1/mmc1">Table S1</a>). Of note, PCA-based louvain clustering leads to qualitatively similar cell subset definition (data not shown). However, since we de-novo discover gene expression programs by NMF, we decided to consistently use NMF instead of PCA also for the cluster definition.</p>
+<h2 id="Cluster-connectivity"><a href="#Cluster-connectivity" class="headerlink" title="Cluster connectivity"></a>Cluster connectivity</h2><p>To identify relationships between clusters (‘cluster connectivity’) we used <strong>Partition-based Graph Abstraction (PAGA)</strong> with connectivity model v1.2 on the NMF based <em>k</em>-NN graph above (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib87">Wolf et al., 2019</a>). PAGA edge thresholds were selected by using the minimum edge weight of the corresponding minimum spanning tree for each <em>k</em>-NN graph (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#fig3">Figures 3</a>D and 3F).</p>
+<h2 id="Cluster-assignment-by-gradient-boosting-and-filtering-of-potential-doublets"><a href="#Cluster-assignment-by-gradient-boosting-and-filtering-of-potential-doublets" class="headerlink" title="Cluster assignment by gradient boosting and filtering of potential doublets"></a>Cluster assignment by gradient boosting and filtering of potential doublets</h2><p>In order to exclude potential doublets and low confidence assignments by clustering we used a classifier for final assignment of cells to clusters. Gradient boosting (R 3.6.1, xgboost v0.90.0.2 (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib11">Chen and Guestrin, 2016</a>)) was first applied to build a cell to cluster classifier for each of the top-level seven cluster types and subsequently to each of the 88 low-level clusters. During training, we included only high quality cells: (1) we excluded potential doublets, defined as cells appearing by manual examination between major high-level cell type regions with expression features from both cell types; (2) cells with possible quality concerns that were not substantial enough for removal during QC; (3) cells with elevated potential ambient RNA contamination, retaining 314,524 cells (85%) for final classifier training.</p>
+<p>For each of the seven top-level cell types, a separate classifier was trained to predict each cell type separately (one-versus-all), in a 5-fold cross-validation scheme. Next, using the probability scores of the held-out test-set we identified an optimal cutoff for each class based on an ROC analysis comparing the true positive rate (TPR = true positives divided by all positive predictions) to the false positive rate (FPR = true negative divided by all negatives) and selecting the point at which the ROC curve intersects with the diagonal. Cells that were ambiguously assigned in this way to more than one cluster were removed as potential doublets.</p>
+<p>Next, a similar classification training scheme was applied separately to cells from each top-level cell type (epithelial, stromal, mast, B, plasma, myeloid, and T cells). We used 5-fold cross-validation and ROC analysis to select thresholds. In cases where a cell was assigned to more than one subtype, we used the assignment with the higher predictive score. Cells that could not be assigned confidently by any classifier were excluded from further analysis.</p>
+<h2 id="Classifying-malignant-cells-by-gradient-boosting"><a href="#Classifying-malignant-cells-by-gradient-boosting" class="headerlink" title="Classifying malignant cells by gradient boosting"></a>Classifying malignant cells by gradient boosting</h2><p>Adjacent normal tissue, which was sampled distantly from the tumor (e.g., ∼10cm apart), is expected to be tumor-cell free. We used gradient boosting to train a classifier predicting malignant from non-malignant epithelial cells based on the source channel type (tumor versus adjacent normal), in a 5-fold cross validation scheme. We separately trained two classifiers, one predicting isTumor and another predicting isNormal, and used the geometric mean of the resulting probabilities as the final statistic. In subsequent analyses, we considered epithelial cells from tumor channels with a predicted score greater than 0.75 to be malignant, and cells from normal channels with a predicted score &lt; 0.25 to be normal epithelial cells. Overall, by this measure ∼95% of tumor channel epithelial cells were predicted to be malignant, and 98% of normal channel epithelial cells were predicted to be non-malignant cells. The classifier predictions were highly concordant with those made by inferred copy number alterations with only ∼11% of likely malignant cells showing no substantial copy number differences from normal (8% for MMRp, and 15% for MMRd), and 2% of likely normal cells showing copy number differences (data not shown). Copy number alterations were only determined for epithelial cells.</p>
+<h2 id="Identification-of-gene-expression-programs-by-NMF"><a href="#Identification-of-gene-expression-programs-by-NMF" class="headerlink" title="Identification of gene expression programs by NMF"></a>Identification of gene expression programs by NMF</h2><p>To identify robust transcriptional programs, we adapted a <strong>consensus NMF procedure</strong> (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib41">Kotliar et al., 2019</a>). We used as input the weight components matrices (W matrices) from an NMF procedure that was run on 50-200 subsampled gene x cell subsets, as described above (see section on <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#sec5.5.2">Selection of variable genes, dimensionality reduction and clustering</a>). We excluded outlier components by sorting components by their cosine distance to the 20th nearest neighbor and excluding components with unusually high distance by an elbow-based criterion. </p>
+<p>Next, we constructed a <em>k</em>-NN graph (<em>k</em> = 30), and identified clusters of highly similar components in this graph using stability optimizing graph clustering (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib19">Delvenne et al., 2010</a>), with an exponentially varied scale parameter (0.1 to 10). The components in each cluster were median-averaged into a single component, resulting in a shortlist of “consensus NMF” components. These were used as the initialization component matrix for a second round of NMF of all cells and highly variable genes (as described in <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#sec5.5.2">Selection of variable genes, dimensionality reduction and clustering</a>). </p>
+<p>The above procedure was applied separately to each top-level cell population and to epithelial cells from normal channels. For each cell type, this resulted in eight solutions, of between 8-48 clusters corresponding to different choices of the resolution parameter. <strong>For each cell type, a single solution was selected based on examination of the mean cluster silhouette, inflection of residual error graph, and by manual examination of the top genes in the output programs</strong>.</p>
+<p>To characterize the expression programs identified with this procedure, we used the top 150 genes in each of the components, ranked by the following weighting scheme: For the <em>i</em>th gene and <em>j</em>th component we define the scaled weight as follows: $WS_{ij}=W_{ij}\max_{k\ne j}log\frac{W_{ij}+1}{W_{ik}+1}$ where $W_{ik}$ is the largest weight for gene <em>i</em> in the rest of the components, i.e., <em>k</em> ≠ <em>j</em>. </p>
+<p>This weighting scheme prioritizes for high weight (highly expressed; first term in $WS_{ij}$ formula) and unique genes in each component (second term in  $WS_{ij}$ formula). For the visualization of relative gene weights of each gene within a program as circle (as in <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#fig2">Figures 2</a>C, 2F, <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#fig3">3</a>D, 3F, and <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#fig4">4</a>D), weights were scaled to [0,1] range.</p>
+<h2 id="Identification-of-shared-gene-programs-in-malignant-epithelial-cells"><a href="#Identification-of-shared-gene-programs-in-malignant-epithelial-cells" class="headerlink" title="Identification of shared gene programs in malignant epithelial cells"></a>Identification of shared gene programs in malignant epithelial cells</h2><p>To identify expression programs shared across malignant epithelial cells, from multiple individual patients, the above consensus NMF procedure was first applied separately to malignant cells from each patient (cells from tumor channels and classified as malignant as described above). For each patient a separate consensus NMF expression program set (<em>W</em> matrix) was generated, with the number of programs chosen automatically based on the residual error graph. </p>
+<p>Next, a similar consensus approach was applied to the combined list of all per-patient consensus NMF program sets (all W matrices, one per patient) as well as a set of 17 normal epithelial programs (identified as described above - <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#sec5.5.6">Identification of gene expression programs by NMF</a>), in order to capture malignant and normal epithelial programs in a single combined NMF solution. </p>
+<p>After this consensus clustering procedure had completed, NMF clusters including one or more normal epithelial programs were excluded and the corresponding normal NMF programs were used in their place. This was done for all specimens (resulting in 43 pEpi programs), and separately for MMRd and MMRp tumors (resulting in 29 pEpiTd and 32 pEpiTp programs, respectively; <a target="_blank" rel="noopener" href="https://www.cell.com/cms/10.1016/j.cell.2021.08.003/attachment/9a9a8db7-9bcd-4967-bb52-8359b9ecc439/mmc4">Table S4</a>).</p>
+<h2 id="Calculating-NMF-transcriptional-program-activity"><a href="#Calculating-NMF-transcriptional-program-activity" class="headerlink" title="Calculating NMF transcriptional program activity"></a>Calculating NMF transcriptional program activity</h2><p>In order to calculate the NMF program activity matrix (<em>H</em>), we used non-negative least-squares (NNLS), solving the following equation for the matrix <em>H</em>, $H=argmin_{H&gt;0}\left|X-WH\right|_{F}$, given <em>X</em> and <em>W</em>, where <em>H</em> is the ‘program activity’ matrix, <em>k</em> is the by cell matrix; <em>X</em> is the gene by cell expression matrix, and <em>W</em> is the gene by <em>k</em> NMF expression program matrix. <em>W</em> was restricted to at most top 100 weighted genes per NMF component (selected as described above - <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#sec5.5.6">Identification of gene expression programs by NMF</a>). In this way we can calculate the activity values for any cell including cells not part of the original NMF procedure used to discover the program “dictionary” (e.g., pEpiTd∗ in MMRp cells or in data from <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib45">Lee et al., 2020</a>).</p>
+<h2 id="Testing-for-covarying-NMF-expression-programs"><a href="#Testing-for-covarying-NMF-expression-programs" class="headerlink" title="Testing for covarying NMF expression programs"></a>Testing for covarying NMF expression programs</h2><p>We calculated the co-variation of two programs A, B as the correlation (see below) between the vectors of their program activity across the patients, where program activity is calculated by the cell type in which the program was initially defined (e.g., pTNI∗ programs in T/NK/ILC cells). We restricted this analysis to include only patients where at least 1,000 cells were captured and did not consider stromal cells due to their low number per patient (stromal cells account for &lt; 5% of all profiled cells). </p>
+<p>In order to capture relationships between expression programs that are active in only a small number of cells, we calculated for each patient, cell type, and expression program, the program activity values in this cell type at five quantiles (0.25 0.5, 0.75, 0.95, 0.99). </p>
+<p>We then calculated the Pearson correlation coefficient, <em>R,</em> for every pair of NMF programs, separately for each quantile across patients. The correlation for each quantile was Fisher transformed (i.e., arctanh(R)) and the mean of the five values was used as a test statistic and compared against a null distribution of mean Fisher transformed R values generated by permuting the patient ID assignment (and keeping cell type, and overall NMF value distribution unchanged). A p value was calculated by counting how often the permuted R is above the true observed R (p = (# R &gt; R’)/(# permutations), and separately how often the permuted R is below the observed R. The minimum of these (scaled by two) was taken as the outcome empirical p value statistic and reported at a Benjamini-Hochberg FDR of 10%. We report the raw correlation at the 0.75 quantile and the adjusted R, calculated as the difference of mean true R values, and the mean of permuted R values across 10,000 permutations. We constructed a signed weighted network from the pairwise R values retaining only significant edges (FDR &lt; 0.1).</p>
+<p>Next, we discovered modules (‘hubs’) in the resulting network using a module detection algorithm for signed graphs (i.e., having both negative and positive edges; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib24">Esmailian and Jalili, 2015</a>). This method explores a space of solutions set by a resolution parameter in the range 0.001 to 0.2, and a random-walk parameter (tau = 0.2), and outputs the optimal solution based on the Constant Potts Model of graph modularity. We applied this method iteratively, and split modules if they were larger than 3 nodes and improved the signed weighted modularity of the solution.</p>
+<h2 id="Constructing-a-network-of-expression-program-similarity"><a href="#Constructing-a-network-of-expression-program-similarity" class="headerlink" title="Constructing a network of expression program similarity"></a>Constructing a network of expression program similarity</h2><p>A network of expression program similarities was constructed for pTNI∗, pS∗, pM∗, and pEpi∗ programs by calculating for every pair of program genes a pairwise Jaccard similarity (i.e., for sets A and B J = |A intersect B|/|A union B|) of the top 50 program genes (selected as described above - <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#sec5.5.6">Identification of gene expression programs by NMF</a>). The resulting similarity matrix was used to construct a Gaussian kernel matrix (as in constructing a tSNE, with perplexity of 30 and a tolerance of 10−5). The kernel matrix was filtered to retain the top 4% of value pairs to construct the final network, and visualized using a force-directed layout algorithm.</p>
+<h2 id="Visualization-of-single-cell-profiles"><a href="#Visualization-of-single-cell-profiles" class="headerlink" title="Visualization of single cell profiles"></a>Visualization of single cell profiles</h2><p>We generated tSNE plots per compartment from NMF loading matrices, with a perplexity value of 30 and the Barnes-Hut approximation method (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib86">Van Der Maaten, 2014</a>). A global tSNE of all cells was generated using Pegasus with the default parameters and using SVD for the preliminary embedding (v0.17.0; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib50">Li et al., 2020</a>).</p>
+<h2 id="Identification-of-differentially-expressed-genes"><a href="#Identification-of-differentially-expressed-genes" class="headerlink" title="Identification of differentially expressed genes"></a>Identification of differentially expressed genes</h2><p>Differentially expressed genes (DEGs) were identified using a two-step procedure applied to the log(TP10K+1) values, first using a <strong>Mann-Whitney-Wilcoxon Ranksum test</strong>, and then <strong>sorting genes by Wilcoxon statistic</strong>, and testing each of the top 1,000 genes for differential expression using a generalized linear mixed model using a normal distribution, with terms for the total UMI and the total number of genes, and a fixed effect intercept term for each patient. We report the likelihood ratio Wald-test p value comparing this model to one also including a categorical class term.</p>
+<p>Genes were identified as differentially expressed in a particular set of cells if they met all of the following criteria: </p>
+<p>(<strong>1</strong>) Ranksum test with a Benjamini-Hochberg FDR &lt; 0.1; </p>
+<p>(<strong>2</strong>) Minimum expression in at least 5% of cells; </p>
+<p>(<strong>3</strong>) Area Under a Receiver Operating Curve (AUROC) &gt; 0.55, </p>
+<p>(<strong>4</strong>) 1.25 log fold change versus all other cells;  </p>
+<p><strong>(5)</strong> Wald-test with a Benjamini-Hochberg FDR &lt; 0.1. </p>
+<p>We included tables for the top 100 significant genes (sorted by AUCROC), for immune, stromal and epithelial cells (<a target="_blank" rel="noopener" href="https://www.cell.com/cms/10.1016/j.cell.2021.08.003/attachment/eb339e56-1bf6-4d25-82c8-f165cfd502ba/mmc2">Tables S2</a>, <a target="_blank" rel="noopener" href="https://www.cell.com/cms/10.1016/j.cell.2021.08.003/attachment/d7bf994e-9e42-456b-90b9-7bf87b22f726/mmc3">S3</a>, and <a target="_blank" rel="noopener" href="https://www.cell.com/cms/10.1016/j.cell.2021.08.003/attachment/9a9a8db7-9bcd-4967-bb52-8359b9ecc439/mmc4">S4</a>).</p>
+<h2 id="Pearson-residual-calculation-in-contingency-tables"><a href="#Pearson-residual-calculation-in-contingency-tables" class="headerlink" title="Pearson residual calculation in contingency tables"></a>Pearson residual calculation in contingency tables</h2><p>Enrichment/depletion of particular cell clusters compared to adjacent normal colon tissue (as shown in <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#fig2">Figures 2</a>A, <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#fig3">3</a>B, and <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#figs2">S2</a>B) were determined using the Pearson residual. The Pearson residual is a measure of relative enrichment for cells in a contingency table. It is calculated here as: $R=\frac{obs-exp}{\sqrt{exp}}$, where the expected value is calculated as the product of row and column marginal probabilities by the total count.</p>
+<h2 id="Transcription-factor-target-enrichment-in-gene-expression-programs"><a href="#Transcription-factor-target-enrichment-in-gene-expression-programs" class="headerlink" title="Transcription factor target enrichment in gene expression programs"></a>Transcription factor target enrichment in gene expression programs</h2><p>Transcription factor target gene predictions are aggregated from the following database: </p>
+<p>(1) Trrust (v2; <a target="_blank" rel="noopener" href="https://www.grnpedia.org/trrust/">https://www.grnpedia.org/trrust/</a>, retrieved April 2018; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib30">Han et al., 2018</a>), </p>
+<p>(2) MsigDB (v.7.1; <a target="_blank" rel="noopener" href="http://www.gsea-msigdb.org/gsea/msigdb/">http://www.gsea-msigdb.org/gsea/msigdb/</a>, retrieved March 2020; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib51">Liberzon et al., 2015</a>), </p>
+<p>(3) RegNetwork web (<a target="_blank" rel="noopener" href="http://regnetworkweb.org/">http://regnetworkweb.org/</a>, retrieved Jan 2019; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib53">Liu et al., 2015</a>). </p>
+<p>TF target sets were tested for statistical enrichment within the top genes of each program using the Fisher-exact test. A TF was considered a putative regulator of an NMF program if it showed significant enrichment (FDR &lt; 0.1), had an overlap of at least 3 genes between the top NMF program genes and TF targets, and if the TF gene expression showed a positive correlation with the respective NMF activity.</p>
+<h1 id="Figure"><a href="#Figure" class="headerlink" title="Figure"></a>Figure</h1><h2 id="Fig-1-Cohort-and-atlas-of-cell-subsets-and-programs-in-MMRd-and-MMRp-CRC"><a href="#Fig-1-Cohort-and-atlas-of-cell-subsets-and-programs-in-MMRd-and-MMRp-CRC" class="headerlink" title="Fig 1. Cohort and atlas of cell subsets and programs in MMRd and MMRp CRC"></a>Fig 1. Cohort and atlas of cell subsets and programs in MMRd and MMRp CRC</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr1_lrg-20211223221946473.jpg" alt="img"></p>
+<blockquote>
+<p>(A) MMR status and clinical characteristics of primary untreated individuals with CRC.</p>
+<p>(B) tSNEs (t-distributed stochastic neighbor embedding) by major cell partitions (left), tissue type (middle), or specimen (right).</p>
+<p>(C) NMF-based gene programs can be cell type specific (example 1, pS02-Fibro matrix/stem cell niche) or shared (example 2, pTNI03-proliferation; example 3, pEpi30-ISGs).</p>
+</blockquote>
+<h2 id="Fig-2-The-immune-compartment-in-MMRd-and-MMRp-CRC"><a href="#Fig-2-The-immune-compartment-in-MMRd-and-MMRp-CRC" class="headerlink" title="Fig 2. The immune compartment in MMRd and MMRp CRC"></a>Fig 2. The immune compartment in MMRd and MMRp CRC</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr2_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Compositional changes in immune cell clusters in MMRp and MMRd tumors relative to adjacent normal tissue. Kruskal-Wallis <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/neuroscience/false-discovery-rate">false discovery rate</a> (FDR) &lt; 0.05 for MMRp versus MMRd are marked with asterisks.</p>
+<p>(B) tSNEs of myeloid cells in all normal and tumor samples.</p>
+<p>(C) Activities of selected myeloid gene programs with high activities in <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/monocyte">monocytes</a> and macrophages. Each dot indicates the 75th percentile of the program activity in the myeloid cells of one specimen. GLME (generalized linear mixed model) FDR: ∗∗∗∗ ≤ 0.0001, ∗∗∗ ≤ 0.001, ∗∗ ≤ 0.01, ∗ ≤ 0.05, not significant (ns) for &gt; 0.05. tSNEs below show program activities within the myeloid compartment. For each program, the top genes are listed below, with circle size indicating the relative weight of each gene within the program.</p>
+<p>(D) tSNEs of the T/NK/ILC cell partition colored by major cell subsets.</p>
+<p>(E) pTNI08, pTNI16, pTNI18, and pTNI06 activities within each of the T/NK/ILC cell clusters.</p>
+<p>(F) pTNI08, pTNI16, pTNI18, and pTNI06 activities displayed as in (C). GLME FDR reported as in (C).</p>
+<p>(G) pTNI16 and pTNI18 gene signature scores in bulk RNA-seq from TCGA-CRC (COADREAD, colon and <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/immunology-and-microbiology/rectum">rectum</a> adenocarcinoma) specimens. Mann-Whitney-Wilcoxon test, ∗∗∗∗p ≤ 0.0001.</p>
+<p>(H) Localization of <em><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/cxcl13">CXCL13</a></em>+ T cells in tumor center versus lymphoid structure. Left: H&amp;E. Right: <em>CD3E</em> and <em>CXCL13</em> RNA <em>in situ</em> hybridization (ISH). Scale bar, 200 μm.</p>
+</blockquote>
+<h2 id="Fig-3-Stromal-remodeling-in-MMRd-and-MMRp-CRC"><a href="#Fig-3-Stromal-remodeling-in-MMRd-and-MMRp-CRC" class="headerlink" title="Fig 3. Stromal remodeling in MMRd and MMRp CRC"></a>Fig 3. Stromal remodeling in MMRd and MMRp CRC</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr3_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) tSNEs of stromal cells in all normal and tumor samples.</p>
+<p>(B) Compositional changes in endothelial, pericyte, and fibroblast subsets within their respective compartments in MMRp and MMRd tumors relative to adjacent normal tissue. Tumor-enriched clusters are indicated in bold red. Kruskal-Wallis FDR &lt; 0.05 for MMRp versus MMRd are marked with asterisks. cS30 and cS31 are overwhelmingly from two tumors that grew below non-neoplastic tissue and may not be purely tumor derived.</p>
+<p>(C) Fraction of stromal cell subsets per tissue type (mean ± SEM with each specimen being one data point). Kruskal-Wallis FDR &lt; 0.05 for normal versus tumor are marked with asterisks.</p>
+<p>(D) Activities of selected programs in each of the endothelial cell clusters. Tumor-enriched clusters are indicated in bold red. Top program genes are listed to the right, with circle size indicating the weight of each gene in the program. Key edges (connectivity) between two normal or one normal and one tumor-associated cluster (weights &gt; 0.5, identified by PAGA) are shown below, and colors are matched to programs with high activity in the respective clusters.</p>
+<p>(E) Activity of pS05 (ISG) and pS10 (angiogenesis) in all tumor and normal samples. Each point indicates the 75th percentile of the program activity per specimen in endothelial cells. GLME FDR: ∗∗∗∗ ≤ 0.0001, ∗∗∗ ≤ 0.001, ∗∗ ≤ 0.01, ∗ ≤ 0.05, ns for &gt; 0.05.</p>
+<p>(F) Selected programs in fibroblast and pericyte subtypes shown as in (D). Shown below are PAGA-based connectivity weights &gt; 0.25.</p>
+<p>(G) Activities of pS03 (ACTA2), pS13 (inflammation), and pS17 (BMP fibro) in fibroblasts and pS03 and pS13 in pericytes, shown as in (E).</p>
+<p>(H) Dot plot showing geometric mean expression (log(TP10K+1)) and frequency (dot size) of key genes in selected fibroblast subtypes. INHBA distinguishes cancer-associated fibroblasts (CAFs) from fibroblasts in normal tissue. Tumor-enriched clusters are indicated in bold red.</p>
+<p>(I) Representative RNA ISH/immunofluorescence (IF) images of tumor show MMP3+ fibroblasts at the luminal surface around dilated vessels, CXCL14+ fibroblasts lining malignant cells, and GREM1+ fibroblasts in stromal bands reaching far into the tumor (left image). In tumors, GREM1+ fibroblasts additionally line malignant epithelial cells (center). In normal tissues (right), GREM1 signal is restricted to in and below the muscularis mucosa, while only CXCL14+ fibroblasts line the epithelial cells. Scale bar, 100 μm (except where annotated).</p>
+<p>(J) Quantification of CXCL14+, GREM1+, and MMP3+ CAFs among COL1A1/COL1A2+ fibroblasts based on whole-slide scans of 5 MMRd and 4 MMRp CRC specimens from (I); Mann-Whitney-Wilcoxon test. Rightmost graph: MMP3+ cells among all COL1A1/COL1A2+ cells outside or inside of the LM (defined as ≤ 360 μm from the luminal border of the tumor); Wilcoxon matched-pairs signed rank test. Only 8 samples are included on the right because one clinical paraffin block did not contain LM.</p>
+<p>(K) Gene signature scores of top differentially expressed genes from CXCL14+ CAFs, GREM1+ CAFs, MMP3+ CAFs, and all fibroblasts in bulk RNA-seq from TCGA-CRC (COADREAD). Mann-Whitney-Wilcoxon test: ∗∗∗∗p ≤ 0.0001, ∗∗∗p ≤ 0.001, ∗∗p ≤ 0.01, ∗p ≤ 0.05, ns for &gt; 0.05.</p>
+<p>(L) RNA ISH/IF staining for RSPO3 on consecutive sections to those shown in (I) shows that the RSPO3 signal is restricted to the crypt base in normal tissue (right image and top inset) but ascends far into the tumor (left image and bottom inset). Scale bar: 100um.</p>
+</blockquote>
+<h2 id="fig-4-Transcriptional-programs-in-malignant-cells-differ-between-MMRd-and-MMRp-CRC"><a href="#fig-4-Transcriptional-programs-in-malignant-cells-differ-between-MMRd-and-MMRp-CRC" class="headerlink" title="fig 4. Transcriptional programs in malignant cells differ between MMRd and MMRp CRC"></a>fig 4. Transcriptional programs in malignant cells differ between MMRd and MMRp CRC</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr4_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) tSNEs of epithelial cells by tissue type (left), individual (middle), and cell type (right).</p>
+<p>(B) Heatmap showing the 75th percentile of activities from the 43 malignant programs in malignant cells across CRC specimens (rows centered and Z scored), hierarchically clustered using average linkage. Gene program activity in normal epithelial cells is shown for comparison (rightmost column). Significant differences in MMRd versus MMRp are indicated by asterisks (GLME, individual as random effects, MMR status as fixed effect, FDR &lt; 0.05). Significant difference between MLH1 promoter-methylated versus MLH1-non-methylated MMRd specimens is indicated with +.</p>
+<p>(C) Inferred cell type composition of malignant cells in each tumor specimen, classified by supervised learning trained on non-malignant epithelial cells. Epithelial cell composition in normal tissue is shown for comparison (rightmost bar). Morphologically mucinous tumors are indicated with #. Individual order is the same as in (B).</p>
+<p>(D) Selected immune-related transcriptional programs in epithelial cells with significantly different activity in MMRd versus MMRp CRC (GLME FDR &lt; 0.05). For each program, the top genes are shown, and circles indicate the relative weight of each gene in the program. tSNEs show program activities across all cell types (global tSNE); location of epithelial cells is indicated on the right in yellow.</p>
+<p>(E) Signature gene scores for programs in (D) in bulk RNA-seq from TCGA-CRC(COADREAD), GSE39582, and GSE13294 specimens. Mann-Whitney-Wilcoxon test: ∗∗∗∗p ≤ 0.0001, ∗∗∗p ≤ 0.001, ∗∗p ≤ 0.01, ∗p ≤ 0.05, ns for &gt; 0.05.</p>
+</blockquote>
+<h2 id="fig-5-Discovery-of-multicellular-interaction-networks-in-MMRd-CRC"><a href="#fig-5-Discovery-of-multicellular-interaction-networks-in-MMRd-CRC" class="headerlink" title="fig 5. Discovery of multicellular interaction networks in MMRd CRC"></a>fig 5. Discovery of multicellular interaction networks in MMRd CRC</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr5_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Heatmap showing permutation-adjusted pairwise correlation of gene program activities (co-variation score) across MMRd specimens (STAR Methods) using specimen-level activities in T/NK/ILC cell, myeloid, and malignant compartments. Significance is determined using permutation of patient ID and indicated with asterisks (FDR &lt; 0.1). Densely connected modules (hubs) are identified based on graph clustering of significant correlation edges.</p>
+<p>(B) Jaccard similarity of gene programs calculated based on the overlap of top weighted genes across T/NK/ILC, stromal, myeloid, and malignant cells. Edge thickness is proportional to program similarity. Edges from selected network neighborhoods are colored and annotated by function.</p>
+</blockquote>
+<h2 id="Fig-6-An-inflammatory-hub-at-the-luminal-surface-of-primary-MMRd-and-MMRp-tumors"><a href="#Fig-6-An-inflammatory-hub-at-the-luminal-surface-of-primary-MMRd-and-MMRp-tumors" class="headerlink" title="Fig 6. An inflammatory hub at the luminal surface of primary MMRd and MMRp tumors"></a>Fig 6. An inflammatory hub at the luminal surface of primary MMRd and MMRp tumors</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr6_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Inflammatory hub 3 in MMRd specimens. Nodes respresent gene programs, and the size of each node is proportional to the log ratio of the respective mean program activity in MMRd versus normal. Edge thickness is proportional to co-variation.</p>
+<p>(B) Venn diagrams showing the overlap of top weighted genes (left) and predicted transcription factors (right) for inflammatory gene programs in myeloid, stromal, and malignant compartments.</p>
+<p>(C) Violin plots showing program activities of pM15 and pM20 across myeloid cell clusters and pS13 activity across stromal cell clusters.</p>
+<p>(D) Expression level of all chemokines and cytokines present in the top genes of the depicted NMF-based programs (indicated with black dot on the left) across the specified clusters and malignant cells with high versus low pEpiTd17 program activity. Genes are normalized across all cell clusters in the dataset (not only clusters shown).</p>
+<p>(E) Interactions between CXCR1/2 and cognate chemokines. Clusters with high activity for the co-varying or similar inflammatory gene programs are marked in red.</p>
+<p>(F) Primary CRC-derived fibroblasts and SNU-407 MMRd CRC cell line were stimulated with 10 ng/ml IL-1A, IL-1B, IL-6, or tumor necrosis factor (TNF) for 14 h or not treated. Transcriptional signatures were determined by RNA-seq. Shown are log fold changes compared with unstimulated cells. Data are representative of 2 independent experiments each.</p>
+<p>(G) Representative RNA ISH/IF image shows accumulations of neutrophils (CD66b-IF) and IL1B and CXCL1 ISH signals at the malignant interface (EPCAM-ISH) with the colonic lumen. Myeloid cells are marked by TYROBP-ISH. Scale bar, 100 μm. Right: quantification of cell phenotypes in 8 CRC specimens (one clinical paraffin block did not contain LM) shows IL1B, CXCL1, and neutrophil (CD66b) signals enriched in the LM, defined as ≤ 360 μm from the luminal border of the tumor. Paired two-tailed t test. Individual C110 does not show CD66b enrichment at the LM.</p>
+</blockquote>
+<h2 id="Fig-7-A-coordinated-network-of-CXCL13-T-cells-with-myeloid-and-malignant-cells-expressing-ISGs"><a href="#Fig-7-A-coordinated-network-of-CXCL13-T-cells-with-myeloid-and-malignant-cells-expressing-ISGs" class="headerlink" title="Fig 7. A coordinated network of CXCL13+ T cells with myeloid and malignant cells expressing ISGs"></a>Fig 7. A coordinated network of CXCL13+ T cells with myeloid and malignant cells expressing ISGs</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-gr7_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Hub 6 in MMRd specimens (left) and projected onto MMRp specimens (right). Nodes respresent gene programs, and the size of each node is proportional to the log ratio of the respective mean program activity in MMRd or MMRp versus normal. Edge thickness is proportional to co-variation. Pink lines depict positive and blue lines negative correlations. Non-significant edges are depicted as dotted lines.</p>
+<p>(B) Overlap of top weighted genes (left) and predicted transcription factors (right) for ISG programs in T/NK/ILC cell, myeloid, stromal, and malignant compartments.</p>
+<p>(C) Image shows a portion of the tissue from individual C110 with regions selected for spatially indexed transcriptomics (GeoMx DSP CTA). ~45 regions of interest (ROIs) per specimen were sampled, and each ROI was auto-segmented into PanCK-positive and -negative regions. Scale bar, 500 μm.</p>
+<p>(D) Three CRC specimens with high CXCL13 activity (C110, C132, and C107) were analyzed by spatially indexed transcriptomics (GeoMx DSP CTA) as described in (C). CXCL13 signal in PanCK-negative regions was correlated to an ISG/MHC-II signal score (STAR Methods) in the paired PanCK-positive regions (Spearman correlation).</p>
+<p>(E) Quantification of the NanoString GeoMx Digital Spatial Profiler (DSP) Cancer Transcriptome Atlas (CTA) assay showing high IDO1 expression in malignant cells of individual C110 and high CD38 expression in malignant cells of C132, consistent with scRNA-seq data (heatmap, log2(TP10K+1)). Right: Spearman correlation between IDO1 (top) or CD38 (bottom) expression and ISG/MHC-II scores (as calculated in D) in malignant cells of the respective individuals.</p>
+<p>(F) All chemokines present in the top genes of the depicted NMF-based programs (indicated by black dot at left) as expressed in the depicted clusters and malignant cells with high versus low pEpiTd19 program activity. Genes are normalized across all cell clusters in the dataset (not only the clusters shown).</p>
+<p>(G) GeoMx DSP CTA assay as in (D), showing Spearman correlation of CXCL13 signal in PanCK-negative regions with CXCR3 ligand expression (i.e., sum of CXCL9, CXCL10, and CXCL11) in the paired PanCK-positive regions.</p>
+<p>(H) PanCK-IF, CD3E-ISH, CXCL10/CXCL11-ISH, CXCL13-ISH, and IFNG-ISH were performed on 9 tumor tissue slides from different donors (MMRd, n = 5: C110, C123, C132, C139, C144; MMRp, n = 4: C103, C112, C126, C107). Cells were phenotyped using Halo software. An image section from C123 is shown (top), as well as a computational rendering of the same section (center left) and the full slide (center right). Cells were characterized by a 100-μm neighborhood and clustered by their neighborhood features to identify “foci” and “no foci.” Scale bar, 100 μm.</p>
+<p>(I) Based on the approach in (H), percentages of the indicated phenotype (p, positive; n, negative) among all DAPI+ cells or DAPI+ cells within the foci were calculated. CXCL10/CXCL11p, CD3Ep, CXCL13p, and IFNGp cells are significantly enriched in foci (paired two-tailed t tests).</p>
+<p>(J) Distances were calculated from CXCL10/CXCL11-positive cells to the indicated phenotypes (mean distance across 100-μm neighborhoods) outside or inside the foci. If a phenotype was not observed in the 100-μm neighborhood, the distance was set to 150 μm. p values for paired two-tailed t tests are shown.</p>
+<p>(K) Percentage of cells within foci (among all DAPI+ cells) was correlated to scRNA-seq-based pTNI18 and pEpiTd19 activities from the respective specimens (Spearman correlation).</p>
+</blockquote>
+<h2 id="Fig-S1-Cellular-composition-of-the-scRNA-seq-dataset-and-use-of-NMF-and-gene-expression-programs-in-our-analysis-pipeline"><a href="#Fig-S1-Cellular-composition-of-the-scRNA-seq-dataset-and-use-of-NMF-and-gene-expression-programs-in-our-analysis-pipeline" class="headerlink" title="Fig S1. Cellular composition of the scRNA-seq dataset and use of NMF and gene expression programs in our analysis pipeline"></a>Fig S1. Cellular composition of the scRNA-seq dataset and use of NMF and gene expression programs in our analysis pipeline</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs1_lrg-20211223204326065.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Number of cells in immune (T/NK/ILC, B, Plasma, Mast, Myeloid), stromal (Endothelial cells, Pericytes, Fibroblasts, Smooth Muscle cells, Schwann cells), and epithelial (malignant in tumor and non-malignant in normal specimens) compartment per specimen.</p>
+<p>(B) Number of cells per cluster (left) and fraction of cells from MMRd, MMRp, and normal specimens (right) within each cluster. Each specimen is indicated by a different color shade and separated by a vertical black line.</p>
+<p>(C) NMF is underlying cell type clusters, tSNE visualization, and the gene expression programs.</p>
+<p>(D) Gene expression programs can be further analyzed in the indicated ways to predict upstream regulators, infer function, or associate the program with clinical features. By calculating gene program activities in other scRNA-seq or bulk RNA-seq datasets, programs can be compared across studies. Clustering of covarying gene programs enables the prediction of multicellular interaction networks.</p>
+</blockquote>
+<h2 id="fig-S2-The-immune-compartment-in-MMRd-and-MMRp-CRC"><a href="#fig-S2-The-immune-compartment-in-MMRd-and-MMRp-CRC" class="headerlink" title="fig S2. The immune compartment in MMRd and MMRp CRC"></a>fig S2. The immune compartment in MMRd and MMRp CRC</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs2_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Heatmaps showing selected unbiased and well-established marker genes for immune clusters as mean expression in normalized log2(TP10K+1). Clusters with differences in frequency between MMRp and MMRd tumors with Kruskal-Wallis <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/neuroscience/false-discovery-rate">false discovery rate</a> (FDR) &lt; 0.05 are marked with ∗. A comprehensive list of DEGs for each cluster can be found in Table S2.</p>
+<p>(B) Changes in immune cell clusters in MMRp and MMRd tumors relative to adjacent normal tissue, showing frequency of immune cells (dot size) and enrichment/depletion (Pearson residual, colored squares). Clusters with differences in frequency between MMRp and MMRd tumors with Kruskal-Wallis false discovery rate (FDR) &lt; 0.05 are marked with ∗.</p>
+<p>(C) tSNEs showing pTNI06, pTNI08, pTNI16, and pTNI18 program activities on the global tSNE. The location of T cells is indicated in green (right).</p>
+<p>(D) Gene signature score for pTNI16 and pTNI18 in MMRd and MMRp CRC in bulk RNA-seq from GSE39582 and GSE13294 patient specimens (Mann–Whitney–Wilcoxon test with ∗∗∗∗ for p≤0.0001, ∗∗∗ ≤0.001, ∗∗ ≤0.01, ∗ ≤0.05, ns for &gt;0.05).</p>
+</blockquote>
+<h2 id="fig-S3-Stromal-remodeling-in-MMRd-and-MMRp-CRC"><a href="#fig-S3-Stromal-remodeling-in-MMRd-and-MMRp-CRC" class="headerlink" title="fig S3. Stromal remodeling in MMRd and MMRp CRC"></a>fig S3. Stromal remodeling in MMRd and MMRp CRC</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs3_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Heatmap showing selected literature based marker genes and differentially expressed genes for endothelial cell clusters as mean expression in normalized log2(TP10K+1). Clusters with differences in frequency between MMRp and MMRd tumors with Kruskal-Wallis false discovery rate (FDR) &lt; 0.05 are marked with ∗. A comprehensive list of DEGs for each cluster can be found in Table S3.</p>
+<p>(B) As (A) for pericyte clusters.</p>
+<p>(C) As (A) for fibroblast clusters.</p>
+<p>(D) Serial section of the same area as in Figures 3I and 3L stained by multiplex RNA ISH/IF for smooth muscle marker MYH11-ISH, fibroblast marker COL1A1/2-ISH, epithelial marker PanCK-IF, and endothelial marker VWF-ISH (left image). The MMP3+ CAFs surround VWF+ endothelial cells enclosing autofluorescent (AF) red blood cells. H&amp;E image (right) with dilated blood vessels (bright pink, marked with arrows). Scale bars: 100um.</p>
+<p>(E) Representative multiplex RNA ISH/IF image of patient C103 showing CXCL14-ISH expression by both epithelial lining fibroblasts and the malignant epithelial cells. Scale bar: 100um. tSNE shows CXCL14 expression in the malignant cells of patient C103 by scRNA-seq.</p>
+<p>(F) Gene signature scores of cell type-specific DEGs for CXCL14+ CAFs, GREM1+ CAFs, MMP3+ CAFs, and all fibroblasts in MMRd and MMRp bulk RNA-seq of patient specimens in GSE39582 and GSE13294. Mann–Whitney–Wilcoxon test ∗∗∗∗ for p ≤ 0.0001, ∗∗∗ ≤ 0.001, ∗∗ ≤ 0.01, ∗ ≤ 0.05, ns for &gt; 0.05.</p>
+<p>(G) Representative multiplex RNA ISH/IF (as in D) image of MYH11+ COL1A/2-negative muscularis mucosa below the base of the crypt in non-neoplastic colon (left). H&amp;E image (right) of the same region with arrow pointing to muscularis mucosa. Scale bars: 100μm.</p>
+</blockquote>
+<h2 id="Fig-S4-The-epithelial-compartment-in-adjacent-normal-colon-tissue-and-MMRd-and-MMRp-CRC"><a href="#Fig-S4-The-epithelial-compartment-in-adjacent-normal-colon-tissue-and-MMRd-and-MMRp-CRC" class="headerlink" title="Fig S4. The epithelial compartment in adjacent normal colon tissue and MMRd and MMRp CRC"></a>Fig S4. The epithelial compartment in adjacent normal colon tissue and MMRd and MMRp CRC</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs4_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Epithelial programs with significantly differential activities between MMRd and MMRp tumors in the scRNA-seq dataset (GLME FDR &lt; 0.05 and &gt; 1.5-fold difference between means) scored in bulk RNA-seq from three external cohorts.</p>
+<p>(B) Gene signature for the 43 epithelial programs in bulk RNA-seq from TCGA-CRC (COADREAD) patient specimens. Rows are ordered as in Figure 4B, columns are clustered. Significant MMRd versus MMRp differences are marked with ∗ (Wilcoxon, two-sided with family-wise error rate corrected p ≤ 0.05). Bar to the right of the heatmap shows the number of most closely correlated programs (≥90th percentile of correlations) based on program activities within scRNA-seq data (yellow+gray) and number of those most closely correlated programs that are preserved in TCGA (yellow).</p>
+<p>(C) Heatmap shows selected unbiased and well-established marker genes for normal epithelial cell clusters. A comprehensive list of DEGs for each cluster can be found in Table S4.</p>
+<p>(D) Transcriptional activities of epithelial programs within normal epithelial cell clusters.</p>
+<p>(E) Similarity between epithelial gene programs and MMRd- and MMRp-derived gene programs based on cosine weight. Programs that only had close matches in MMRd are marked in red, programs that only had close matches in MMRp are marked in blue. See also Table S4.</p>
+</blockquote>
+<h2 id="Fig-S5-Discovery-of-multicellular-interaction-networks-in-MMRp-CRC"><a href="#Fig-S5-Discovery-of-multicellular-interaction-networks-in-MMRp-CRC" class="headerlink" title="Fig S5. Discovery of multicellular interaction networks in MMRp CRC"></a>Fig S5. Discovery of multicellular interaction networks in MMRp CRC</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs5_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Heatmap showing pairwise adjusted correlation of gene program activities (‘co-variation score’) across MMRp specimens (STAR Methods) using specimen-level activities in T/NK/ILC, myeloid, and malignant compartments. Significance is determined using permutation of patient IDs and is indicated with ∗ (FDR &lt; 0.1). Densely connected modules (‘hubs’) are identified based on graph clustering of the significantly correlated edges.</p>
+</blockquote>
+<h2 id="Fig-S6-An-inflammatory-hub-at-the-luminal-surface-of-primary-MMRd-and-MMRp-tumors"><a href="#Fig-S6-An-inflammatory-hub-at-the-luminal-surface-of-primary-MMRd-and-MMRp-tumors" class="headerlink" title="Fig S6. An inflammatory hub at the luminal surface of primary MMRd and MMRp tumors"></a>Fig S6. An inflammatory hub at the luminal surface of primary MMRd and MMRp tumors</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs6_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) Inflammatory hub 3, as discovered in MMRd, projected onto all MMRd and MMRp specimens from our scRNA-seq cohort (left; n = 35 MMRd, n = 29 MMRp), MMRp specimens (middle) or (Lee et al., 2020) (right; n = 5 MMRd, n = 24 MMRp). Nodes respresent gene programs and the size of each node is proportional to the log ratio of the respective mean program activity in MMRd or MMRp versus normal. Edge thickness is proportional to co-variation scores. Pink lines depict positive, blue lines negative correlations. Non-significant edges are depicted as dotted lines.</p>
+<p>(B) Multiplex RNA ISH/IF staining for neutrophil marker CD66b-IF, epithelial marker EPCAM-ISH, myeloid TYROBP-ISH, IL1B-ISH, and CXCL1-ISH and corresponding H&amp;E images. Representative images of indicated CRC specimens (n = 4 MMRd, n = 4 MMRp) showing accumulations of neutrophils, IL1B and CXCL1 signals at the malignant interface with the colonic lumen, often nearby dilated vessels (marked with arrows) or in necrotic regions (as indicated). Note also that neutrophils are sometimes observed directly within vessels (e.g., C103, inset). Scale bars: 50μm.</p>
+</blockquote>
+<h2 id="fig-S7-A-coordinated-network-of-CXCL13-T-myeloid-and-malignant-cells-expressing-ISGs"><a href="#fig-S7-A-coordinated-network-of-CXCL13-T-myeloid-and-malignant-cells-expressing-ISGs" class="headerlink" title="fig S7. A coordinated network of CXCL13+ T, myeloid, and malignant cells expressing ISGs"></a>fig S7. A coordinated network of CXCL13+ T, myeloid, and malignant cells expressing ISGs</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs7_lrg.jpg" alt="img"></p>
+<blockquote>
+<p>(A) ISG/CXCL13 hub, as discovered in MMRd, projected onto all MMRd and MMRp specimens from our scRNA-seq cohort (left; n = 35 MMRd, n = 29 MMRp) or Lee et al. (2020) (right; n = 5 MMRd, n = 24 MMRp). Nodes respresent gene programs and the size of each node is proportional to the log ratio of the respective mean program activity in MMRd or MMRp versus normal. Edge thickness is proportional to co-variation scores. Pink lines depict positive, blue lines negative correlations. Non-significant edges are depicted as dotted lines.</p>
+<p>(B) Multiplex RNA ISH/IF staining for epithelial marker PanCK-IF, T cell marker CD3E-ISH, CXCL10/CXCL11-ISH, CXCL13-ISH, and IFNG-ISH on 9 different patient sections (MMRd n = 5: C110, C123, C132, C139, C144; MMRp n = 4: C103, C112, C126, C107). Cells were phenotyped using Halo software and clustered by their neighborhoods (defined as 100 μm) into cells that are part of the foci or not (red and gray, respectively). Shown from left to right for each patient specimen are an H&amp;E section, fluorescent image, a computational rendering of the same section, the assignment to foci in the same section, the assignment of foci in the whole slide scan and magnified fluorescent images of foci. Scale bars: 500 μm for second column, 50 μm for rightmost column.</p>
+<p>(C) For each specimen (ordered by their scRNA-seq-based CXCL13 T cell activity) the fractions of CXCL10/CXCL11-positive PanCK-positive and CXCL10/CXCL11-positive PanCK-negative cells within foci are shown. High CXCL13 T cell activity correlates with higher fractions of CXCL10/CXCL11-positive PanCK-positive cells (Spearman correlation).</p>
+</blockquote>
+<p>Ref:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0092867421009454">Spatially organized multicellular immune hubs in human colorectal cancer</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/single-cell-RNA-seq/" rel="tag"># single-cell RNA-seq</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/13/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E5%9B%9B-Human-and-mouse-single-nucleus-transcriptomics-reveal-TREM2-dependent-and-TREM2-independent-cellular-responses-in-Alzheimer%E2%80%99s-disease/" rel="prev" title="单细胞转录组文献分析方法[四]:Human and mouse single-nucleus transcriptomics reveal TREM2-dependent and TREM2-independent cellular responses in Alzheimer’s disease">
+      <i class="fa fa-chevron-left"></i> 单细胞转录组文献分析方法[四]:Human and mouse single-nucleus transcriptomics reveal TREM2-dependent and TREM2-independent cellular responses in Alzheimer’s disease
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#methods"><span class="nav-number">2.</span> <span class="nav-text">methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scRNA-seq-pre-processing-and-quality-control-filtering"><span class="nav-number">2.1.</span> <span class="nav-text">scRNA-seq pre-processing and quality control filtering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Selection-of-variable-genes-dimensionality-reduction-and-clustering"><span class="nav-number">2.2.</span> <span class="nav-text">Selection of variable genes, dimensionality reduction and clustering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster-connectivity"><span class="nav-number">2.3.</span> <span class="nav-text">Cluster connectivity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster-assignment-by-gradient-boosting-and-filtering-of-potential-doublets"><span class="nav-number">2.4.</span> <span class="nav-text">Cluster assignment by gradient boosting and filtering of potential doublets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Classifying-malignant-cells-by-gradient-boosting"><span class="nav-number">2.5.</span> <span class="nav-text">Classifying malignant cells by gradient boosting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identification-of-gene-expression-programs-by-NMF"><span class="nav-number">2.6.</span> <span class="nav-text">Identification of gene expression programs by NMF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identification-of-shared-gene-programs-in-malignant-epithelial-cells"><span class="nav-number">2.7.</span> <span class="nav-text">Identification of shared gene programs in malignant epithelial cells</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Calculating-NMF-transcriptional-program-activity"><span class="nav-number">2.8.</span> <span class="nav-text">Calculating NMF transcriptional program activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Testing-for-covarying-NMF-expression-programs"><span class="nav-number">2.9.</span> <span class="nav-text">Testing for covarying NMF expression programs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructing-a-network-of-expression-program-similarity"><span class="nav-number">2.10.</span> <span class="nav-text">Constructing a network of expression program similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Visualization-of-single-cell-profiles"><span class="nav-number">2.11.</span> <span class="nav-text">Visualization of single cell profiles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identification-of-differentially-expressed-genes"><span class="nav-number">2.12.</span> <span class="nav-text">Identification of differentially expressed genes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pearson-residual-calculation-in-contingency-tables"><span class="nav-number">2.13.</span> <span class="nav-text">Pearson residual calculation in contingency tables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transcription-factor-target-enrichment-in-gene-expression-programs"><span class="nav-number">2.14.</span> <span class="nav-text">Transcription factor target enrichment in gene expression programs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figure"><span class="nav-number">3.</span> <span class="nav-text">Figure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-1-Cohort-and-atlas-of-cell-subsets-and-programs-in-MMRd-and-MMRp-CRC"><span class="nav-number">3.1.</span> <span class="nav-text">Fig 1. Cohort and atlas of cell subsets and programs in MMRd and MMRp CRC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-2-The-immune-compartment-in-MMRd-and-MMRp-CRC"><span class="nav-number">3.2.</span> <span class="nav-text">Fig 2. The immune compartment in MMRd and MMRp CRC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-3-Stromal-remodeling-in-MMRd-and-MMRp-CRC"><span class="nav-number">3.3.</span> <span class="nav-text">Fig 3. Stromal remodeling in MMRd and MMRp CRC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fig-4-Transcriptional-programs-in-malignant-cells-differ-between-MMRd-and-MMRp-CRC"><span class="nav-number">3.4.</span> <span class="nav-text">fig 4. Transcriptional programs in malignant cells differ between MMRd and MMRp CRC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fig-5-Discovery-of-multicellular-interaction-networks-in-MMRd-CRC"><span class="nav-number">3.5.</span> <span class="nav-text">fig 5. Discovery of multicellular interaction networks in MMRd CRC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-6-An-inflammatory-hub-at-the-luminal-surface-of-primary-MMRd-and-MMRp-tumors"><span class="nav-number">3.6.</span> <span class="nav-text">Fig 6. An inflammatory hub at the luminal surface of primary MMRd and MMRp tumors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-7-A-coordinated-network-of-CXCL13-T-cells-with-myeloid-and-malignant-cells-expressing-ISGs"><span class="nav-number">3.7.</span> <span class="nav-text">Fig 7. A coordinated network of CXCL13+ T cells with myeloid and malignant cells expressing ISGs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-S1-Cellular-composition-of-the-scRNA-seq-dataset-and-use-of-NMF-and-gene-expression-programs-in-our-analysis-pipeline"><span class="nav-number">3.8.</span> <span class="nav-text">Fig S1. Cellular composition of the scRNA-seq dataset and use of NMF and gene expression programs in our analysis pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fig-S2-The-immune-compartment-in-MMRd-and-MMRp-CRC"><span class="nav-number">3.9.</span> <span class="nav-text">fig S2. The immune compartment in MMRd and MMRp CRC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fig-S3-Stromal-remodeling-in-MMRd-and-MMRp-CRC"><span class="nav-number">3.10.</span> <span class="nav-text">fig S3. Stromal remodeling in MMRd and MMRp CRC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-S4-The-epithelial-compartment-in-adjacent-normal-colon-tissue-and-MMRd-and-MMRp-CRC"><span class="nav-number">3.11.</span> <span class="nav-text">Fig S4. The epithelial compartment in adjacent normal colon tissue and MMRd and MMRp CRC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-S5-Discovery-of-multicellular-interaction-networks-in-MMRp-CRC"><span class="nav-number">3.12.</span> <span class="nav-text">Fig S5. Discovery of multicellular interaction networks in MMRp CRC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-S6-An-inflammatory-hub-at-the-luminal-surface-of-primary-MMRd-and-MMRp-tumors"><span class="nav-number">3.13.</span> <span class="nav-text">Fig S6. An inflammatory hub at the luminal surface of primary MMRd and MMRp tumors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fig-S7-A-coordinated-network-of-CXCL13-T-myeloid-and-malignant-cells-expressing-ISGs"><span class="nav-number">3.14.</span> <span class="nav-text">fig S7. A coordinated network of CXCL13+ T, myeloid, and malignant cells expressing ISGs</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Max</p>
+  <div class="site-description" itemprop="description">在学了在学了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-bug"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
