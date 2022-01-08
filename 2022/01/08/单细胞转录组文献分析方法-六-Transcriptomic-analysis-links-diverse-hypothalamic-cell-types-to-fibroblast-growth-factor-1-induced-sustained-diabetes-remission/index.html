@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="单细胞转录组文献分析方法[六]:Transcriptomic analysis links diverse hypothalamic cell types to fibroblast growth factor 1-induced sustained diabetes remission">
+<meta property="og:url" content="http://example.com/2022/01/08/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E5%85%AD-Transcriptomic-analysis-links-diverse-hypothalamic-cell-types-to-fibroblast-growth-factor-1-induced-sustained-diabetes-remission/index.html">
+<meta property="og:site_name" content="TypeError">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20220108111607965.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig1_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig1_HTML-20220108151535291.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig2_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig3_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig4_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig5_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig6_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig7_HTML.png">
+<meta property="article:published_time" content="2022-01-08T03:13:47.000Z">
+<meta property="article:modified_time" content="2022-01-08T07:20:10.580Z">
+<meta property="article:author" content="Max">
+<meta property="article:tag" content="single-cell RNA-seq">
+<meta property="article:tag" content="brain">
+<meta property="article:tag" content="hypothalamus">
+<meta property="article:tag" content="disease">
+<meta property="article:tag" content="diabetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20220108111607965.png">
+
+<link rel="canonical" href="http://example.com/2022/01/08/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E5%85%AD-Transcriptomic-analysis-links-diverse-hypothalamic-cell-types-to-fibroblast-growth-factor-1-induced-sustained-diabetes-remission/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>单细胞转录组文献分析方法[六]:Transcriptomic analysis links diverse hypothalamic cell types to fibroblast growth factor 1-induced sustained diabetes remission | TypeError</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TypeError</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/08/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E5%85%AD-Transcriptomic-analysis-links-diverse-hypothalamic-cell-types-to-fibroblast-growth-factor-1-induced-sustained-diabetes-remission/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Max">
+      <meta itemprop="description" content="在学了在学了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TypeError">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单细胞转录组文献分析方法[六]:Transcriptomic analysis links diverse hypothalamic cell types to fibroblast growth factor 1-induced sustained diabetes remission
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-08 11:13:47 / 修改时间：15:20:10" itemprop="dateCreated datePublished" datetime="2022-01-08T11:13:47+08:00">2022-01-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">单细胞转录组</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20220108111607965.png" alt="image-20220108111607965"></p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig1_HTML.png" alt="Fig. 1"></p>
+<span id="more"></span>
+
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>In rodent models of type 2 diabetes (T2D), sustained remission of hyperglycemia can be induced by a single intracerebroventricular (icv) injection of fibroblast growth factor 1 (FGF1), and the <strong>mediobasal hypothalamus (MBH)</strong> was recently implicated as the brain area responsible for this effect. </p>
+<p>To better understand the cellular response to FGF1 in the MBH, we sequenced <strong>&gt;79,000 single-cell transcriptomes</strong> from the <strong>hypothalamus of diabetic Lep<em>ob/ob</em> mice obtained on Days 1 and 5 after icv injection of either FGF1 or vehicle.</strong> </p>
+<p>A wide range of transcriptional responses to FGF1 was observed across diverse hypothalamic cell types, with <strong>glial cell types responding much more robustly than neurons at both time points</strong>. </p>
+<p>Tanycytes and ependymal cells were the most FGF1-responsive cell type at Day 1, but astrocytes and oligodendrocyte lineage cells subsequently became more responsive. Based on histochemical and ultrastructural evidence of enhanced cell-cell interactions between astrocytes and Agrp neurons (key components of the melanocortin system), we performed a series of studies showing that intact melanocortin signaling is required for the sustained antidiabetic action of FGF1. </p>
+<p>These data collectively suggest that hypothalamic glial cells are leading targets for the effects of FGF1 and that sustained diabetes remission is dependent on intact melanocortin signaling.</p>
+<h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><h2 id="Single-cell-RNA-seq-and-single-nucleus-RNA-seq-data-processing"><a href="#Single-cell-RNA-seq-and-single-nucleus-RNA-seq-data-processing" class="headerlink" title="Single-cell RNA-seq and single-nucleus RNA-seq data processing"></a>Single-cell RNA-seq and single-nucleus RNA-seq data processing</h2><p><strong>Cell Ranger version 1.2</strong> (10× Genomics, USA) was used to de-multiplex and quantify UMIs. A count matrix was generated for each sample with <strong>default parameters and genes</strong> were mapped to the mouse reference genome GRCm38 (mm10, part of the Cell Ranger software package; for the scRNA-seq dataset) or an adapted reference from mouse reference genome including introns (for the snRNA-seq dataset), following the steps outlined on the 10× Genomics website (<a target="_blank" rel="noopener" href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/advanced/references#premrna">https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/advanced/references#premrna</a>). Barcodes were filtered to include those <strong>with a total UMI count &gt;10% of the 99th percentile of the expected recovered cells</strong>.</p>
+<h2 id="Quality-control-of-single-cell-and-single-nucleus-expression-data"><a href="#Quality-control-of-single-cell-and-single-nucleus-expression-data" class="headerlink" title="Quality control of single-cell and single-nucleus expression data"></a>Quality control of single-cell and single-nucleus expression data</h2><p><strong>Scrublet</strong> was run with default parameters to identify likely doublets (this step was omitted for the snRNA-seq data), which were subsequently removed from the expression matrix. Further processing was performed using the <strong>Seurat</strong> R package (version 2.3). </p>
+<p>Cells in which <strong>&lt;400 or &gt;4000 expressed genes</strong> were detected, as well as <strong>any cell with &gt;20% (&gt;5% for snRNA-seq) mitochondrial and/or ribosomal transcripts</strong>, were discarded. Genes detected in <strong>&lt;10 cells (&lt;5 cells in the snRNA-seq data)</strong> were also removed. </p>
+<p>Counts were normalized using the <code>SCtransform()</code> from Seurat. Variable genes were identified using the <code> function with default settings</code>. Unwanted sources of variation, e.g., number of UMI and ribosomal and mitochondrial percentage, were regressed out using the <code>ScaleData()</code> function. PCs were found with variable genes using the <code>RunPCA()</code> function. The top 30 PCs were used to identify clusters and with the <code>FindClusters()</code> function at a resolution of 0.1.</p>
+<h2 id="Single-nucleus-RNA-seq-data-clustering"><a href="#Single-nucleus-RNA-seq-data-clustering" class="headerlink" title="Single-nucleus RNA-seq data clustering"></a>Single-nucleus RNA-seq data clustering</h2><p>UMAP projection of snRNA-seq data revealed a strong batch effect between samples in this dataset. To identify conserved populations between all samples, sample datasets were integrated using the Seurat commands <code>FindIntegrationAnchors()</code> and <code>IntegrateData()</code>. </p>
+<p>Following integration, the data were processed as described above. Following identification of marker genes with the <code>FindMarkers()</code> function, literature was searched for cell-specific genes to determine cluster identity. At this low-resolution clustering, we removed ambiguously mapping cells by identifying cells with <strong>low silhouette scores &lt;0</strong> and removed them from the dataset (<a target="_blank" rel="noopener" href="https://perslab.github.io/bentsen-rausch-2020/">https://perslab.github.io/bentsen-rausch-2020/</a>). Finally, the data were re-clustered to identify major cell populations. </p>
+<h2 id="Single-cell-RNA-seq-data-clustering-and-identification-of-cell-types"><a href="#Single-cell-RNA-seq-data-clustering-and-identification-of-cell-types" class="headerlink" title="Single-cell RNA-seq data clustering and identification of cell types"></a>Single-cell RNA-seq data clustering and identification of cell types</h2><p>The scRNA-seq data showed much reduced batch effect as compared to the snRNA-seq data, so the integration step was unnecessary. </p>
+<p>Following identification of marker genes with the <code>FindMarkers()</code> function, literature was searched for cell-specific genes to determine cluster identity. <strong>All neuronal lineage cells were removed from this dataset, as the quality was poor due to mouse age</strong> (myelination/neuron fragility). </p>
+<p>The final step was to further remove any artifacts/doublets, which had been missed in the initial round of processing. Each cell type underwent a round of iterative clustering as described above. </p>
+<p>Within each cell type, <strong>any cluster in which 50% of cells originated from a single sample was removed</strong>. The <code>FindMarkers()</code> function was used to identify markers of each subcluster, which were removed if enriched for marker genes of a different cell type. </p>
+<p>Finally, all remaining cells were merged to create the final dataset, and clustering was performed again with the same settings as above.</p>
+<h2 id="Label-projection"><a href="#Label-projection" class="headerlink" title="Label projection"></a>Label projection</h2><p>To identify canonical hypothalamic neuron populations, we downloaded three existing single-cell studies characterizing cell types in the MBH region. </p>
+<p>The raw data were processed with <strong>Seurat</strong> using default parameters and original labels were maintained. The projection was performed iteratively in that we first took the <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR16">Campbell et al</a>. data (GSE93374) and used the <code>FindTransferAnchors()</code> and <code>TransferData()</code> commands (default settings, 30 dimensions) to transfer labels to the query data. <strong>All cells that were assigned a label with &gt;75% confidence were removed from the query dataset</strong>. </p>
+<p>We then performed label projection using the <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR18">Chen et al</a>. (GSE87544) and the <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR17">Romanov et al</a>. (GSE74672) datasets as described above. </p>
+<p>All mapped cells were then extracted and reclustered as described above. Clusters were annotated based on marker genes and the projected label that appeared most times in the identified cluster.</p>
+<h2 id="Differential-gene-expression-resampling"><a href="#Differential-gene-expression-resampling" class="headerlink" title="Differential gene expression resampling"></a>Differential gene expression resampling</h2><p><strong>A strong driver of differential expression in single-cell data is the cell number</strong>. To control for this, our <strong>resampling procedure randomly selects ten cells per cluster per sample for pseudobulk analysis</strong> (see below). The test was performed 100 times per cluster to generate a distribution of DEGs. Bonferroni adjustment was used to account for multiple testing. </p>
+<h2 id="Pseudobulk-analysis"><a href="#Pseudobulk-analysis" class="headerlink" title="Pseudobulk analysis"></a>Pseudobulk analysis</h2><p>Pre-determined clusters were split by sample. <strong>Raw counts were summed across each gene per sample to generate a single column per sample</strong>. This matrix was then fed directly into <strong>DESeq2</strong> tool (version 1.22.2) for standard processing. </p>
+<h2 id="Pathway-enrichment-analysis-for-pseudobulk-results"><a href="#Pathway-enrichment-analysis-for-pseudobulk-results" class="headerlink" title="Pathway enrichment analysis for pseudobulk results"></a>Pathway enrichment analysis for pseudobulk results</h2><p>DEGs were tested for functional enrichment of <strong>GO (GO:BP category)</strong>, <strong>REACTOME</strong>, and **KEGG **pathways using the <strong>gProfiler</strong> R package. </p>
+<p>gProfiler parameters were adjusted to indicate the use of an ordered query, limit testing to pathways containing <strong>between 10 and 300 genes</strong>, a minimum intersection size of 3 genes, and a strong hierarchical filtering of GO terms. </p>
+<p>A custom background was set for all analyses to include all genes that were used for <strong>DESeq2</strong> analyses. A <em>z</em>-score was calculated for each term by calculating the number of upregulated minus downregulated genes divided by the square root of the number of genes that overlapped within a term. </p>
+<h2 id="WGCNA-and-adjacency-matrix-calculation"><a href="#WGCNA-and-adjacency-matrix-calculation" class="headerlink" title="WGCNA and adjacency matrix calculation"></a>WGCNA and adjacency matrix calculation</h2><p>The <strong>WGCNA</strong> package (version 1.66) implemented in R was used. Pearson correlation coefficient was used for the single-cell data and <em>signed network</em> parameter was used to compute the gene–gene adjacency matrix. </p>
+<p>Powers corresponding to the top 95th percentile of network connectivity or above were discarded and the lowest soft threshold power between 1 and 30 to achieve a scale-free topology <em>R</em>-squared fit of 0.8 was selected. </p>
+<h2 id="WGCNA-hierarchical-clustering"><a href="#WGCNA-hierarchical-clustering" class="headerlink" title="WGCNA hierarchical clustering"></a>WGCNA hierarchical clustering</h2><p>The topological overlap matrices were converted to distance matrices, and the <strong>hclust()</strong> function was used with the <strong>average (clusters &lt;3000 cells)** or **complete (clusters &gt;3000 cells)</strong> method to cluster genes hierarchically. </p>
+<p>The <strong>cutreeDynamic()</strong> function was used with a <strong>deepSplit</strong> parameter of 2 (clusters &gt;3000 cells) or 4 (clusters &lt;3000 cells) and the <em>pamStage</em> parameter set to FALSE to carve the dendrogram into modules with at least 15 genes. </p>
+<p>The <em>mergeCloseModules()</em> function was used to compute module eigengenes, the vector of cell embeddings on the first PC of each module’s expression submatrix. </p>
+<p>The same function was used to merge modules, using a <em>cutHeight</em> of ≤0.2, corresponding to a Pearson correlation between module eigengenes of ≥0.8. The module eigengenes and expression matrices were used with the <em>signedKME()</em> function to compute gene–module Pearson correlations, or <em>kMEs</em>, a measure of how close each gene is to each module. Module treatment associations were tested using a linear mixed-effects model with the <strong>nlme</strong> R package(function <em>lme()</em>), using a random effect for each sample. Treatment and batch were modeled as fixed effects to control for variation between samples. Significance values are FDR corrected to account for multiple testing. </p>
+<h2 id="Geneset-enrichment-analysis"><a href="#Geneset-enrichment-analysis" class="headerlink" title="Geneset enrichment analysis"></a>Geneset enrichment analysis</h2><p>Genes within each module were ordered based on their module membership (kME) and tested for functional enrichment of GO:BP terms, REACTOME, and KEGG pathways using the <strong>gProfiler</strong> R package. gProfiler parameters were adjusted to indicate the use of an ordered query, limit testing to pathways containing between 10 and 300 genes, a minimum intersection size of 3 genes, and a strong hierarchical filtering of GO terms. A custom background was set for all single-cell analyses to include only the 5000 most variable genes, which were used for WGCNA-based analyses. </p>
+<h2 id="Tanycyte-analysis"><a href="#Tanycyte-analysis" class="headerlink" title="Tanycyte analysis"></a>Tanycyte analysis</h2><p>Labels were propagated from the Campbell et al. dataset(GSE93374) using the <em>Seurat</em> (version 3.0) <code>SCTintegration()</code> pipeline with default settings and 30 dimensions. All cells that were assigned a label with &gt;50% confidence were further analyzed. </p>
+<p>PCA was performed on all tanycytes using the <code>RunPCA()</code> function in Seurat. Upon identification of a gene expression continuum in PC1/PC2, the <em>princurve</em> R package was used with default settings to fit a principal curve to the data. </p>
+<p>Each cell was assigned a lambda value along the principal curve to be used as a measure of pseudoventricle height. To calculate the effect of FGF1 on module expression over pseudoventricle height, module expression was binned with a width of 1. Average expression and SEM was calculated at each pseudoventricle value. </p>
+<p>Linear regression was performed to identify significant changes in expression.</p>
+<h2 id="Astrocyte-analysis"><a href="#Astrocyte-analysis" class="headerlink" title="Astrocyte analysis"></a>Astrocyte analysis</h2><p>To better characterize genesets induced in astrocytes by FGF1, hypergeometric enrichment was performed to test whether the genesets enriched for markers of astrocytes in middle cerebral artery occlusion (MCAO)/lipopolysaccharide (LPS) mice or astrocytes co-cultured with neurons. </p>
+<p>Prior to the analysis, the <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR25">Zamanian et al</a> (GSE35338) and <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR31">Hasel et al</a>. (E-MTAB-5514) datasets were downloaded and DEG analysis was performed. </p>
+<p>Genesets were constructed by identifying any gene with a <strong>log2 FC &gt; 2 and FDR &lt; 0.05</strong> (omitted for the Zamanian et al. dataset) in any of the conditions described. Any genes shared between LPS and MCAO at Day 1 were assigned to the PAN-reactive geneset. Furthermore, any gene found to overlap between LPS and MCAO was removed from the geneset. All <em>p</em> values were FDR corrected.</p>
+<h2 id="Oligodendrocyte-analysis"><a href="#Oligodendrocyte-analysis" class="headerlink" title="Oligodendrocyte analysis"></a>Oligodendrocyte analysis</h2><p>Labels were propagated from <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR35">Marques et al</a> (GSE75330) using the <em>Seurat</em> pipeline with default settings and 30 dimensions. <strong>All cells which were assigned a label with &gt;50% confidence were further analyzed</strong>. </p>
+<p>Shifts in cell type abundance across conditions were tested using the <strong>Student’s t test</strong>. To further analyze the effects of FGF1 on oligodendrocytes, a pseudo-developmental timeline of oligodendrocyte differentiation was built with <strong>Monocle2</strong>. Cells were ordered based on genes that differ between clusters, a procedure referred to as <em>dpFeature</em>. </p>
+<p>tSNE dimensional reduction was performed using two PCs. Cells were then clustered in this with the <em>clusterCells()</em> command with a local density (<em>p</em> value) value of 150 and a nearest distance of a cell (<em>delta</em>) value of 15. DEGs between clusters were identified with the <em>differentialGeneTest()</em> command. The top 1000 DEGs were extracted for cell ordering. The pseudotime axis of differentiation was determined based on the expression of previously established markers.</p>
+<h1 id="Figure"><a href="#Figure" class="headerlink" title="Figure"></a>Figure</h1><h2 id="Fig-1-Study-design-and-icv-FGF1-induced-temporal-glia-responses"><a href="#Fig-1-Study-design-and-icv-FGF1-induced-temporal-glia-responses" class="headerlink" title="Fig. 1: Study design and icv FGF1-induced temporal glia responses."></a>Fig. 1: Study design and icv FGF1-induced temporal glia responses.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig1_HTML-20220108151535291.png" alt="Fig. 1"></p>
+<blockquote>
+<p><strong>a</strong> Diabetic Lep<em>ob/ob</em> mice received a single intracerebroventricular (icv) injection of FGF1 (3 µg) or vehicle at Day 0. Hypothalami were harvested on Days 1, 5, and 42 after icv injection. Vehicle-injected mice were pair-fed (PF) to the amount of food consumed by icv FGF1-injected Lep<em>ob/ob</em> mice and morning blood glucose levels were monitored. Plots are represented as mean ± SEM, and source data are provided as a Source data file; FGF1 (<em>n</em> = 17), vehicle (<em>n</em> = 15). <strong>b</strong> Uniform manifold approximation and projection (UMAP) clustering of hypothalamic nuclei from Day 1 and Day 5 snRNA-seq datasets. Source data are available through the NCBI Gene Expression Omnibus (GEO; GSE153551). <strong>c</strong> UMAP clustering from <strong>b</strong> colored according to treatment group and time of euthanasia. <strong>d</strong> UMAP clustering of hypothalamic non-neuronal cells from Day 1 and Day 5 snRNA-seq datasets. <strong>e</strong> Number of differentially expressed genes (DEGs) for non-neuronal subclusters at Day 1 identified through repeated downsampling (10 cells/group/cell type/iteration; 100 iterations), <em>n</em> = 3 mice/group. Data are presented as median with interquartile range (IQR) and summary statistics are provided as a Source data file. <strong>f</strong> Each bar represents the number of unique DEGs for one or a certain combination of cell types (pseudobulk approach, see “Methods”) from Day 1 snRNA-seq dataset, <em>n</em> = 3 mice/group. <strong>g</strong> Associated Gene Ontology terms (biological process category; red), KEGG (blue) and REACTOME (green) pathways associated with DEGs in the indicated cell types. Point size indicates −log10(<em>p</em> value) (Bonferroni adjusted). <strong>h</strong> Weighted gene co-expression network analysis (WGCNA) of tanycytes, ependymal cells, and astrocytes from Days 1 and 5 snRNA-seq datasets. Significantly changed gene modules (linear mixed-effects model; FDR &lt; 0.05) are indicated with color and cell-specific expression is indicated by shape. Modules are plotted according to their <em>β</em>-values; Day 1 (<em>n</em> = 3/group), Day 5 (<em>n</em> = 2/group). <strong>i</strong> Module plots of top 15 genes of <em>sn-glia-M1</em>–<em>sn-glia-M3</em>, which are upregulated on Day 1. Genes in red denote genes mentioned in the text. Astro astrocytes, Tany tanycytes, Epend ependymal cells, Olig oligodendrocytes, OPC oligodendrocyte precursor cell, COP committed to differentiate oligodendrocyte, VLMC vascular leptomeningeal cell.</p>
+</blockquote>
+<h2 id="Fig-2-Tanycyte-module-expression-maps-to-the-spatial-distribution-lining-the-third-ventricle"><a href="#Fig-2-Tanycyte-module-expression-maps-to-the-spatial-distribution-lining-the-third-ventricle" class="headerlink" title="Fig. 2: Tanycyte module expression maps to the spatial distribution lining the third ventricle."></a>Fig. 2: Tanycyte module expression maps to the spatial distribution lining the third ventricle.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig2_HTML.png" alt="Fig. 2"></p>
+<blockquote>
+<p><strong>a</strong> UMAP clustering of tanycytes (β2-, β1-, α1-, α2-Tanycytes) from the Day 5 single-cell RNA-sequencing (scRNA-seq) dataset. Cell type annotations were inferred from a published dataset<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR16">16</a>. <strong>b</strong> Tanycyte lineage cells plotted on principal components 1 and 2 revealed a trajectory (left). The colors represent the subtype of each cell from <strong>a</strong>. A principal curve fit across the trajectory was used to assign a pseudoventricle score to each cell corresponding to the spatial location of that cell type along third ventricular (3V) wall. Density plot of each tanycyte subpopulation plotted along the pseudoventricle revealed a continuum of gene expression and non-distinct shifts in the expression of marker genes along the pseudoventricle. <strong>c</strong> Scaled module expression of <em>sc-tany-M1</em> in FGF1-treated (black) and vehicle (gray) tanycytes (linear mixed-effects model; bin size of 1; mean ± SEM; <em><em>p</em> &lt; 0.05) (Bonferroni adjusted) from the Day 5 scRNA-seq dataset (<em>n</em> = 6 mice/group). Exact adjusted <em>p</em> values are provided in Supplementary Data <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#MOESM7">5</a>. ME module eigengene. <strong>d</strong> Gene–gene network plot of the correlation of top 15 genes in module <em>sc-tany-M1</em> (left) and associated pathways (right). Genes mentioned in the text are labeled in red. <strong>e</strong> Representative images of immunolabeling of vimentin in diabetic Lep*ob/ob</em> mice 1 week after vehicle or icv FGF1 injection. Pixel dimensions: 0.27 × 0.27 × 2.00 microns. Quantification: dots represent volume of vimentin-positive voxels assessed by iMARIS for individual animals (mean from 2 sections per animal, <em>n</em> = 4/group), mean ± SEM. Unpaired <em>t</em> test, two tailed, *<em>p</em> = 0.022 (not adjusted). Source data are provided as a Source data file. <strong>f</strong> Scaled module expression of <em>sc-tany-M2</em>, <em>sc-tany-M3</em>, <em>sc-tany-M5</em>, <em>sc-tany-M6</em>, and <em>sc-tany-M23</em> with 5 consecutive points of difference in expression along the pseudoventricle between FGF1-treated (black) and vehicle (gray) tanycytes (linear mixed-effects models; bin size of 1; mean ± SEM; *<em>p</em> &lt; 0.05) (Bonferroni adjusted) from the Day 5 scRNA-seq dataset (<em>n</em> = 6 mice/group). Exact adjusted <em>p</em> values are provided in Supplementary Data <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#MOESM7">5</a>.</p>
+</blockquote>
+<h2 id="Fig-3-Evolution-of-the-astrocyte-response-to-icv-FGF1"><a href="#Fig-3-Evolution-of-the-astrocyte-response-to-icv-FGF1" class="headerlink" title="Fig. 3: Evolution of the astrocyte response to icv FGF1."></a>Fig. 3: Evolution of the astrocyte response to icv FGF1.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig3_HTML.png" alt="Fig. 3"></p>
+<blockquote>
+<p><strong>a</strong> Identification of <em>sn-astro-M1</em>–<em>sn-astro-M3</em> upregulated at Day 1 and <em>sn-astro-M4</em> upregulated at Day 5 in FGF1-treated mice (linear mixed-effects model, FDR &lt; 0.05) using WGCNA on astrocytes from the snRNA-seq datasets. Enrichment of DEGs in astrocytes in response to lipopolysaccharide (neurotoxic, A1), middle cerebral artery occlusion (neuroprotective, A2), or overlapping genes (PAN)<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR25">25</a> or enrichment of genes induced by neuron interaction (NeurI) or neuron activity (NeurA)<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR31">31</a>. Point size is scaled by −log10(<em>p* value) (Bonferroni adjusted). <strong>b</strong> Correlation of top 15 genes of <em>sn-astro-M1</em>–<em>sn-astro-M4</em>. Node size; correlation of the given gene with the module eigengene (kME). <strong>c</strong> Number of DEGs for non-neuronal subclusters identified in the Day 5 scRNA-seq dataset with repeated downsampling (10 cells/group/cell type/iteration, 100 iterations; <em>n</em> = 6 mice/group), median (IQR). Summary statistics provided as a Source data file. Macro macrophages, Peri pericytes, ABC arachnoid barrier cells, SMC smooth muscle cells, VLMC vascular leptomeningeal cells. <strong>d</strong> Volcano plot of pseudobulk DEGs in astrocytes Day 5, scRNA-seq dataset between FGF1 and vehicle. Blue, genes with FDR &lt; 0.05; red, genes with FDR &lt; 0.05 and |log2 fold change| &gt; 0.25; green, genes with |log2 fold change| &gt; 0.25; gray, genes below both thresholds. <strong>e</strong> Astrocytes WGCNA (Day 5; scRNA-seq) identified three significant upregulated (<em>sc-astro-M1</em>–</em>sc-astro-M3*; linear mixed-effects model; FDR &lt; 0.05) and three downregulated (<em>sc-astro-M5</em>, <em>sc-astro-M6</em>, <em>sc-astro-M9</em>) modules in FGF1-treated mice, median (IQR). Lower panel: hypergeometric enrichment analysis of single-nucleus RNA-sequencing (snRNA-seq) and scRNA-seq astrocyte modules. Point size is scaled by −log10(<em>p</em> value) (Bonferroni adjusted; <em>n</em> = 6 mice/group). <strong>f</strong> Correlation of top 15 genes in modules <em>sc-astro-M1</em> and <em>sc-astro-M3</em>. <strong>g</strong> Representative images of immunoreactivity of aquaporin 4 (Aqp4; red) and glial fibrillary acid protein (GFAP; green) from coronal sections of hypothalamus from diabetic Lep<em>ob/ob</em> mice 1 week after either vehicle or FGF1 icv injection. Lower panels: higher magnification of white inset. Scale bar 100 μm (top), 50 μm (lower). Pixel dimensions: 0.27 × 0.27 × 2.00 microns. Quantification: dots represent volume of Aqp4- or GFAP-positive voxels for individual animals (mean from 2 sections per animal, <em>n</em> = 4/group), mean ± SEM. Unpaired <em>t</em> test, two tailed, *<em>p</em> = 0.037, **<em>p</em> = 0.003 (not adjusted). Source data are provided as a Source data file. Genes mentioned in the text are labeled in red.</p>
+</blockquote>
+<h2 id="Fig-4-Icv-FGF1-induces-a-population-of-differentiating-oligodendrocytes"><a href="#Fig-4-Icv-FGF1-induces-a-population-of-differentiating-oligodendrocytes" class="headerlink" title="Fig. 4: Icv FGF1 induces a population of differentiating oligodendrocytes."></a>Fig. 4: Icv FGF1 induces a population of differentiating oligodendrocytes.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig4_HTML.png" alt="Fig. 4"></p>
+<blockquote>
+<p><strong>a</strong> UMAP clustering of cells in the oligodendrocyte lineage from the Day 5 scRNA-seq dataset. Cell type annotations were inferred from a published dataset<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR35">35</a>. <strong>b</strong> Dots represent mean number of cells per animal and lines represent mean ± SEM. Unpaired <em>t</em> test, two tailed, *<em>p</em> &lt; 0.022, <em>*<em>p</em> &lt; 0.0074 (Bonferroni adjusted; <em>n</em> = 6 mice/group); ns not significant. Source data for each subcluster are provided as a Source data file. <strong>c</strong> UMAP of cells in the oligodendrocyte lineage labeled according to maturation in Monocle-derived pseudotime. <strong>d</strong> UMAP of cells expressing <em>Gpr17</em>, a maturing oligodendrocyte marker. <strong>e</strong> RNAScope detection of <em>Gpr17</em> expression in the hypothalamus of Lep*ob/ob</em> mice 5 days after icv FGF1 or vehicle. <strong>f</strong> Quantification of <em>Gpr17</em>+ cells from the ARC area (2 sections per animal, icv vehicle (<em>n</em> = 4) and icv FGF1 (<em>n</em> = 5)), mean ± SEM. Unpaired <em>t</em> test, two tailed, *<em>p</em> = 0.005 (not adjusted). Source data are provided as a Source data file. NFOL newly formed oligodendrocyte, MFOL myelin-forming oligodendrocyte, MOL1 myelinating oligodendrocyte.</p>
+</blockquote>
+<h2 id="Fig-5-Effects-of-icv-FGF1-on-Agrp-neurons"><a href="#Fig-5-Effects-of-icv-FGF1-on-Agrp-neurons" class="headerlink" title="Fig. 5: Effects of icv FGF1 on Agrp neurons."></a>Fig. 5: Effects of icv FGF1 on Agrp neurons.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig5_HTML.png" alt="Fig. 5"></p>
+<blockquote>
+<p><strong>a</strong> UMAP clustering of neurons from the snRNA-seq dataset that confidently mapped to published datasets<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5/figures/5#ref-CR16">16</a>,<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5/figures/5#ref-CR17">17</a>,<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5#ref-CR18">18</a>. Original cell type annotations from the published datasets are indicated in brackets. <strong>b</strong> Numbers of DEGs for neuron subclusters identified using repeated downsampling (10 cells/group/cell type/iteration, 100 iterations; <em>n</em> = 3 mice/group), median (IQR). <strong>c</strong> Volcano plot of pseudobulk DEGs in Agrp neurons from the Day 1 snRNA-seq dataset between FGF1 and vehicle. Red, genes with FDR &lt; 0.05 and |log2 fold change| &gt; 0.25; green, genes with an |log2 fold change| &gt; 0.25; gray, genes below both thresholds. <strong>d</strong> Gene Ontology (biological process; red) and REACTOME (blue) terms enriched for DEGs in Agrp neurons at Day 1. Circle size denotes gene overlap with the identified geneset. <strong>e</strong> Principal component analysis of Agrp neurons sampled at Days 1 and 5 (vehicle and FGF1) revealed strong separation from other groups at PC4 and PC5, respectively (<em>n</em> = 3 mice/group Day 1, <em>n</em> = 2 mice/group Day 5), median (IQR). <strong>f</strong> Gene Ontology term (biological processes) of highly loading genes on PC5. <strong>g</strong> Normalized expression of <em>Agrp</em> and <em>Npy</em> in Agrp neurons across the 4 groups (FGF1, Days 1 and 5; vehicle, Days 1 and 5; <em>n</em> = 3 mice/group Day 1, <em>n</em> = 2 mice/group Day 5). <strong>h</strong> Top panel: representative electron microscopic images of coverage of synapses between axonal boutons (B) and dendritic spines (S) by peri-synaptic astrocytic in the ARC area of Lep<em>ob/ob</em> mice. Bottom panel: immunostaining for <em>Npy</em>. Scale bar 500 nm. Quantification: dots represent percentage of astrocytic coverage for individual animals (mean of 30 synapses per animal, <em>n</em> = 4/group), mean ± SEM. Unpaired <em>t</em> test, two tailed, *<em>*<em>p</em> &lt; 0.0001 (not adjusted). <strong>i</strong> Contacts between GFAP(+) astrocytes (green) and Agrp(+) neurons in the ARC area (equivalent to outline in <strong>g</strong>) 1 week following icv FGF1 or vehicle injection of Lep*ob/ob</em>. Yellow represents co-labeled GFAP-positive and Agrp-positive voxels. Scale bar 8 μm. Pixel dimensions: 0.057 × 0.057 × 0.500 microns. Quantification: dots represent mean contact volume over high power field (hpf: 116.5 × 116.5 microns) for individual animals (2 sections per animal, <em>n</em> = 4/group), mean ± SEM. Unpaired <em>t</em> test, two tailed, **<em>p</em> = 0.0093 (not adjusted). Source data and summary statistics are provided as a Source data file.</p>
+</blockquote>
+<h2 id="Fig-6-FGF1-induced-sustained-diabetes-remission-is-melanocortin-dependent"><a href="#Fig-6-FGF1-induced-sustained-diabetes-remission-is-melanocortin-dependent" class="headerlink" title="Fig. 6: FGF1-induced sustained diabetes remission is melanocortin dependent."></a>Fig. 6: FGF1-induced sustained diabetes remission is melanocortin dependent.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig6_HTML.png" alt="Fig. 6"></p>
+<blockquote>
+<p><strong>a</strong> Blood glucose levels and food intake in diabetic Mc4r<em>−/−</em> (Mc4r knockout) mice injected with icv FGF1 (3 µg) or vehicle (<em>n</em> = 8/group). <strong>b</strong> Blood glucose levels and food intake in agouti (KK-A<em>y</em>) mice icv injected with FGF1 (3 µg) (<em>n</em> = 12) or vehicle (<em>n</em> = 9). Vehicle-injected mice were not pair-fed to the intake of mice receiving FGF1. <strong>c</strong> Blood glucose levels and food intake of diabetic Lep<em>ob/ob</em> mice treated with either a single icv injection of FGF1 (3 µg) or vehicle, followed immediately by continuous icv infusion of either vehicle or the Mc4r antagonist SHU9119 (5 nmol/day) for 28 days. Veh+Veh (<em>n</em> = 8), FGF1+Veh (<em>n</em> = 9), Veh+SHU (<em>n</em> = 6), FGF1+SHU (<em>n</em> = 8). Data are represented as mean ± SEM, source data are provided as a Source data file.</p>
+</blockquote>
+<h2 id="Fig-7-FGF1-induced-long-term-changes-in-the-hypothalamus"><a href="#Fig-7-FGF1-induced-long-term-changes-in-the-hypothalamus" class="headerlink" title="Fig. 7: FGF1-induced long-term changes in the hypothalamus."></a>Fig. 7: FGF1-induced long-term changes in the hypothalamus.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41467_2020_17720_Fig7_HTML.png" alt="Fig. 7"></p>
+<blockquote>
+<p><strong>a</strong> Number of DEGs (|log2 fold change| &gt; 0.5; FDR &lt; 0.05) from bulk RNA-sequencing (bRNA-seq) of hypothalami from Lep<em>ob/ob</em> mice injected with icv FGF1 or vehicle and harvested Days 1 (FGF1 <em>n</em> = 10, vehicle <em>n</em> = 4), 5 (FGF1 <em>n</em> = 9, vehicle <em>n</em> = 7), and 42 (<em>n</em> = 5 mice/group) after injection. Control vehicle mice were pair-fed to FGF1-injected mice. <strong>b</strong> Rank–rank hypergeometric overlap maps of the degree of overlapping genes between Day 1 and Day 5 (top) and between Day 5 and Day 42 (bottom). Venn diagrams and top overlapping genes (middle panel). Enrichment of Gene Ontology biological process terms of overlapping genes (right panel). <strong>c</strong> Normalized counts (mean ± SEM, <em>n</em> = 5 mice/group) of the selected glial genes from the bRNA-seq datasets Days 1, 5, and 42 after icv FGF1 or vehicle injection. <strong>d</strong> Normalized counts (mean ± SEM, <em>n</em> = 5 mice/group) of <em>Agrp</em>, <em>Npy</em>, <em>Mef2c</em>, and <em>Pomc</em> expression Days 1, 5, and 42 after icv FGF1 or vehicle injection. <strong>e</strong> Targeted relative gene expression of <em>Agrp</em>, <em>Npy</em>, and <em>Pomc</em>. Unpaired <em>t</em> test, two tailed, <em><em>p</em> = 0.04 (not adjusted, <em>n</em> = 5 mice/group); ns not significant. Source data are provided as a Source data file. <strong>f</strong> Threshold-free geneset enrichment analysis (Gene Ontology biological processes terms) of DEGs identified in bRNA-seq data at Days 1, 5, and 42. Point size is scaled by −log10(<em>p</em> value) (Bonferroni adjusted) and is colored based on the normalized enrichment score (NES). <strong>g</strong> Representative electron microscopic images of synapses of Lep*ob/ob</em> mice 5 days after icv injection of either vehicle or FGF1. syn synaptic active zone, DCV dense-core vesicle, SV small light-core vesicle. Scale bar 500 nm. Quantification: dots represent mean %DCV/synapse per mouse (25 synapses per animal, <em>n</em> = 4/group). Unpaired <em>t</em> test, two tailed, *<em>p</em> = 0.01 (not adjusted); ns not significant. Source data are provided as a Source data file. Data are presented as mean ± SEM.</p>
+</blockquote>
+<p>ref.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-020-17720-5">Transcriptomic analysis links diverse hypothalamic cell types to fibroblast growth factor 1-induced sustained diabetes remission</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/single-cell-RNA-seq/" rel="tag"># single-cell RNA-seq</a>
+              <a href="/tags/brain/" rel="tag"># brain</a>
+              <a href="/tags/hypothalamus/" rel="tag"># hypothalamus</a>
+              <a href="/tags/disease/" rel="tag"># disease</a>
+              <a href="/tags/diabetes/" rel="tag"># diabetes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/23/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%BA%94-Spatially-organized-multicellular-immune-hubs-in-human-colorectal-cancer/" rel="prev" title="单细胞转录组文献分析方法[五]:Spatially organized multicellular immune hubs in human colorectal cancer">
+      <i class="fa fa-chevron-left"></i> 单细胞转录组文献分析方法[五]:Spatially organized multicellular immune hubs in human colorectal cancer
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods"><span class="nav-number">2.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-cell-RNA-seq-and-single-nucleus-RNA-seq-data-processing"><span class="nav-number">2.1.</span> <span class="nav-text">Single-cell RNA-seq and single-nucleus RNA-seq data processing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quality-control-of-single-cell-and-single-nucleus-expression-data"><span class="nav-number">2.2.</span> <span class="nav-text">Quality control of single-cell and single-nucleus expression data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-nucleus-RNA-seq-data-clustering"><span class="nav-number">2.3.</span> <span class="nav-text">Single-nucleus RNA-seq data clustering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-cell-RNA-seq-data-clustering-and-identification-of-cell-types"><span class="nav-number">2.4.</span> <span class="nav-text">Single-cell RNA-seq data clustering and identification of cell types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Label-projection"><span class="nav-number">2.5.</span> <span class="nav-text">Label projection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Differential-gene-expression-resampling"><span class="nav-number">2.6.</span> <span class="nav-text">Differential gene expression resampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pseudobulk-analysis"><span class="nav-number">2.7.</span> <span class="nav-text">Pseudobulk analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pathway-enrichment-analysis-for-pseudobulk-results"><span class="nav-number">2.8.</span> <span class="nav-text">Pathway enrichment analysis for pseudobulk results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WGCNA-and-adjacency-matrix-calculation"><span class="nav-number">2.9.</span> <span class="nav-text">WGCNA and adjacency matrix calculation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WGCNA-hierarchical-clustering"><span class="nav-number">2.10.</span> <span class="nav-text">WGCNA hierarchical clustering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Geneset-enrichment-analysis"><span class="nav-number">2.11.</span> <span class="nav-text">Geneset enrichment analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanycyte-analysis"><span class="nav-number">2.12.</span> <span class="nav-text">Tanycyte analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Astrocyte-analysis"><span class="nav-number">2.13.</span> <span class="nav-text">Astrocyte analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oligodendrocyte-analysis"><span class="nav-number">2.14.</span> <span class="nav-text">Oligodendrocyte analysis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figure"><span class="nav-number">3.</span> <span class="nav-text">Figure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-1-Study-design-and-icv-FGF1-induced-temporal-glia-responses"><span class="nav-number">3.1.</span> <span class="nav-text">Fig. 1: Study design and icv FGF1-induced temporal glia responses.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-2-Tanycyte-module-expression-maps-to-the-spatial-distribution-lining-the-third-ventricle"><span class="nav-number">3.2.</span> <span class="nav-text">Fig. 2: Tanycyte module expression maps to the spatial distribution lining the third ventricle.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-3-Evolution-of-the-astrocyte-response-to-icv-FGF1"><span class="nav-number">3.3.</span> <span class="nav-text">Fig. 3: Evolution of the astrocyte response to icv FGF1.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-4-Icv-FGF1-induces-a-population-of-differentiating-oligodendrocytes"><span class="nav-number">3.4.</span> <span class="nav-text">Fig. 4: Icv FGF1 induces a population of differentiating oligodendrocytes.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-5-Effects-of-icv-FGF1-on-Agrp-neurons"><span class="nav-number">3.5.</span> <span class="nav-text">Fig. 5: Effects of icv FGF1 on Agrp neurons.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-6-FGF1-induced-sustained-diabetes-remission-is-melanocortin-dependent"><span class="nav-number">3.6.</span> <span class="nav-text">Fig. 6: FGF1-induced sustained diabetes remission is melanocortin dependent.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-7-FGF1-induced-long-term-changes-in-the-hypothalamus"><span class="nav-number">3.7.</span> <span class="nav-text">Fig. 7: FGF1-induced long-term changes in the hypothalamus.</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Max</p>
+  <div class="site-description" itemprop="description">在学了在学了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-bug"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
