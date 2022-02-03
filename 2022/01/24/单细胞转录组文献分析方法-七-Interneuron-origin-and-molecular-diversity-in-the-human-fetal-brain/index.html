@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="单细胞转录组文献分析方法[七]:Interneuron origin and molecular diversity in the human fetal brain">
+<meta property="og:url" content="http://example.com/2022/01/24/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%B8%83-Interneuron-origin-and-molecular-diversity-in-the-human-fetal-brain/index.html">
+<meta property="og:site_name" content="TypeError">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20220124180654469.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig1_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig1_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig2_HTML.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig3_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig4_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig5_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig6_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig7_HTML.png">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig8_ESM.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig9_ESM.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig10_ESM.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig11_ESM.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig12_ESM.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig13_ESM.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig14_ESM.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig15_ESM.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig16_ESM.webp">
+<meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig17_ESM.webp">
+<meta property="article:published_time" content="2022-01-24T10:05:46.000Z">
+<meta property="article:modified_time" content="2022-02-03T06:12:50.883Z">
+<meta property="article:author" content="Max">
+<meta property="article:tag" content="single-cell RNA-seq">
+<meta property="article:tag" content="brain">
+<meta property="article:tag" content="development">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20220124180654469.png">
+
+<link rel="canonical" href="http://example.com/2022/01/24/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%B8%83-Interneuron-origin-and-molecular-diversity-in-the-human-fetal-brain/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>单细胞转录组文献分析方法[七]:Interneuron origin and molecular diversity in the human fetal brain | TypeError</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TypeError</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/24/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E4%B8%83-Interneuron-origin-and-molecular-diversity-in-the-human-fetal-brain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Max">
+      <meta itemprop="description" content="在学了在学了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TypeError">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单细胞转录组文献分析方法[七]:Interneuron origin and molecular diversity in the human fetal brain
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-24 18:05:46" itemprop="dateCreated datePublished" datetime="2022-01-24T18:05:46+08:00">2022-01-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-03 14:12:50" itemprop="dateModified" datetime="2022-02-03T14:12:50+08:00">2022-02-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">单细胞转录组</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20220124180654469.png" alt="image-20220124180654469"></p>
+<p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig1_HTML.png" alt="Fig. 1"></p>
+<span id="more"></span>
+
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Precise generation of excitatory neurons and inhibitory interneurons is crucial for proper formation and function of neural circuits in the mammalian brain. Because of the size and complexity of the human brain, it is a challenge to reveal the rich diversity of interneurons. To decipher origin and diversity of interneurons in the human fetal subpallium, here we show molecular features of diverse subtypes of interneuron progenitors and precursors by conducting single-cell RNA sequencing and in situ sequencing. Interneuron precursors in the medial and lateral ganglionic eminence simultaneously procure temporal and spatial identity through expressing a combination of specific sets of RNA transcripts. Acquisition of various interneuron subtypes in adult human brains occurs even at fetal stages. Our study uncovers complex molecular signatures of interneuron progenitors and precursors in the human fetal subpallium and highlights the logic and programs in the origin and lineage specification of various interneurons.</p>
+<h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><h2 id="Quality-control-doublet-removal-and-cell-cycle-analysis"><a href="#Quality-control-doublet-removal-and-cell-cycle-analysis" class="headerlink" title="Quality control, doublet removal and cell cycle analysis"></a>Quality control, doublet removal and cell cycle analysis</h2><p>Four 10x-derived sequencing datasets, representing GW9, GW10, GW11 and GW12, were obtained. </p>
+<p>Quality control was performed to filter out low-quality cells. <strong>Only cells with over 1,000 sequenced genes and a proportion of the unique molecular identifier count attributable to mitochondrial genes below 10% were retained</strong>. Sex-specific genes (<em>DDX3Y</em>, <em>EIF2S3Y</em>, <em>UTY</em>, <em>KDM5D</em>, <em>XIST</em>, <em>TSIX</em> and <em>SRY</em>) were also removed for downstream analyses.</p>
+<p>Doublets were abducted by <strong>Doublet Detection</strong> (<a target="_blank" rel="noopener" href="https://github.com/JonathanShor/DoubletDetection">https://github.com/JonathanShor/DoubletDetection</a>) using default parameters. </p>
+<p>After the filtering processes, 17,822 cells were removed, leaving 9,118 cells for sample GW9, 14,397 cells for GW10, 11,068 cells for GW11 and 5,989 cells for GW12. </p>
+<p>To remove the effect of cell cycle on cell clustering and dimensionality reduction, <strong>Seurat</strong> packages, containing a cell-cycle-related gene set with 46 genes for the G1/S phase and 54 genes for the G2/M phase of the cell cycle, were applied. The G1/S and G2/M states of each cell were defined using the <code>CellCycleScoring</code> function, and the difference between the G2M and S phase scores were regressed out using the <code>ScaleData</code> function.</p>
+<h2 id="Clustering-and-annotation"><a href="#Clustering-and-annotation" class="headerlink" title="Clustering and annotation"></a>Clustering and annotation</h2><p>The downstream analysis was performed using data normalization (<code>NormalizeData</code>, LogNormalize method, <strong>scaling factor 10,000</strong>), data feature scaling (<code>ScaleData</code>), variable gene detection (<code>FindVariableGenes</code>, top 2,000 genes with the highest standardized variance selected using the <strong>vst</strong> selection method), PCA (<code>RunPCA</code>, from variable genes) and Louvain graph-based clustering (<code>FindClusters</code>, data dimensionality reduction using PCA; the PCA number was 30, and the clustering resolution was 0.60, performed using the R package <strong>Seurat</strong> (v.3.1.2)). The top 30 significant prinicpal components (PCs) were selected to alleviate technical variation between different batches by using the R package <strong>Harmony</strong>.</p>
+<p>Cluster cell identity was assigned by manual annotation using known marker genes and computed DEGs using the <code>FindAllMarkers</code> function (<strong>thresh.use = 0.25, test.use = ‘bimod’</strong>) with the Seurat R package. </p>
+<p>Genes with average expression difference greater than <strong>0.5 natural log</strong> with <strong><em>P</em> &lt; 0.05</strong> were selected as marker genes. </p>
+<p>Seven major clusters were identified and annotated as NSCs, INPs, IPCs, excitatory neurons, OPCs, MG and ECs. </p>
+<p>Visualization was performed using <em>t</em>-SNE to present data in two-dimensional coordinates, generated by the <code>RunTSNE</code> function in Seurat, and <em>t</em>-SNE plots were generated using the R package ggplot2.</p>
+<p>Random forest classifier was performed by <strong>scikit-learn</strong>. A set of cluster marker genes was used as input features to define those cells as interneuron progenitors and precursors. Grid-search was used to obtain optimal parameters (max_features = 7, n_estimators = 2,500) to training model and prediction.</p>
+<p>Interneuron progenitors (P1, P2, P3, P4, P5 and P6) were further assessed and were separated into subsets and reanalyzed with data normalization (<code>NormalizeData</code>, LogNormalize method, scaling factor 10,000), data feature scaling (<code>ScaleData</code>) and variable gene detection (<code>FindVariableGenes</code>, top 1,000 genes with the highest standardized variance selected using the <strong>vst</strong> selection method). The variable genes were used to run PCA dimension reduction by <code>RunPCA</code> function, and the top ten PCs were used to perform <em>t</em>-SNE dimensionality reduction by the <code>RunTSNE</code> function. The marker genes of the VZ and SVZ were identified by the <code>FindAllMarkers</code> function.</p>
+<p>The same reanalysis processes were used on MGE-INPs, CGE-INPs and LGE-INPs. </p>
+<p>To obtain proper results, different parameters were used. </p>
+<ul>
+<li><p>The top 1,000 MGE-INP variable genes were used, whereas the top 2,000 CGE-INP and LGE-INP variable genes were used. </p>
+</li>
+<li><p>The PCA number used in MGE-INP was 30, and the PCA number used in CGE-INPs and LGE-INPs was 20. </p>
+</li>
+<li><p>For the <code>FindClusters</code> function, the difference resolution was set (0.30 in MGE-INPs of GW9–GW12; 0.68 in CGE-INPs of GW9 and GW11 and 0.5 of GW9–GW12; and 0.30 in LGE-INPs of GW9 and GW11 and 0.6 of GW9–GW12). </p>
+<p>Cluster cell identity was assigned by manual annotation using known marker genes, and DEGs were computed using the <code>FindAllMarkers</code> function (thresh.use = 0.25, test.use = bimod) with the Seurat R package. Genes with an average expression difference of more than 0.5 natural log with <em>P</em> &lt; 0.05 were selected as marker genes.</p>
+</li>
+</ul>
+<h2 id="Trajectory-and-lineage-analysis"><a href="#Trajectory-and-lineage-analysis" class="headerlink" title="Trajectory and lineage analysis"></a>Trajectory and lineage analysis</h2><p><strong>PAGA</strong> was applied to predict a lineage tree for the interneuron progenitors and precursors. </p>
+<p>The Seurat project was transformed into a loom file by the <code>as.loom</code> function of the Seurat package. The loom file was input to build an AnnData type file using the <code>sc.read_loom</code> function of the Scanpy package. </p>
+<p>The default process of <strong>Scanpy</strong> packages was then performed to compute neighbor and constructing networks of clusters using PAGA (threshold was set as 0.01 and graph by ForceAtlas2). </p>
+<p>To further explore the relationship between neural progenitor cells and interneuron precursors, both neural progenitor cells and interneuron precursors for the MGE, LGE and CGE were annotated and analyzed using diffusion map. PCA embedding was used as the input to build diffusion map embedding with the <code>DiffusionMap</code> function.</p>
+<p><strong>Monocle 2</strong> was applied to construct LGE and CGE pseudotime trajectories to discover developmental transitions. Subpallial cells of GW9 and GW11 were first analyzed. The LGE-INP and CGE-INP ordering genes were used as the differential genes, which were identified by the <code>FindAllMarkers</code> function of the Seurat package (<em>log fold change &gt; 0.25, pct.1 &gt; 0.4 and pct.2 &lt; 0.4</em>). The dimension was reduced using <strong>DDRTree</strong>. </p>
+<p>Branch analyses were performed using the <strong>BEAM test</strong> on branch points at the two cellular hierarchies using all default parameters with the exception of the dimensionality of the embedding. The same parameters were used to analyze cells from brains of GW9–GW12 using Monocle 2.</p>
+<p>Cell lineage reconstruction of MGE was performed using the <strong>Destiny</strong> R package. Subpallial cells of GW9 and GW11 were first analyzed. PCA embedding was used as the input to build diffusion map embedding with the DiffusionMap function. Trajectories and the pseudotime were calculated with the <strong>Slingshot</strong> R package using diffusion map embedding as input. The significant genes along the pseudotime were calculated using <strong>Monocle 2</strong> by the <code>differentialGeneTest</code> function (df = 3) and <em>q</em> &lt; 0.001 as significant genes. The same parameters were used to analyze cells from brains of GW9–GW12. The DEGs among vMGE and dMGE were identified by the ‘FindMarkers’ function of the <strong>Seurat</strong> package.</p>
+<h2 id="Human-adult-M1-interneuron-cell-types"><a href="#Human-adult-M1-interneuron-cell-types" class="headerlink" title="Human adult M1 interneuron cell types"></a>Human adult M1 interneuron cell types</h2><p>A publicly available dataset of GABAergic interneurons of the human adult M1 was employed (<a target="_blank" rel="noopener" href="http://celltypes.brain-map.org/rnaseq">http://celltypes.brain-map.org/rnaseq</a>). </p>
+<p>The 23,992 cells that were assigned as GABA interneurons were selected to perform the Seurat analyses. </p>
+<p>In brief, the <code>SCTransform</code> function was used to normalize and scale the data. PCA was then run to select the top 30 PCs to perform clustering. A total of five and 13 non-overlapping types and subtypes of interneurons were identified (resolution = 0.15), respectively.</p>
+<h2 id="Mapping-human-fetal-interneurons-using-a-dataset-from-human-adult-brains"><a href="#Mapping-human-fetal-interneurons-using-a-dataset-from-human-adult-brains" class="headerlink" title="Mapping human fetal interneurons using a dataset from human adult brains"></a>Mapping human fetal interneurons using a dataset from human adult brains</h2><p>Genetic fate-mapping strategies were employed to analyze the developmental stages of cortical interneurons from the human fetal GE in the subpallium (GW9–GW12) to the adult cortex. The fetal GE cells included progenitors and GE-derived precursors (P1, P2, P3, P4, P5, P6, MGE1, MGE2, CGE, LGE1, LGE2 and LGE3). The integration process from <strong>Seurat</strong> packages was performed to identify the connections between fetal (GW9 and GW11) and adult datasets. </p>
+<p>In brief, the <code>SCTransform</code> function was employed, and <strong>3,000</strong> variable genes were selected for the integration analysis; </p>
+<p>k.anchor = 5 and k.filter = 200 were set to identify anchors between the datasets. <code>RunPCA</code> was performed on the integrated dataset, and the results were visualized by uniform manifold approximation and projection (UMAP).</p>
+<p>A method was applied to assigned cells from fetal datasets to adult interneuron subtypes, performed separately for GW9 and GW11 to the adult cortex. </p>
+<p>The top 30 PCA embeddings were used as input to calculate the distance matrix. The <em>k</em> = 10 closet neighbors were calculated in the adult dataset for each cell in the fetal dataset, and at least nine of the neighbors in the adult dataset were of the same subtype, and then the fetal cell was assigned to this subtype. Moreover, for each fetal cell, the nearest <em>k</em> = 10 neighbors were calculated across all cells in the merged fetal and adult dataset. If none of the ten neighbors represented the cells in the adult dataset, this cell was considered unassigned. This mapping procedure was performed twice, to assign cells to the five main interneuron types and to 13 subtypes.</p>
+<p>The <code>FindConservedMarkers</code> function in Seurat was employed to identify DEGs between cell types that were conserved throughout development. The <code>FindConservedMarkers</code> function ran differential expression tests on the fetal and adult datasets. Genes with log2 fold change &gt; 0.25 and adjusted <em>P</em> &lt; 0.01 were considered conserved markers in the fetal and adult datasets.</p>
+<h2 id="Differentiation-analysis-of-interneurons"><a href="#Differentiation-analysis-of-interneurons" class="headerlink" title="Differentiation analysis of interneurons"></a>Differentiation analysis of interneurons</h2><p>Cell types were compared using the Seurat <code>FindMarkers</code> function and test method using bimod to explore the divergence among different cell types in the data. The signature differential gene threshold was set to log2 fold change &gt; 0.25 and adjusted <em>P</em> &lt; 0.05.</p>
+<h2 id="GO-analysis-and-GSEA"><a href="#GO-analysis-and-GSEA" class="headerlink" title="GO analysis and GSEA"></a>GO analysis and GSEA</h2><p>GO enrichment analysis and GSEA were performed using the R package <strong>clusterProfiler</strong> to explore function discrepancy. The gene list, which is sorted by log2 fold change, was used to perform GSEA analysis. </p>
+<h2 id="Transcription-regulation-network-analysis"><a href="#Transcription-regulation-network-analysis" class="headerlink" title="Transcription regulation network analysis"></a>Transcription regulation network analysis</h2><p>CGE-INP development pseudotime-associated transcription factors were selected to build a transcription regulation network by <strong>GENIE3</strong>. Interesting transcription factors were set as regulators, and the expression matrix of CGE-INPs was set as input data to construct a transcription target gene network using <strong>GENIE3</strong>. The top 1,000 gene links were then plotted using <strong>Cytoscape</strong>.</p>
+<h1 id="Figure"><a href="#Figure" class="headerlink" title="Figure"></a>Figure</h1><h2 id="Fig-1-Molecular-diversity-of-the-human-fetal-subpallium"><a href="#Fig-1-Molecular-diversity-of-the-human-fetal-subpallium" class="headerlink" title="Fig. 1: Molecular diversity of the human fetal subpallium."></a>Fig. 1: Molecular diversity of the human fetal subpallium.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig1_HTML.png" alt="Fig. 1"></p>
+<blockquote>
+<p><strong>a</strong>, Experimental workflow of single-cell RNA-seq of human fetal subpallium collected from brains at GW9 to GW12 (GW9, GW10, GW11 and GW12). <strong>b</strong>, Cell clustering of human fetal subpallial samples (GW9–GW12) integrated using Harmony and depicted using <em>t</em>-SNE. <strong>c</strong>, Representative genes expressed in cell clusters from the human fetal subpallium visualized using <em>t</em>-SNE. Each dot represents one cell. Five major clusters include NPCs (progenitors 1–6), INPs, OPCs, MG and ECs. <strong>d</strong>, Abstracted graph illustrating a landscape of a developmental trajectory from interneuron progenitors to GE-derived precursors using PAGA. <strong>e</strong>, PAGA connectivity scores of interneuron progenitor and precursor populations. <strong>f</strong>–<strong>h</strong>, Lineage analyses by combining genes for neural progenitors and for distinct interneuron precursors in the MGE (<strong>f</strong>), CGE (<strong>g</strong>) and LGE (<strong>h</strong>).</p>
+</blockquote>
+<h2 id="Fig-2-Characterization-of-heterogeneity-of-interneuron-progenitors-in-the-human-fetal-subpallium"><a href="#Fig-2-Characterization-of-heterogeneity-of-interneuron-progenitors-in-the-human-fetal-subpallium" class="headerlink" title="Fig. 2: Characterization of heterogeneity of interneuron progenitors in the human fetal subpallium."></a>Fig. 2: Characterization of heterogeneity of interneuron progenitors in the human fetal subpallium.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig2_HTML.webp" alt="41593_2021_940_Fig2_HTML"></p>
+<blockquote>
+<p><strong>a</strong>, Visualization of cell diversity of interneuron progenitors (P1–P6) from the subpallium at GW9 and GW11 using <em>t</em>-SNE. <strong>b</strong>, <strong>c</strong>, Violin plots of expression patterns of progenitor markers expressed in the VZ and SVZ at GW9 (<strong>b</strong>) and GW11 (<strong>c</strong>) in the subpallium. <strong>d</strong>–<strong>i</strong>, Expression patterns of 12 progenitor marker genes in coronal sections of human fetal brains at GW12 as detected using ISS. Boxed areas in <strong>d</strong> and <strong>g</strong> are shown in high-power views in <strong>e</strong> and <strong>f</strong> and in <strong>h</strong> and <strong>i</strong>, respectively. Genes expressed in the VZ and SVZ are shown in green and purple pseudo-colors, respectively, in the MGE, LGE and CGE. Scale bars, 1 mm in <strong>d</strong> and <strong>g</strong>; 100 µm in <strong>e</strong>, <strong>f</strong>, <strong>h</strong> and <strong>i</strong>.</p>
+</blockquote>
+<h2 id="Fig-3-Expression-patterns-of-subpallial-genes-in-the-GE-of-the-human-fetal-brain-as-detected-by-ISS"><a href="#Fig-3-Expression-patterns-of-subpallial-genes-in-the-GE-of-the-human-fetal-brain-as-detected-by-ISS" class="headerlink" title="Fig. 3: Expression patterns of subpallial genes in the GE of the human fetal brain as detected by ISS."></a>Fig. 3: Expression patterns of subpallial genes in the GE of the human fetal brain as detected by ISS.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig3_HTML.png" alt="Fig. 3"></p>
+<blockquote>
+<p><strong>a</strong>, <strong>b</strong>, Coronal sections labeled with DAPI to illustrate cell nucleoli of a human fetal brain at GW12. Boxed areas highlight the MGE, LGE and CGE. The dorsal (D), ventral (V), medial (M) and lateral (L) orientations of the sections are labeled. <strong>c</strong>, Workflow of ISS. <strong>d</strong>, <strong>e</strong>, Merged expression images of 48 genes, illustrated by pseudo-colors, in the coronal sections of MGE/LGE (<strong>d</strong>) and CGE (<strong>e</strong>) of the human fetal brain at GW12, as detected by ISS. Scale bars, 1 mm.</p>
+</blockquote>
+<h2 id="Fig-4-Specification-of-MGE-derived-interneuron-precursors"><a href="#Fig-4-Specification-of-MGE-derived-interneuron-precursors" class="headerlink" title="Fig. 4: Specification of MGE-derived interneuron precursors."></a>Fig. 4: Specification of MGE-derived interneuron precursors.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig4_HTML.png" alt="Fig. 4"></p>
+<blockquote>
+<p><strong>a</strong>, Clustering of MGE-derived interneuron precursors from GW9 and GW11 visualized by <em>t</em>-SNE embedding. <strong>b</strong>, Heat map of DEGs from five subclusters. <strong>c</strong>, Diffusion map of the most variable genes and reconstruction of the cell lineages. Dots represent cells; black lines represent constructed cell lineage-1 and lineage-2. <strong>d</strong>–<strong>f</strong>, Expression patterns of 12 MGE precursor marker genes in coronal sections of human fetal brains at GW12 as detected using ISS. The dorsal and ventral MGEs are labeled as dMGE (<strong>e</strong>) and vMGE (<strong>f</strong>), respectively. <strong>g</strong>–<strong>i</strong>, The developmental trajectory of MGE genes with preferred expression domains in dMGE (<strong>g</strong>), vMGE (<strong>h</strong>) and MGE (<strong>i</strong>). The error bands are presented as mean ± s.e.m., and the level of confidence interval is 0.95. Scale bar, 1 mm.</p>
+</blockquote>
+<h2 id="Fig-5-Two-lineages-of-LGE-derived-interneuron-precursors"><a href="#Fig-5-Two-lineages-of-LGE-derived-interneuron-precursors" class="headerlink" title="Fig. 5: Two lineages of LGE-derived interneuron precursors."></a>Fig. 5: Two lineages of LGE-derived interneuron precursors.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig5_HTML.png" alt="Fig. 5"></p>
+<blockquote>
+<p><strong>a</strong>, Clustering of LGE-derived interneuron precursors from GW9 and GW11 visualized by <em>t</em>-SNE embedding. <strong>b</strong>, Gene expression sets of subclusters of LGE-derived interneuron precursors. <strong>c</strong>, The developmental trajectory of LGE subclusters constructed using Monocle 2. Dots represent each cell; colored arrows represent constructed cell lineage-1 and lineage-2. <strong>d</strong>, Expression levels of LGE genes along with pseudotime. The red and yellow lines represent lineage-1 and lineage-2, respectively. The error bands are presented as mean ± s.e.m., and the level of confidence interval is 0.95. <strong>e</strong>–<strong>g</strong>, Expression patterns of eight LGE precursor marker genes in coronal sections of human fetal brains at GW12 as detected using ISS. The ventral and dorsal LGE (boxed areas in <strong>e</strong>) are shown in high-power views as vLGE (<strong>f</strong>) and dLGE (<strong>g</strong>). <strong>h</strong>, Volcano plot of differential expressions of genes from lineage-1 and lineage-2. <strong>i</strong>, The GSEA of GO biological processes, ranked genes from high to low by the values of log2 fold change. Adjusted <em>P</em> &lt; 0.05. <em>P</em> values were adjusted using the Benjamini–Hochberg method. Scale bars, 1 mm in <strong>e</strong>; 100 µm in <strong>f</strong> and <strong>g</strong>. FC, fold change.</p>
+</blockquote>
+<h2 id="Fig-6-Heterogeneity-of-CGE-derived-interneuron-precursors"><a href="#Fig-6-Heterogeneity-of-CGE-derived-interneuron-precursors" class="headerlink" title="Fig. 6: Heterogeneity of CGE-derived interneuron precursors."></a>Fig. 6: Heterogeneity of CGE-derived interneuron precursors.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig6_HTML.png" alt="Fig. 6"></p>
+<blockquote>
+<p><strong>a</strong>, Clustering of CGE-derived interneuron precursors from GW9 and GW11 visualized by <em>t</em>-SNE embedding. <strong>b</strong>, Violin plot illustrating expression patterns of CGE marker genes in five subclusters. <strong>c</strong>, The pseudotime tree of five CGE subclusters. Dots represent each cell. <strong>d</strong>–<strong>f</strong>, The changes of expression levels of CGE-specific transcription factors along the pseudotime. The error bands are presented as mean ± s.e.m., and the level of confidence interval is 0.95. <strong>g</strong>, Expression patterns of six CGE precursor marker genes in coronal sections of human fetal brains at GW9 as detected using ISS. <strong>h</strong>, High-power views of gene expression in the CGE. Scale bars, 1 mm.</p>
+</blockquote>
+<h2 id="Fig-7-Early-acquisition-of-adult-interneuron-diversity-in-the-human-fetal-subpallium"><a href="#Fig-7-Early-acquisition-of-adult-interneuron-diversity-in-the-human-fetal-subpallium" class="headerlink" title="Fig. 7: Early acquisition of adult interneuron diversity in the human fetal subpallium."></a>Fig. 7: Early acquisition of adult interneuron diversity in the human fetal subpallium.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig7_HTML.png" alt="Fig. 7"></p>
+<blockquote>
+<p><strong>a</strong>, Clustering of five major types of interneurons based on datasets from the human adult primary motor cortex (M1). <strong>b</strong>, Distribution patterns of genes expressed in five types of interneurons visualized by uniform manifold approximation and projection (UMAP). <strong>c</strong>, <strong>f</strong>, Mapped INPs from the human fetal subpallium at GW9 (<strong>c</strong>) and GW11 (<strong>f</strong>) were integrated with those five types of cells in the human adult M1. Different colors represent different adult cell types. Pink color represents cells in fetal stages. <strong>d</strong>, <strong>g</strong>, INP cells in the subpallium at GW9 (<strong>d</strong>) and GW11 (<strong>g</strong>) colored by five major adult interneuron cell types. <strong>e</strong>, <strong>h</strong>, Alluvial plots illustrating the origin of five major types of adult interneurons from the NPCs (P1–P6) and INPs in the MGE, LGE and CGE of the human fetal subpallium. <strong>i</strong>, <strong>j</strong>, The percentages of five major types of adult interneurons that are derived from the MGE, LGE and CGE in the human fetal subpallium at GW9 (<strong>i</strong>) and GW11(<strong>j</strong>).</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-1-Single-cell-transcriptomic-maps-of-the-human-fetal-subpallium"><a href="#Extended-Data-Fig-1-Single-cell-transcriptomic-maps-of-the-human-fetal-subpallium" class="headerlink" title="Extended Data Fig. 1: Single-cell transcriptomic maps of the human fetal subpallium."></a>Extended Data Fig. 1: Single-cell transcriptomic maps of the human fetal subpallium.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig8_ESM.webp" alt="41593_2021_940_Fig8_ESM"></p>
+<blockquote>
+<p><strong>a</strong>, Cell clustering of human fetal subpallial samples at gestational weeks (GW) 9 to 12 integrated using harmony and depicted using t-SNE. <strong>b</strong>, The distribution of each subclusters in the subpallium at four developing stages. Colors indicate cell clusters as shown in <strong>a</strong>. <strong>c</strong>, Clustering of all cells from four developing stages after batch correction visualized using t-SNE. <strong>d</strong>, Heatmap illustrating differentially expressed genes (DEGs) in five major clusters and 17 subclusters. <strong>e</strong>, Assessment of 71 genes from 2,922 DEGs using Random Forest Classifier from scikit-learn of the remaining 16 subclusters after removing excitatory lineages. ‘True label’ indicates the manual annotation based on the 71 genes.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-2-Expression-patterns-of-canonical-genes-from-each-cell-types"><a href="#Extended-Data-Fig-2-Expression-patterns-of-canonical-genes-from-each-cell-types" class="headerlink" title="Extended Data Fig. 2: Expression patterns of canonical genes from each cell types."></a>Extended Data Fig. 2: Expression patterns of canonical genes from each cell types.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig9_ESM.webp" alt="41593_2021_940_Fig9_ESM"></p>
+<blockquote>
+<p><strong>a-f</strong>, Representative genes expressed in cell clusters from human fetal subpallium visualized using t-SNE. Each dot represents one cell. Major clusters include excitatory lineages (<strong>a</strong>), neural progenitor cells (NPCs, <strong>b</strong>) and interneuron precursors (INPs, <strong>c</strong>) derived from the medial ganglionic eminence (MGE_INPs, <strong>d</strong>), caudal ganglionic eminence (CGE_INPs, <strong>e</strong>) and lateral ganglionic eminence (LGE_INPs, <strong>f</strong>).</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-3-Heterogeneity-of-interneuron-progenitors-in-the-human-fetal-subpallium"><a href="#Extended-Data-Fig-3-Heterogeneity-of-interneuron-progenitors-in-the-human-fetal-subpallium" class="headerlink" title="Extended Data Fig. 3: Heterogeneity of interneuron progenitors in the human fetal subpallium."></a>Extended Data Fig. 3: Heterogeneity of interneuron progenitors in the human fetal subpallium.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig10_ESM.webp" alt="41593_2021_940_Fig10_ESM"></p>
+<blockquote>
+<p><strong>a</strong>-<strong>c</strong>, Expression of <em>DLX2</em> and <em>GAD2</em> at gestational weeks (GW) 9 (<strong>a</strong>), GW11 (<strong>b</strong>), GW12 (<strong>c</strong>), visualized by the t-SNE plot. <strong>d</strong>, Violin plots of expression patterns of progenitor markers expressed at the ventricular zone (VZ) and subventricular zone (SVZ) in the subpallium at GW12. <strong>e</strong>, Violin plots of expression patterns of ganglionic eminence regional markers in the progenitors from GW9 to GW12.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-4-Expression-patterns-of-subpallial-genes-in-the-ganglionic-eminence-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS"><a href="#Extended-Data-Fig-4-Expression-patterns-of-subpallial-genes-in-the-ganglionic-eminence-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS" class="headerlink" title="Extended Data Fig. 4: Expression patterns of subpallial genes in the ganglionic eminence of the human fetal brain as detected by in situ sequencing (ISS)."></a>Extended Data Fig. 4: Expression patterns of subpallial genes in the ganglionic eminence of the human fetal brain as detected by <em>in situ</em> sequencing (ISS).</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig11_ESM.webp" alt="41593_2021_940_Fig11_ESM"></p>
+<blockquote>
+<p><strong>a</strong> and <strong>b</strong>, Expression patterns of 6 subpallial genes in the medial ganglionic eminence (MGE) (<strong>a</strong>), lateral ganglionic eminence (LGE) (<strong>a</strong>) and caudal ganglionic eminence (CGE) (<strong>b</strong>) at gestational week 12 (GW12). <strong>c</strong>-<strong>e</strong>, Boxed areas in <strong>a</strong> and <strong>b</strong> are shown in high power views. Scale bars: 1 mm in <strong>a</strong> and <strong>b</strong>; 100 µm in <strong>c-e</strong>.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-5-Expression-patterns-of-genes-in-the-subpallium-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS"><a href="#Extended-Data-Fig-5-Expression-patterns-of-genes-in-the-subpallium-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS" class="headerlink" title="Extended Data Fig. 5: Expression patterns of genes in the subpallium of the human fetal brain as detected by in situ sequencing (ISS)."></a>Extended Data Fig. 5: Expression patterns of genes in the subpallium of the human fetal brain as detected by <em>in situ</em> sequencing (ISS).</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig12_ESM.webp" alt="41593_2021_940_Fig12_ESM"></p>
+<blockquote>
+<p><strong>a</strong>-<strong>d</strong>, Expression patterns of genes expressed in the ventricular zone (VZ) and subventricular zone (SVZ) at gestational week 12 (GW12) are shown in green and purple pseudo-colors, respectively, in the medial ganglionic eminence (MGE), lateral ganglionic eminence (LGE) and caudal ganglionic eminence (CGE). Scale bars: 1 mm.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-6-Expression-patterns-of-genes-expressed-in-the-ventricular-zone-VZ-in-the-subpallium-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS"><a href="#Extended-Data-Fig-6-Expression-patterns-of-genes-expressed-in-the-ventricular-zone-VZ-in-the-subpallium-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS" class="headerlink" title="Extended Data Fig. 6: Expression patterns of genes expressed in the ventricular zone (VZ) in the subpallium of the human fetal brain as detected by in situ sequencing (ISS)."></a>Extended Data Fig. 6: Expression patterns of genes expressed in the ventricular zone (VZ) in the subpallium of the human fetal brain as detected by <em>in situ</em> sequencing (ISS).</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig13_ESM.webp" alt="41593_2021_940_Fig13_ESM"></p>
+<blockquote>
+<p><strong>a</strong>, Merged expression of <em>CLU</em>, <em>LIX1</em>, <em>PTN</em> and <em>SPARC</em> in the medial ganglionic eminence (MGE), lateral ganglionic eminence (LGE) and caudal ganglionic eminence (CGE) at gestational week 12 (GW12). <strong>b</strong>-<strong>e</strong>, Expression of <em>CLU</em> (<strong>b</strong>), <em>LIX1</em> (<strong>c</strong>), <em>PTN</em> (<strong>d</strong>) and <em>SPARC</em> (<strong>e</strong>) in the MGE, LGE and CGE. Scale bars: 100 µm.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-7-Specification-of-medial-ganglionic-eminence-MGE-derived-interneuron-precursors"><a href="#Extended-Data-Fig-7-Specification-of-medial-ganglionic-eminence-MGE-derived-interneuron-precursors" class="headerlink" title="Extended Data Fig. 7: Specification of medial ganglionic eminence (MGE)-derived interneuron precursors."></a>Extended Data Fig. 7: Specification of medial ganglionic eminence (MGE)-derived interneuron precursors.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig14_ESM.webp" alt="41593_2021_940_Fig14_ESM"></p>
+<blockquote>
+<p><strong>a</strong>, Clustering of MGE-derived interneuron precursors from GW9 to GW12 visualized by t-SNE embedding. Cluster 5, 1, 2, 4 and 7 were similar to <em>ANGPT2</em>+/<em>CRABP1</em>+, <em>ZEB2</em>+/<em>MAF</em>+, <em>POU3F2</em>+/<em>CNTNAP2</em>+, <em>NR2F1</em>+/<em>MEIS2</em>+ and <em>LHX8</em>+/<em>NKX2-1</em>+, respectively, in the Fig. <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-021-00940-3#Fig4">4a</a>, cluster 3, 6, 8 were raised from the GW12. <strong>b</strong>, Heatmap of differentially expressed genes from subclusters in <strong>a</strong>. <strong>c</strong>, Diffusion map of the most variable genes and reconstruction of the cell lineages. Dots represent cells, and black lines represent predicted cell lineage-1 and -2. As examples, the cluster 6 was predicted to the lineage 1 and the cluster 3 to the lineage 2. <strong>d</strong>. Expression patterns of genes highly expressed in the dorsal (<em>MEIS2</em> and <em>NR2F1</em>) and ventral (<em>LHX8</em> and <em>ZIC4</em>) MGE in human fetal brains at gestational week 12 (GW12) as detected using <em>in situ</em> sequencing (ISS). <strong>e</strong>, Box plots representing relative numbers of positive dots of MGE marker genes in boxed areas in the dorsal and ventral MGE in <strong>d</strong>. Box: 25–75th percentiles, whiskers: 10–90th percentiles, horizontal line in box: median. Scale bars: 1 mm.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-8-Expression-patterns-of-medial-ganglionic-eminence-MGE-specific-genes-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS"><a href="#Extended-Data-Fig-8-Expression-patterns-of-medial-ganglionic-eminence-MGE-specific-genes-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS" class="headerlink" title="Extended Data Fig. 8: Expression patterns of medial ganglionic eminence (MGE) specific genes of the human fetal brain as detected by in situ sequencing (ISS)."></a>Extended Data Fig. 8: Expression patterns of medial ganglionic eminence (MGE) specific genes of the human fetal brain as detected by <em>in situ</em> sequencing (ISS).</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig15_ESM.webp" alt="41593_2021_940_Fig15_ESM"></p>
+<blockquote>
+<p><strong>a</strong>, Coronal sections labeled with DAPI to illustrate cell nucleoli of a human fetal brain at gestational week 12 (GW12). Boxed areas highlight the MGE. The dorsal (D), ventral (V), medial (M) and lateral (L) orientations of the sections are labeled. <strong>b</strong>, High expression of <em>CNTNAP2</em> and <em>MAF</em> at the root of lineage-1 and -2 based on the diffusion map in lineage analyses. <strong>c</strong>-<strong>e</strong>, Expression patterns of 10 MGE-precursor marker genes in coronal sections of human fetal brains. The dorsal and ventral MGEs are labeled as dMGE (<strong>c</strong>) and vMGE (<strong>d</strong>). Scale bars: 1 mm.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-9-Lateral-ganglionic-eminence-LGE-derived-interneuron-precursors"><a href="#Extended-Data-Fig-9-Lateral-ganglionic-eminence-LGE-derived-interneuron-precursors" class="headerlink" title="Extended Data Fig. 9: Lateral ganglionic eminence (LGE)-derived interneuron precursors."></a>Extended Data Fig. 9: Lateral ganglionic eminence (LGE)-derived interneuron precursors.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig16_ESM.webp" alt="41593_2021_940_Fig16_ESM"></p>
+<blockquote>
+<p><strong>a</strong> and <strong>b</strong>, Expression patterns of 8 LGE specific genes in coronal sections of the human fetal brain at gestational week 12 (GW12) as detected by <em>in situ</em> sequencing (ISS). The ventral (green box) and dorsal (blue box) LGE are shown as vLGE and dLGE. The boxed areas also are shown in high power views. Scale bars: 1 mm and 100 µm.</p>
+</blockquote>
+<h2 id="Extended-Data-Fig-10-Caudal-ganglionic-eminence-CGE-derived-interneuron-precursors"><a href="#Extended-Data-Fig-10-Caudal-ganglionic-eminence-CGE-derived-interneuron-precursors" class="headerlink" title="Extended Data Fig. 10: Caudal ganglionic eminence (CGE)-derived interneuron precursors."></a>Extended Data Fig. 10: Caudal ganglionic eminence (CGE)-derived interneuron precursors.</h2><p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/41593_2021_940_Fig17_ESM.webp" alt="41593_2021_940_Fig17_ESM"></p>
+<blockquote>
+<p><strong>a</strong>, The transcription network regulated by CGE-specific transcription factors in interneuron precursors. <strong>b</strong>, Gene ontology (GO) enrichment analysis of target genes for CGE-specific transcription factors. <strong>c</strong>, A coronal section labeled with DAPI to illustrate cell nucleoli of one human fetal brain at gestational week 12 (GW12). <strong>d</strong>, Expression patterns of <em>CALB2</em>, <em>NPAS3</em>, <em>ST18</em> and <em>SP9</em> in the CGE in coronal sections of the human fetal brain at GW12, as detected by <em>in situ</em> sequencing (ISS). Scale bar: 1 mm.</p>
+</blockquote>
+<p>ref.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41593-021-00940-3">Interneuron origin and molecular diversity in the human fetal brain</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/single-cell-RNA-seq/" rel="tag"># single-cell RNA-seq</a>
+              <a href="/tags/brain/" rel="tag"># brain</a>
+              <a href="/tags/development/" rel="tag"># development</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/08/%E5%8D%95%E7%BB%86%E8%83%9E%E8%BD%AC%E5%BD%95%E7%BB%84%E6%96%87%E7%8C%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95-%E5%85%AD-Transcriptomic-analysis-links-diverse-hypothalamic-cell-types-to-fibroblast-growth-factor-1-induced-sustained-diabetes-remission/" rel="prev" title="单细胞转录组文献分析方法[六]:Transcriptomic analysis links diverse hypothalamic cell types to fibroblast growth factor 1-induced sustained diabetes remission">
+      <i class="fa fa-chevron-left"></i> 单细胞转录组文献分析方法[六]:Transcriptomic analysis links diverse hypothalamic cell types to fibroblast growth factor 1-induced sustained diabetes remission
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods"><span class="nav-number">2.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quality-control-doublet-removal-and-cell-cycle-analysis"><span class="nav-number">2.1.</span> <span class="nav-text">Quality control, doublet removal and cell cycle analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clustering-and-annotation"><span class="nav-number">2.2.</span> <span class="nav-text">Clustering and annotation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trajectory-and-lineage-analysis"><span class="nav-number">2.3.</span> <span class="nav-text">Trajectory and lineage analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-adult-M1-interneuron-cell-types"><span class="nav-number">2.4.</span> <span class="nav-text">Human adult M1 interneuron cell types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mapping-human-fetal-interneurons-using-a-dataset-from-human-adult-brains"><span class="nav-number">2.5.</span> <span class="nav-text">Mapping human fetal interneurons using a dataset from human adult brains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Differentiation-analysis-of-interneurons"><span class="nav-number">2.6.</span> <span class="nav-text">Differentiation analysis of interneurons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GO-analysis-and-GSEA"><span class="nav-number">2.7.</span> <span class="nav-text">GO analysis and GSEA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transcription-regulation-network-analysis"><span class="nav-number">2.8.</span> <span class="nav-text">Transcription regulation network analysis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figure"><span class="nav-number">3.</span> <span class="nav-text">Figure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-1-Molecular-diversity-of-the-human-fetal-subpallium"><span class="nav-number">3.1.</span> <span class="nav-text">Fig. 1: Molecular diversity of the human fetal subpallium.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-2-Characterization-of-heterogeneity-of-interneuron-progenitors-in-the-human-fetal-subpallium"><span class="nav-number">3.2.</span> <span class="nav-text">Fig. 2: Characterization of heterogeneity of interneuron progenitors in the human fetal subpallium.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-3-Expression-patterns-of-subpallial-genes-in-the-GE-of-the-human-fetal-brain-as-detected-by-ISS"><span class="nav-number">3.3.</span> <span class="nav-text">Fig. 3: Expression patterns of subpallial genes in the GE of the human fetal brain as detected by ISS.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-4-Specification-of-MGE-derived-interneuron-precursors"><span class="nav-number">3.4.</span> <span class="nav-text">Fig. 4: Specification of MGE-derived interneuron precursors.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-5-Two-lineages-of-LGE-derived-interneuron-precursors"><span class="nav-number">3.5.</span> <span class="nav-text">Fig. 5: Two lineages of LGE-derived interneuron precursors.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-6-Heterogeneity-of-CGE-derived-interneuron-precursors"><span class="nav-number">3.6.</span> <span class="nav-text">Fig. 6: Heterogeneity of CGE-derived interneuron precursors.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fig-7-Early-acquisition-of-adult-interneuron-diversity-in-the-human-fetal-subpallium"><span class="nav-number">3.7.</span> <span class="nav-text">Fig. 7: Early acquisition of adult interneuron diversity in the human fetal subpallium.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-1-Single-cell-transcriptomic-maps-of-the-human-fetal-subpallium"><span class="nav-number">3.8.</span> <span class="nav-text">Extended Data Fig. 1: Single-cell transcriptomic maps of the human fetal subpallium.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-2-Expression-patterns-of-canonical-genes-from-each-cell-types"><span class="nav-number">3.9.</span> <span class="nav-text">Extended Data Fig. 2: Expression patterns of canonical genes from each cell types.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-3-Heterogeneity-of-interneuron-progenitors-in-the-human-fetal-subpallium"><span class="nav-number">3.10.</span> <span class="nav-text">Extended Data Fig. 3: Heterogeneity of interneuron progenitors in the human fetal subpallium.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-4-Expression-patterns-of-subpallial-genes-in-the-ganglionic-eminence-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS"><span class="nav-number">3.11.</span> <span class="nav-text">Extended Data Fig. 4: Expression patterns of subpallial genes in the ganglionic eminence of the human fetal brain as detected by in situ sequencing (ISS).</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-5-Expression-patterns-of-genes-in-the-subpallium-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS"><span class="nav-number">3.12.</span> <span class="nav-text">Extended Data Fig. 5: Expression patterns of genes in the subpallium of the human fetal brain as detected by in situ sequencing (ISS).</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-6-Expression-patterns-of-genes-expressed-in-the-ventricular-zone-VZ-in-the-subpallium-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS"><span class="nav-number">3.13.</span> <span class="nav-text">Extended Data Fig. 6: Expression patterns of genes expressed in the ventricular zone (VZ) in the subpallium of the human fetal brain as detected by in situ sequencing (ISS).</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-7-Specification-of-medial-ganglionic-eminence-MGE-derived-interneuron-precursors"><span class="nav-number">3.14.</span> <span class="nav-text">Extended Data Fig. 7: Specification of medial ganglionic eminence (MGE)-derived interneuron precursors.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-8-Expression-patterns-of-medial-ganglionic-eminence-MGE-specific-genes-of-the-human-fetal-brain-as-detected-by-in-situ-sequencing-ISS"><span class="nav-number">3.15.</span> <span class="nav-text">Extended Data Fig. 8: Expression patterns of medial ganglionic eminence (MGE) specific genes of the human fetal brain as detected by in situ sequencing (ISS).</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-9-Lateral-ganglionic-eminence-LGE-derived-interneuron-precursors"><span class="nav-number">3.16.</span> <span class="nav-text">Extended Data Fig. 9: Lateral ganglionic eminence (LGE)-derived interneuron precursors.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extended-Data-Fig-10-Caudal-ganglionic-eminence-CGE-derived-interneuron-precursors"><span class="nav-number">3.17.</span> <span class="nav-text">Extended Data Fig. 10: Caudal ganglionic eminence (CGE)-derived interneuron precursors.</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Max</p>
+  <div class="site-description" itemprop="description">在学了在学了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-bug"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
