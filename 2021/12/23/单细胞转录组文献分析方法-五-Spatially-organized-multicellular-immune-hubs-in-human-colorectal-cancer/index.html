@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs6_lrg.jpg">
 <meta property="og:image" content="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/1-s2.0-S0092867421009454-figs7_lrg.jpg">
 <meta property="article:published_time" content="2021-12-23T12:32:15.000Z">
-<meta property="article:modified_time" content="2021-12-24T02:57:26.103Z">
+<meta property="article:modified_time" content="2022-02-21T01:48:16.030Z">
 <meta property="article:author" content="Max">
 <meta property="article:tag" content="single-cell RNA-seq">
 <meta name="twitter:card" content="summary">
@@ -211,7 +211,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-24 10:57:26" itemprop="dateModified" datetime="2021-12-24T10:57:26+08:00">2021-12-24</time>
+                <time title="修改时间：2022-02-21 09:48:16" itemprop="dateModified" datetime="2022-02-21T09:48:16+08:00">2022-02-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,7 +244,7 @@
 
 <h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>Immune responses to cancer are highly variable, with <strong>mismatch repair-deficient (MMRd) tumors</strong> exhibiting more anti-tumor immunity than <strong>mismatch repair-proficient (MMRp) tumors</strong>. To understand the rules governing these varied responses, we transcriptionally profiled <strong>371,223</strong> cells from colorectal tumors and adjacent normal tissues of <strong>28 MMRp</strong> and <strong>34 MMRd</strong> individuals. Analysis of 88 cell subsets and their 204 associated gene expression programs revealed extensive transcriptional and spatial remodeling across tumors. To discover hubs of interacting malignant and immune cells, we identified expression programs in different cell types that co-varied across tumors from affected individuals and used spatial profiling to localize coordinated programs. We discovered a myeloid cell-attracting hub at the tumor-luminal interface associated with tissue damage and an MMRd-enriched immune hub within the tumor, with activated T cells together with malignant and myeloid cells expressing T cell-attracting chemokines. By identifying interacting cellular programs, we reveal the logic underlying spatially organized immune-malignant cell networks. </p>
 <h1 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h1><h2 id="scRNA-seq-pre-processing-and-quality-control-filtering"><a href="#scRNA-seq-pre-processing-and-quality-control-filtering" class="headerlink" title="scRNA-seq pre-processing and quality control filtering"></a>scRNA-seq pre-processing and quality control filtering</h2><p>For droplet-based scRNA-seq, <strong>CellRanger v3.1</strong> was used to align reads to the GRCh38 liftover (37 liftover, v28; <a target="_blank" rel="noopener" href="https://www.gencodegenes.org/human/release_28lift37.html">https://www.gencodegenes.org/human/release_28lift37.html</a>) human genome reference. The output was processed using the <strong>dropletUtils</strong> R package (version 1.7.1), to exclude any chimeric reads that had less than 80% assignment to a cell barcode, and identify and exclude empty cell droplets (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib25">Griffiths et al., 2018</a>; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib55">Lun et al., 2019</a>), by testing against a background generated from barcodes with 1,000 to 10 UMIs, with cutoffs determined dynamically based on channel-specific characteristics. </p>
-<p>UMI and gene saturation was estimated in individual cells by sub-sampling reads without replacement in each cell barcode, in incremental fractions of 2%, with 20 repeats. A saturation function of the form $ y = \frac{ax}{x+b}+c$ was fit based on the number of UMIs observed while sampling reads at different depths. </p>
+<p>UMI and gene saturation was estimated in individual cells by sub-sampling reads without replacement in each cell barcode, in incremental fractions of 2%, with 20 repeats. A saturation function of the form $ y = \frac{ax}{x+b}+c $ was fit based on the number of UMIs observed while sampling reads at different depths. </p>
 <p>Cell barcodes were excluded if they satisfied any one of the following criteria: </p>
 <p>(<strong>1</strong>) Fewer than 200 genes; </p>
 <p>(<strong>2</strong>) Fewer than 1,000 reads; </p>
@@ -265,7 +265,7 @@
 <p>A cell was excluded if it was flagged by at least two of these criteria for epithelial and immune cells, or at least three criteria for stromal cells.</p>
 <h2 id="Selection-of-variable-genes-dimensionality-reduction-and-clustering"><a href="#Selection-of-variable-genes-dimensionality-reduction-and-clustering" class="headerlink" title="Selection of variable genes, dimensionality reduction and clustering"></a>Selection of variable genes, dimensionality reduction and clustering</h2><p>After filtering and exclusion, scRNA-seq profiles were clustered across all patients using a <strong>non-negative matrix factorization (NMF)</strong> (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib47">Li and Ngom, 2013</a>) and a graph clustering-based approach. Transcriptionally over-dispersed genes were identified within each experimental batch (i.e., 10x channel) by the difference of the coefficient of variation (CV) from the median CV for other genes with a similar mean expression (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib72">Satija et al., 2015</a>). </p>
 <p>A robust set of <strong>1,000 to 8,000 genes</strong> was retained based on an elbow-based criterion, applied to the median of over-dispersed difference statistics based on 200 samples of 75% of cells. </p>
-<p>In all subsequent analysis of single cell data we used <strong>log2(TP10K+1)</strong> values, calculated for the ith gene in the jth cell as $ g_{ij} = log_{2}(\frac{cij}{\sum_{j}c_{ij}}10^{4}+1)$, unless indicated otherwise. </p>
+<p>In all subsequent analysis of single cell data we used <strong>log2(TP10K+1)</strong> values, calculated for the ith gene in the jth cell as $ g_{ij} = log_{2}(\frac{cij}{\sum_{j}c_{ij}}10^{4}+1) $, unless indicated otherwise. </p>
 <p>Next, <strong>80% of genes and samples were sub-sampled between 50 to 200 times</strong>, and NMF was used to reduce the dimensionality of the full dataset to between 15 and 40 dimensions as the product of two non-negative matrices (<a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib44">Lee and Seung, 1999</a>). The loading matrices (i.e., activations) of these NMF components were used to calculate the <em>k</em>-nearest neighbors (<em>k</em>-NN) graph (<em>k</em> = 21) based on a cosine similarity distance. </p>
 <p>This graph was clustered using stability optimizing graph clustering (<a target="_blank" rel="noopener" href="http://michaelschaub.github.io/PartitionStability/">http://michaelschaub.github.io/PartitionStability/</a>; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib19">Delvenne et al., 2010</a>; <a target="_blank" rel="noopener" href="https://www.cell.com/cell/fulltext/S0092-8674(21)00945-4?_returnURL=https://linkinghub.elsevier.com/retrieve/pii/S0092867421009454?showall=true#bib77">Shekhar et al., 2016</a>), to identify 7 top level cell type clusters (epithelial, stromal, mast, B, plasma, myeloid, and T cells). </p>
 <p>To minimize differences across samples due to technical reasons (e.g., 10x v2 versus 10x v3), gene expression measurements of individual genes were quantile normalized, separately among cells of each top-level cellular compartment, such that the expression CDFs for each gene matched across all batches. </p>
@@ -521,7 +521,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -534,7 +534,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
