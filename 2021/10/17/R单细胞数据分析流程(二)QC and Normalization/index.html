@@ -235,50 +235,42 @@
         <p>在这一步我们对加载入Seurat的数据进行进一步的<strong>质量控制</strong>，剔掉一些质量较差的细胞。其实在读入数据时，我们已经剔除了一部分的基因，例如我们筛掉了表达基因少于200个的细胞和在少于三个细胞中表达的基因。而在这一步，我们会从其它的一些指标来对我们的数据进行质控。</p>
 <p>接下来我们对数据进行Normalization，这样做好处多多，可以使数据之间具有可比性，并且可以使数据的分布近似于下游分析的假设(正态分布)。但值得注意的是，<strong>理论上没有一种Normalization的方法适用于所有数据</strong>，我们应该根据数据集的情况选择合适的Normalization方法。</p>
 <span id="more"></span>
-
 <blockquote>
 <p>该流程所用的单细胞数据集来自2018年发表在<em>Science</em>上的<a target="_blank" rel="noopener" href="https://www.science.org/doi/10.1126/science.aau5324">Molecular, spatial, and functional single-cell profiling of the hypothalamic preoptic region</a>. 该文章使用10x  Genomics对6只小鼠下丘脑的POA(视前区)进行了单细胞转录组测序，测序结果发布在GEO数据库的<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE113576">GSE113576</a>上。</p>
 </blockquote>
 <h1 id="Quality-Control-QC"><a href="#Quality-Control-QC" class="headerlink" title="Quality Control(QC)"></a>Quality Control(QC)</h1><p>在QC这一步，我们主要根据三个标准来看细胞测序的质量：<strong>nFeature_RNA(细胞表达的基因数)， nCount_RNA(细胞表达的总的mRNA分子(UMI)数)， percent.mt(细胞中线粒体基因所占的比例)</strong></p>
 <p>计算线粒体基因的占比：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllCell[[<span class="string">&quot;percent.mt&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;mt-&quot;</span>)</span><br></pre></td></tr></table></figure>
-
 <p><code>PercentFeatureSet()</code>用于计算细胞中特定的基因(Feature)的占比，线粒体基因都有一个前缀”mt-“，可以使用”mt-“去匹配所有的线粒体基因。</p>
 <blockquote>
 <p>某些数据集中的线粒体基因可能会标为”MT-“，可以先查看一下基因命名确认一下。</p>
 </blockquote>
 <p>绘制小提琴图来查看这三个标准的在数据集中的分布情况：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VlnPlot(AllCell, features = <span class="built_in">c</span>(<span class="string">&quot;nFeature_RNA&quot;</span>, <span class="string">&quot;nCount_RNA&quot;</span>, <span class="string">&quot;percent.mt&quot;</span>), ncol = <span class="number">3</span>, pt.size = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018005322730.png" alt="image-20211018005322730"></p>
 <blockquote>
 <p>小提琴图横坐标的Identy为每个样本的编号，从这张图我们可以看出每个样本的数据质量。</p>
 </blockquote>
 <p>利用散点图查看不同的标准之间的相关性：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plot1 &lt;- FeatureScatter(AllCell, feature1 = <span class="string">&quot;nCount_RNA&quot;</span>, feature2 = <span class="string">&quot;percent.mt&quot;</span>)</span><br><span class="line">plot2 &lt;- FeatureScatter(AllCell, feature1 = <span class="string">&quot;nCount_RNA&quot;</span>, feature2 = <span class="string">&quot;nFeature_RNA&quot;</span>)</span><br><span class="line">plot1 + plot2</span><br></pre></td></tr></table></figure>
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018010156971.png" alt="image-20211018010156971"></p>
 <blockquote>
-<p><code> FeatureScatter()</code>函数还有很多其它的作用，参数Feature1, Feature2也可以是我们感兴趣的基因，这样我们就可以看到<strong>感兴趣的两种基因的共表达情况</strong>，当然最好在Normalization等标准流程走完以后再进行共表达的分析。</p>
+<p><code>FeatureScatter()</code>函数还有很多其它的作用，参数Feature1, Feature2也可以是我们感兴趣的基因，这样我们就可以看到<strong>感兴趣的两种基因的共表达情况</strong>，当然最好在Normalization等标准流程走完以后再进行共表达的分析。</p>
 </blockquote>
 <p>我们也可以通过颜色添加第三维，将这三个标准展示在同一张图上，但Seurat并没有直接提供函数画出这种图，我们可以ggplot2自己画一下：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">testdata &lt;- FetchData(AllCell, vars = <span class="built_in">c</span>(<span class="string">&#x27;nCount_RNA&#x27;</span>, <span class="string">&#x27;nFeature_RNA&#x27;</span>, <span class="string">&#x27;percent.mt&#x27;</span>))</span><br><span class="line"></span><br><span class="line">ggplot(data = testdata) +</span><br><span class="line">  geom_point(mapping = aes(x = nCount_RNA, y = nFeature_RNA, color = percent.mt)) +</span><br><span class="line">  scale_color_gradientn(colors = <span class="built_in">c</span>(<span class="string">&#x27;#95a5a6&#x27;</span>, <span class="string">&#x27;#c0392b&#x27;</span>)) +</span><br><span class="line">  cowplot::theme_cowplot()</span><br></pre></td></tr></table></figure>
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018012339742.png" alt="image-20211018012339742"></p>
 <p>以上过程为大部分教程中的标准的QC依据，在实际分析中我们可能还会选择一些其它的标准做QC。例如在Moffitt的原文中，作者还考察了<strong>核糖体基因</strong>(以Rps或Rpl开头)和<strong>即早基因</strong>(Fos, Egr1, Npas4)的含量，我们也可以考察这两种基因的含量：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AllCell[[<span class="string">&quot;percent.rb&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;^Rp[ls]&quot;</span>) <span class="comment"># 计算每个细胞中核糖体基因的百分比</span></span><br><span class="line">AllCell[[<span class="string">&quot;percent.IEG&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;^Fos$|^Egr1$|^Npas4$&quot;</span>) <span class="comment"># 计算每个细胞中即早基因IEG的百分比</span></span><br><span class="line"></span><br><span class="line">VlnPlot(AllCell, features = <span class="built_in">c</span>(<span class="string">&quot;nFeature_RNA&quot;</span>, <span class="string">&quot;nCount_RNA&quot;</span>, <span class="string">&quot;percent.mt&quot;</span>, <span class="string">&quot;percent.rb&quot;</span>, <span class="string">&quot;percent.IEG&quot;</span>))</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>即早基因是一组在受到一系列外界刺激后迅速并且短暂激活的基因。</p>
 </blockquote>
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021004941922.png" alt="image-20211021004941922"></p>
 <p>根据绘图的结果，确定筛选的阈值，并进行过滤，<strong>第一次对数据集进行分析的时候筛选的标准应当尽量宽松或者不进行筛选</strong>。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#其实只是一个取子集的过程</span></span><br><span class="line">AllCell &lt;- subset(AllCell, </span><br><span class="line">                  subset = nCount_RNA &gt; <span class="number">2000</span> &amp; nCount_RNA &lt; <span class="number">12000</span> </span><br><span class="line">                            &amp; percent.mt &lt; <span class="number">15</span> </span><br><span class="line">                            &amp; nFeature_RNA &gt;<span class="number">1000</span> &amp; nFeature_RNA &lt; <span class="number">6000</span>)</span><br></pre></td></tr></table></figure>
-
 <h1 id="Normalization"><a href="#Normalization" class="headerlink" title="Normalization"></a>Normalization</h1><p>接下来我们对数据进行Normalization：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllCell &lt;- NormalizeData(AllCell, normalization.method = <span class="string">&quot;LogNormalize&quot;</span>, scale.factor = <span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
-
-<p><code>NormalizationData()</code>函数中的normalization.method中提供的默认参数为*”LogNormalize”*，该方法是对原始的Counts进行<strong>CPM转化</strong>后在进行<strong>log转化</strong>，因此在此步使用”LogNormalize”后<strong>不需要对数据进行进一步的对数转换</strong>。</p>
+<p><code>NormalizationData()</code>函数中的normalization.method中提供的默认参数为<em>“LogNormalize”</em>，该方法是对原始的Counts进行<strong>CPM转化</strong>后在进行<strong>log转化</strong>，因此在此步使用”LogNormalize”后<strong>不需要对数据进行进一步的对数转换</strong>。</p>
 <blockquote>
 <p>在此步一般<strong>使用默认参数</strong>即可，除了使用Seurat中的<code>NormalizationData()</code>, Normalization还有许多种方法，例如使用Scran包对数据进行scran(使用卷积的CPM改进版)，使用Scone包来评估各个Normalization方法对数据集的效果等等，每种方法的原理和使用范围也不同，在以后会提到。</p>
 <p>CPM，TPM等Normalization方法是从bulk RNA-seq借鉴过来的，但是用在单细胞转录组这种十分稀疏的数据集可能会出现各种各样的问题。因此会出现各种各样的对Normalization方法，但总的来说，<strong>不存在一种方法对所有的数据集都适用</strong>，理论上我们应当根据数据集的不同选择不同的Normalization的方法。</p>
@@ -287,7 +279,6 @@
 </blockquote>
 <p>寻找<strong>高异质性的基因</strong>：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllCell &lt;- FindVariableFeatures(AllCell)</span><br></pre></td></tr></table></figure>
-
 <p>在这一步我们要选择在细胞之间表达量差异最大的一部分基因，这样接下来的聚类等操作并不会计算所有的基因。而是会根据这些高异质性基因进行聚类。</p>
 <blockquote>
 <p>寻找高异质性基因是一种特征选择(Feature Selection)的过程。</p>
@@ -295,11 +286,9 @@
 </blockquote>
 <p>绘制高异质性基因:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 异质性最高的十个基因</span></span><br><span class="line">top10 &lt;- head(VariableFeatures(AllCell), <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制高异质性基因</span></span><br><span class="line">VariPlot1 &lt;- VariableFeaturePlot(AllCell)</span><br><span class="line">VariPlot2 &lt;- LabelPoints(plot = VariPlot1, points = top10, repel = <span class="literal">TRUE</span>)</span><br><span class="line">VariPlot1 + VariPlot2</span><br></pre></td></tr></table></figure>
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211018015917490.png" alt="image-20211018015917490"></p>
 <p>对每个细胞的基因表达量进行<strong>scale</strong>:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Scaling the data</span></span><br><span class="line">all.genes &lt;- rownames(AllCell)</span><br><span class="line">AllCell &lt;- ScaleData(AllCell, features = all.genes)</span><br></pre></td></tr></table></figure>
-
 <p>至此，原始表达矩阵的转化已经基本完成，接下来可以着手对细胞进行聚类了。</p>
 <blockquote>
 <p>Ref:</p>
@@ -502,6 +491,8 @@
 
 
 
+
+  
 
   
 

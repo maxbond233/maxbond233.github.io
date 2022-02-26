@@ -230,7 +230,6 @@
       
         <p>进行数据分析首先要获得数据，在这里先介绍一下如何从<strong>GEO数据库上下载</strong>别人发表的单细胞转录组数据库的表达矩阵，以及<strong>如何把数据加载到Seurat中</strong>。</p>
 <span id="more"></span>
-
 <blockquote>
 <p>该流程所用的单细胞数据集来自2018年发表在<em>Science</em>上的<a target="_blank" rel="noopener" href="https://www.science.org/doi/10.1126/science.aau5324">Molecular, spatial, and functional single-cell profiling of the hypothalamic preoptic region</a>. 该文章使用10x  Genomics对6只小鼠下丘脑的POA(视前区)进行了单细胞转录组测序，测序结果发布在GEO数据库的<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE113576">GSE113576</a>上。</p>
 </blockquote>
@@ -251,12 +250,10 @@
 </ul>
 <p>可以在此直接点击下载，也可以使用GEOquery这个R包进行下载：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">library(GEOquery)</span><br><span class="line"></span><br><span class="line">gse &lt;- <span class="string">&quot;GSE113576&quot;</span></span><br><span class="line">getGEOSuppFiles(gse, makeDirectory = <span class="built_in">F</span>, baseDir = <span class="string">&quot;data&quot;</span>)</span><br></pre></td></tr></table></figure>
-
 <p><code>getGEOSuppFiles()</code>用于下载GEO数据库中的Supplementary file文件，<em>baseDir</em>选择文件需要存储的位置。</p>
 <p>下载完成会得到三个*.gz的压缩文件。</p>
 <h1 id="在R中载入数据"><a href="#在R中载入数据" class="headerlink" title="在R中载入数据"></a>在R中载入数据</h1><p>在R中载入相应的包：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">library(Seurat)</span><br><span class="line">library(tidyverse)</span><br><span class="line">library(patchwork)</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>Seurat为主要的分析单细胞测序数据的包，tidyverse用于数据的转换与可视化，patchwork用于拼接绘制的图。</p>
 </blockquote>
@@ -269,7 +266,6 @@
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211016000305360-20211016011400182.png" alt="image-20211016000305360"></p>
 <p>使用<code>CreateSeuratObject()</code>创建Seurat对象，接下来的标准分析流程都以该SeuratObject为基础，分析的信息也会存储在SeuratObj中:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AllCell &lt;- CreateSeuratObject(counts = raw.data, project = <span class="string">&quot;allCell&quot;</span></span><br><span class="line">                              , min.cells = <span class="number">3</span>, min.features = <span class="number">200</span></span><br><span class="line">                              , names.delim = <span class="string">&quot;-&quot;</span>, names.field = <span class="number">2</span>) </span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>SeuratObj中的信息此处可以先不看，等跑完了聚类分析的基本流程后，再来看Seurat中的各个属性的含义。</p>
 </blockquote>
@@ -478,6 +474,8 @@
 
 
 
+
+  
 
   
 

@@ -236,7 +236,6 @@
         <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211024172700636.png" alt="image-20211024172700636"></p>
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211203161811933.png" alt="image-20211203161811933"></p>
 <span id="more"></span>
-
 <blockquote>
 <p><strong>伏隔核 (NAc) 是基底神经节回路的关键组成部分，它将来自皮质和边缘区域的信息整合到直接行为中。</strong>先前的研究表明，NAc 参与调节多种行为，包括食欲和厌恶反应、进食、社交互动、强化和工具学习。此外，临床和临床前研究已将 NAc 功能障碍与多种神经精神疾病联系起来，包括抑郁症、焦虑症、精神分裂症和药物滥用 。与其功能多样性一致，NAc 与不同的大脑区域建立了复杂的神经连接。越来越多的证据表明，<strong>NAc 的特定输入/输出回路可能是其不同功能的基础。</strong></p>
 <p><strong>考虑到 NAc 的功能和解剖复杂性，对细胞组成和结构的理解仍然有限。</strong>一般来说，超过 90% 的 NAc 神经元是 GABA 能中等多刺神经元 (MSNs)，中间神经元 (INs) 的比例很小。<strong>传统的直接/间接通路模型根据其基因表达、连接性和功能将 MSN 分为 D1 多巴胺受体表达亚型和 D2 多巴胺受体表达亚型（D1 和 D2 MSN）。</strong></p>
@@ -246,12 +245,9 @@
 <h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><h2 id="data-filtering-and-quality-control"><a href="#data-filtering-and-quality-control" class="headerlink" title="data filtering and quality control"></a>data filtering and quality control</h2><p>The R package <mark><strong>Seurat</strong></mark> (v2.1.0) and some customized R scripts were used for data analyses. </p>
 <p>First, the expression matrices of all the 11 samples were pooled together into a global Seurat object using the <strong><code>MergeSeurat</code></strong> function. </p>
  <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MergeSeurat(object1, object2, project = <span class="literal">NULL</span>, min.cells = <span class="number">0</span>,</span><br><span class="line">  min.genes = <span class="number">0</span>, is.expr = <span class="number">0</span>, do.normalize = <span class="literal">TRUE</span>, scale.factor = <span class="number">10000</span>,</span><br><span class="line">  do.scale = <span class="literal">FALSE</span>, do.center = <span class="literal">FALSE</span>, names.field = <span class="number">1</span>,</span><br><span class="line">  names.delim = <span class="string">&quot;_&quot;</span>, add.cell.id1 = <span class="literal">NULL</span>, add.cell.id2 = <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p><strong>Genes expressed in fewer than three cells</strong> were excluded. </p>
-</li>
-<li><p><strong>The cells with more than 10% of their total transcripts from mitochondrial transcriptome</strong></p>
-</li>
+<li><strong>Genes expressed in fewer than three cells</strong> were excluded. </li>
+<li><strong>The cells with more than 10% of their total transcripts from mitochondrial transcriptome</strong></li>
 <li><p><strong>cells with a large number of uniquely expressed genes (more than the 99th percentile, 4,766 genes) were removed.</strong> </p>
 </li>
 <li><p>For the initial analysis, <strong>all single cells expressing ≤1,500 genes were also excluded</strong>. </p>
@@ -510,6 +506,8 @@
 
 
 
+
+  
 
   
 

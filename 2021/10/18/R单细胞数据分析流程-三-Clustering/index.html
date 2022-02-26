@@ -244,7 +244,6 @@
       
         <p>在做好了前期的一些预处理后，我们便可以对数据进行<strong>聚类分析</strong>去得到一些我们想要的初步分析结果了，对细胞进行聚类主要有两种方法：聚类算法(clustering algorithms)和社区检测算法(community detection methods)。目前单细胞聚类的主流方法是在单细胞数据的knn图上通过社区检测算法(包括louvain和leiden)进行聚类分析。</p>
 <span id="more"></span>
-
 <h1 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h1><p>首先利用挑出的高异质性基因进行PCA，进一步降低数据的维数。 </p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PCA线性降维</span></span><br><span class="line">AllCell &lt;- RunPCA(AllCell, features = VariableFeatures(object = AllCell))</span><br><span class="line"><span class="comment"># 展示PCA结果</span></span><br><span class="line">pcaPlot &lt;- DimPlot(AllCell, reduction = <span class="string">&quot;pca&quot;</span>)</span><br><span class="line">elbowPlot &lt;- ElbowPlot(AllCell)</span><br></pre></td></tr></table></figure>
 <p>pcaPlot为根据PCA的前两维绘制的散点图，可以大致看出不同的样本的聚集情况。</p>
@@ -262,85 +261,81 @@
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021083546497.png" alt="image-20211021083546497"></p>
 <p>确定了用于后续分析的维数后，就可以开始进行聚类了。目前比较通用的方法是先计算出单细胞簇的knn图<code>FindNeighbors()</code>，再在knn图上使用louvain算法检测出细胞的分簇<code>FindClusters()</code>， 最后通过UMAP图可视化分簇<code>RunUmap()</code>。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算邻居</span></span><br><span class="line">AllCell &lt;- FindNeighbors(AllCell, dims = <span class="number">1</span>:<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 计算分簇</span></span><br><span class="line">AllCell &lt;- FindClusters(AllCell, resolution = <span class="number">0.5</span>)</span><br><span class="line"><span class="comment"># UMAP</span></span><br><span class="line">AllCell &lt;- RunUMAP(AllCell, dims = <span class="number">1</span>:<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 可视化</span></span><br><span class="line">AllCellumap &lt;- DimPlot(AllCell, reduction = <span class="string">&quot;umap&quot;</span>, label = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021102543179.png" alt="image-20211021102543179"></p>
 <p>也可以使用t-sne图进行可视化</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AllCell &lt;- RunTSNE(AllCell, dims = <span class="number">1</span>:<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">AllCellTsne &lt;- DimPlot(AllCell, reduction = <span class="string">&quot;tsne&quot;</span>, label = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021102505404.png" alt="image-20211021102505404"></p>
 <p>Seurat包中的图都是基于ggplot2绘制的，因此可以通过ggplot2对绘制的图进行设置：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DimPlot(AllCell, reduction = <span class="string">&quot;umap&quot;</span>, label = <span class="built_in">T</span>) +theme(</span><br><span class="line">  axis.line = element_blank(),</span><br><span class="line">  axis.ticks = element_blank(),</span><br><span class="line">  axis.text = element_blank(), </span><br><span class="line">  axis.title = element_blank()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021102940802.png" alt="image-20211021102940802"></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DimPlot(AllCell, reduction = <span class="string">&quot;tsne&quot;</span>, label = <span class="built_in">T</span>) +theme(</span><br><span class="line">  axis.line = element_blank(),</span><br><span class="line">  axis.ticks = element_blank(),</span><br><span class="line">  axis.text = element_blank(), </span><br><span class="line">  axis.title = element_blank()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021104702857.png" alt="image-20211021104702857"></p>
 <h1 id="SeuratObject的构成"><a href="#SeuratObject的构成" class="headerlink" title="SeuratObject的构成"></a>SeuratObject的构成</h1><p>现在我们可以回过头来，看看<code>AllCell</code>里到底有什么</p>
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021104955067.png" alt="image-20211021104955067"></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>slot</th>
-<th align="center">function</th>
+<th style="text-align:center">function</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>assays</td>
-<td align="center">A list of assays within this object</td>
+<td style="text-align:center">A list of assays within this object</td>
 </tr>
 <tr>
 <td>meta.data</td>
-<td align="center">Cell-level meta data</td>
+<td style="text-align:center">Cell-level meta data</td>
 </tr>
 <tr>
 <td>active.assay</td>
-<td align="center">Name of active, or default, assay</td>
+<td style="text-align:center">Name of active, or default, assay</td>
 </tr>
 <tr>
 <td>active.ident</td>
-<td align="center">Identity classes for the current object</td>
+<td style="text-align:center">Identity classes for the current object</td>
 </tr>
 <tr>
 <td>graphs</td>
-<td align="center">A list of nearest neighbor graphs</td>
+<td style="text-align:center">A list of nearest neighbor graphs</td>
 </tr>
 <tr>
 <td>reductions</td>
-<td align="center">A list of DimReduc objects</td>
+<td style="text-align:center">A list of DimReduc objects</td>
 </tr>
 <tr>
 <td>project.name</td>
-<td align="center">User-defined project name (optional)</td>
+<td style="text-align:center">User-defined project name (optional)</td>
 </tr>
 <tr>
 <td>tools</td>
-<td align="center">Empty list. Tool developers can store any internal data from their methods here</td>
+<td style="text-align:center">Empty list. Tool developers can store any internal data from their methods here</td>
 </tr>
 <tr>
 <td>misc</td>
-<td align="center">Empty slot. User can store additional information here</td>
+<td style="text-align:center">Empty slot. User can store additional information here</td>
 </tr>
 <tr>
 <td>version</td>
-<td align="center">Seurat version used when creating the objec</td>
+<td style="text-align:center">Seurat version used when creating the objec</td>
 </tr>
 <tr>
 <td>……</td>
-<td align="center">……</td>
+<td style="text-align:center">……</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>挑出几个重要的介绍一下：</p>
 <h2 id="Assays"><a href="#Assays" class="headerlink" title="Assays"></a>Assays</h2><p>assays中存放着原始的表达矩阵，基因名，barcode等信息，</p>
 <blockquote>
 <p>如果想获得数据中的基因名，可以直接使用<code>rownames()</code>如</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(rownames(AllCell))</span><br></pre></td></tr></table></figure>
-
 <p>Output:  [1] “Xkr4”    “Gm1992”  “Rp1”     “Sox17”   “Gm37323” “Mrpl15” </p>
 <p>也可以使用稍微复杂的表达方式:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(AllCell@assays[[<span class="string">&quot;RNA&quot;</span>]]@data@Dimnames[[<span class="number">1</span>]])</span><br></pre></td></tr></table></figure>
-
 <p>Output: [1] “Xkr4”    “Gm1992”  “Rp1”     “Sox17”   “Gm37323” “Mrpl15” </p>
 <p>barcode同理，可以使用<code>colnames()</code>或<code>AllCell@assays[[&quot;RNA&quot;]]@data@Dimnames[[2]]</code>获取</p>
 </blockquote>
@@ -351,14 +346,11 @@
 <p>orig.ident为读入样本时对样本的编号，nCount_RNA是每个细胞的总Count数，nFeature_RNA是每个细胞表达的基因数。</p>
 <p>percent.mt, percent.rb, percent.IEG是我们计算出的线粒体基因，核糖体基因以及即早基因在每个细胞中所占比例：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AllCell[[<span class="string">&quot;percent.mt&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;^mt-&quot;</span>)  <span class="comment"># 计算每个细胞中线粒体基因的百分比</span></span><br><span class="line">AllCell[[<span class="string">&quot;percent.rb&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;^Rp[ls]&quot;</span>) <span class="comment"># 计算每个细胞中核糖体基因的百分比</span></span><br><span class="line">AllCell[[<span class="string">&quot;percent.IEG&quot;</span>]] &lt;- PercentageFeatureSet(AllCell, pattern = <span class="string">&quot;^Fos$|^Egr1$|^Npas4$&quot;</span>) <span class="comment"># 计算每个细胞中即早基因IEG的百分比</span></span><br></pre></td></tr></table></figure>
-
 <p>RNA_snn_res.0.5和Seurat_clusters是每个细胞所属的分簇；</p>
 <p>meta.data中可以任意添加新列以描述各个细胞的信息，例如我们从Moffitt的原文得知，前三个样本(1,2,3)是雌鼠。后三个样本(4,5,6)是雄鼠。我们可以在meta.data中添加这一信息:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sex &lt;- fct_collapse(AllCell$orig.ident, <span class="string">&quot;female&quot;</span> = <span class="built_in">c</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>), <span class="string">&quot;male&quot;</span> = <span class="built_in">c</span>(<span class="string">&quot;4&quot;</span>, <span class="string">&quot;5&quot;</span>, <span class="string">&quot;6&quot;</span>))</span><br><span class="line">AllCell$sex &lt;- sex</span><br></pre></td></tr></table></figure>
-
 <p>在Umap图中，我们可以通过<code>group_by</code>参数查看我们关注的信息的分布情况：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DimPlot(AllCell, group.by = <span class="string">&quot;sex&quot;</span>, shuffle = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021114706028.png" alt="image-20211021114706028"></p>
 <blockquote>
 <p><code>Shffule = T</code>可以按随机顺序绘制点，防止色彩被盖住看不到分布情况。</p>
@@ -369,7 +361,6 @@
 <p>当前默认的active.ident为聚类出的结果。</p>
 </blockquote>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Idents(AllCell) &lt;- <span class="string">&quot;sex&quot;</span></span><br></pre></td></tr></table></figure>
-
 <p><img src="http://maxbond233.oss-cn-shanghai.aliyuncs.com/img/image-20211021115623237.png" alt="image-20211021115623237"></p>
 <p>切换成性别为当前默认ident，这样在调用<code>FindAllMarker()</code>函数时就会计算不同性别之间的差异基因。</p>
 <h2 id="reduction"><a href="#reduction" class="headerlink" title="reduction"></a>reduction</h2><p>reduction中保存了降维计算(pca, umap, tsne)的信息。</p>
@@ -578,6 +569,8 @@
 
 
 
+
+  
 
   
 
